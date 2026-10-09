@@ -1,0 +1,128 @@
+# Residuals across synthetic target families.
+# part=constructions fits positive laws and evaluates on finer quadrature.
+# part=projected measures fixed-law residuals; these need not pass the diagnostics.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r1b_constructions_suite
+study: r1_suite
+part: constructions   # constructions | projected
+phase: smoke          # smoke | pilot | main | stress
+run_id: null
+device: cpu
+threads: 4
+only_units: []        # optional subset of unit ids (e.g. ["gauss-d2-c25__rbf"])
+seed_tag: ${phase}    # appended to every random-stream stage name: pilot and main streams are disjoint
+
+# Kernel parameters include the d=2 and d=50 sensitivity settings.
+# If supplied, the pilot parameters must agree with this file.
+frozen_suite: configs/paperexp/frozen_suite_v1.yaml
+frozen_suite_git_ref: null        # null: read frozen_suite from this checkout
+pilot_params_dir: ${oc.env:MCMC_PAPER_OUT}/suite_pilot/pilot/stress-r1
+
+constructions:
+  targets: [gauss-d2-c25, mixture-d2-s6-w0.5, studentt-d2-nu3, funnel-d2-sy3]
+  kernels: [rbf]                 # sensitivity: [matern32] (funnel is RBF-only, semi-analytic)
+  m_values: [2, 4, 8, 16, 32]
+  R_values: [0.5, 0.2]           # 0.5 primary
+  n_grid: [8, 16, 32, 64]        # K = n^2 equal-mass cells; refinement in K
+  n_dir: 4                       # top generalized eigen-directions tried (both signs)
+  floor: 0.01                    # density 1 + h >= floor (strictly positive laws)
+  n_combo: 6                     # secondary positivity-scaled combination of the top 6
+  rel_cutoff: 1.0e-12            # K_ZZ truncation, node-based integrators
+  rel_cutoff_semi_analytic: 1.0e-10
+  quad_construction:
+    h_x: 0.5
+    q_out: 4
+    q_in: 4
+    q_min: 3
+    cap_out: 0.6
+    cap_in: 0.6
+    tail_mass: 1.0e-14
+    r_max: 30.0
+    funnel_h_z: 0.25
+    funnel_q_y: 6
+  quad_eval:                     # independent: different nodes, finer, larger truncation
+    h_x: 0.35
+    q_out: 6
+    q_in: 6
+    q_min: 4
+    cap_out: 0.45
+    cap_in: 0.45
+    tail_mass: 1.0e-16
+    r_max: 40.0
+    funnel_h_z: 0.2
+    funnel_q_y: 8
+  landmarks_construction:         # gauss / mixture / student_t (r_box: student_t only)
+    h_L: 0.4
+    eta_rel: 1.0e-8
+    box_sd: 9.0
+    box_bw: 3.0
+    r_box: 22.0
+    x_cap: 400.0
+  landmarks_eval:
+    h_L: 0.3
+    eta_rel: 1.0e-9
+    box_sd: 10.0
+    box_bw: 4.0
+    r_box: 26.0
+    x_cap: 600.0
+  landmarks_construction_matern:   # Matern-3/2 eigenfunctions are rougher: denser landmarks
+    h_L: 0.3
+    eta_rel: 1.0e-6
+    box_sd: 8.0
+    box_bw: 2.0
+    r_box: 22.0
+    x_cap: 150.0
+  landmarks_eval_matern:
+    h_L: 0.2
+    eta_rel: 1.0e-6
+    box_sd: 8.0
+    box_bw: 2.0
+    r_box: 22.0
+    x_cap: 150.0
+  landmarks_construction_funnel:  # funnel (second-moment route, cost ~ L^2 x y-nodes)
+    h_L: 0.5
+    eta_rel: 1.0e-6
+    box_sd: 6.0
+    r_box: 30.0
+    x_cap: 150.0
+  landmarks_eval_funnel:          # h_L = construction / 2: x1 lattices nest (lattice second moment)
+    h_L: 0.25
+    eta_rel: 1.0e-7
+    box_sd: 6.0
+    r_box: 30.0
+    x_cap: 200.0
+  gram:
+    method: auto                 # exact | lowrank | auto (exact up to auto_max_nodes)
+    auto_max_nodes: 40000        # CPU budget; lowrank adds a certified omission bound
+  compressed_check: true
+  mc_check:
+    enabled: true
+    kernels: [rbf]
+    m_values: [2, 4, 8]
+    R: 0.5
+    n_samples: 131072
+    n_batches: 32
+
+projected:
+  configs: [gauss-d10-c25__rwm, gauss-d50-c25__rwm, mixture-d10-s6-w0.5__rwm,
+            studentt-d10-nu3__rwm, funnel-d10-sy3__rwm]
+  kernel: rbf
+  bw: ell
+  m_values: [2, 4, 8, 16, 32]
+  n_monitors: 33
+  eps: 0.8                       # known-radius init, R_init = eps
+  t_values: all                  # all frozen checkpoints
+  n_sigma: 8192                  # IID draws for the estimated Sigma (stage r1b-sigma)
+  n_heldout: 8192                # independent draws for the held-out compressed estimate
+  J: 131072                      # replicas of the fixed chain law
+  n_batches: 32                  # jackknife batches

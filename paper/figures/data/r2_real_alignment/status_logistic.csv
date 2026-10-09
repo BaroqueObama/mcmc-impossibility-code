@@ -1,0 +1,33 @@
+budget,unit,m,status,displayed_t_first,displayed_t_last,n_displayed,n_checkpoints,n_dk_applicable,n_half_budget_inconsistent_displayed,note,n_half_budget_unresolved_displayed,n_half_budget_disagreement_displayed
+protocol_32768,hier_pima__mala,1,EVALUATED,0,2,3,4,3,3,reference-based empirical sensitivity envelope,3,0
+protocol_32768,hier_pima__mala,3,EVALUATED,0,4,4,4,4,1,reference-based empirical sensitivity envelope,1,0
+protocol_32768,hier_pima__rwm,1,EVALUATED,0,8,5,7,5,5,reference-based empirical sensitivity envelope,5,0
+protocol_32768,hier_pima__rwm,3,EVALUATED,0,16,6,7,6,1,reference-based empirical sensitivity envelope,1,0
+protocol_32768,hier_australian__mala,1,EVALUATED,0,4,4,5,4,3,reference-based empirical sensitivity envelope,3,0
+protocol_32768,hier_australian__rwm,1,EVALUATED,0,32,7,8,7,7,reference-based empirical sensitivity envelope,7,0
+protocol_32768,hier_ionosphere__mala,1,EVALUATED,0,256,10,11,10,1,reference-based empirical sensitivity envelope,1,0
+protocol_32768,hier_ionosphere__rwm,1,EVALUATED,0,1024,12,13,12,1,reference-based empirical sensitivity envelope,1,0
+protocol_32768,hier_sonar__mala,1,EVALUATED,0,256,10,11,10,0,reference-based empirical sensitivity envelope,0,0
+protocol_32768,hier_sonar__rwm,1,EVALUATED,0,2048,13,14,13,1,reference-based empirical sensitivity envelope,1,0
+expanded_589824,hier__mala,1,EVALUATED,0,16,6,7,6,3,reference-based empirical sensitivity envelope,3,0
+expanded_589824,hier__mala,3,EVALUATED,0,16,6,7,6,0,reference-based empirical sensitivity envelope,0,0
+expanded_131072,hier__rwm,3,EVALUATED,0,64,8,9,8,1,reference-based empirical sensitivity envelope,1,0
+expanded_65536,hier_pima__mala,1,EVALUATED,0,4,4,5,4,2,reference-based empirical sensitivity envelope,2,0
+expanded_65536,hier_pima__mala,3,EVALUATED,0,4,4,5,4,0,reference-based empirical sensitivity envelope,0,0
+expanded_65536,hier_pima__rwm,1,EVALUATED,0,16,6,7,6,6,reference-based empirical sensitivity envelope,6,0
+expanded_65536,hier_pima__rwm,3,EVALUATED,0,16,6,7,6,1,reference-based empirical sensitivity envelope,1,0
+expanded_917504,hier_australian__mala,1,EVALUATED,0,16,6,7,6,0,reference-based empirical sensitivity envelope,0,0
+expanded_917504,hier_australian__mala,3,EVALUATED,0,8,5,7,5,1,reference-based empirical sensitivity envelope,1,0
+expanded_1769472,hier_australian__rwm,1,EVALUATED,0,128,9,10,9,1,reference-based empirical sensitivity envelope,1,0
+expanded_1769472,hier_australian__rwm,3,EVALUATED,0,64,8,10,8,1,reference-based empirical sensitivity envelope,1,0
+expanded_65536,hier_ionosphere__mala,1,EVALUATED,0,256,10,11,10,0,reference-based empirical sensitivity envelope,0,0
+expanded_65536,hier_ionosphere__rwm,1,EVALUATED,0,1024,12,13,12,0,reference-based empirical sensitivity envelope,0,0
+expanded_65536,hier_sonar__mala,1,EVALUATED,0,256,10,11,10,0,reference-based empirical sensitivity envelope,0,0
+expanded_65536,hier_sonar__rwm,1,EVALUATED,0,2048,13,14,13,0,reference-based empirical sensitivity envelope,0,0
+protocol_32768,hier__mala,1,NOT_EVALUATED_NO_PROJECTED_WINDOW,,,,,,,projected best gap/e at the protocol budget = 0.95 (t=4) < 2; lag-2t Sigma_t gap/eps 4.9 vs branched 0.9 at t=2; lag-2t Sigma_t gap/eps 4.7 vs branched 1.3 at t=8 (calibration only); evaluated in the expanded tier,,
+protocol_32768,hier__mala,3,NOT_EVALUATED_NO_PROJECTED_WINDOW,,,,,,,projected best gap/e at the protocol budget = 1.80 (t=1) < 2; lag-2t Sigma_t gap/eps 13.3 vs branched 2.6 at t=2; lag-2t Sigma_t gap/eps 11.4 vs branched 2.6 at t=8 (calibration only); evaluated in the expanded tier,,
+protocol_32768,hier__rwm,3,NOT_EVALUATED_NO_PROJECTED_WINDOW,,,,,,,projected best gap/e at the protocol budget = 1.68 (t=8) < 2; lag-2t Sigma_t gap/eps 4.4 vs branched 2.3 at t=2; lag-2t Sigma_t gap/eps 4.5 vs branched 2.5 at t=8 (calibration only); evaluated in the expanded tier,,
+protocol_32768,hier_australian__mala,3,NOT_EVALUATED_NO_PROJECTED_WINDOW,,,,,,,projected best gap/e at the protocol budget = 0.71 (t=1) < 2; lag-2t Sigma_t gap/eps 6.3 vs branched 1.0 at t=2; lag-2t Sigma_t gap/eps 3.7 vs branched 0.3 at t=8 (calibration only); evaluated in the expanded tier,,
+protocol_32768,hier_australian__rwm,3,NOT_EVALUATED_NO_PROJECTED_WINDOW,,,,,,,projected best gap/e at the protocol budget = 0.71 (t=32) < 2; lag-2t Sigma_t gap/eps 2.4 vs branched 0.6 at t=2; lag-2t Sigma_t gap/eps 2.4 vs branched 0.7 at t=8 (calibration only); evaluated in the expanded tier,,
+,horseshoe__mala,,NONE_ELIGIBLE,,,,,,,"no (lag, m) passes rules 1-2 (half-split embedded spans 80-90 deg apart at every m and lag)",,
+,horseshoe__rwm,,NONE_ELIGIBLE,,,,,,,"no (lag, m) passes rules 1-2 (half-split embedded spans 80-90 deg apart at every m and lag)",,

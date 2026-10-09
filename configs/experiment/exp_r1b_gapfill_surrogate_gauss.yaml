@@ -1,0 +1,11 @@
+# Compare the tapered Matern surrogate and exact kernel on gauss-d2-c25
+# using identical quadrature and landmarks.
+defaults:
+  - exp_r1b_gapfill_funnel_matern
+  - _self_
+
+constructions:
+  targets: [gauss-d2-c25]
+  kernels: [matern32s]
+  gram: {auto_max_nodes: 250000}
+  surrogate: {table_r_max: 30.0, table_n: 300001}

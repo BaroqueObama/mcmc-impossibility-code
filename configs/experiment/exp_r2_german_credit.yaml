@@ -1,0 +1,172 @@
+# Logistic diagnostic spans and chain-law discrepancies against NUTS references.
+# Results are empirical; sampler tuning was fixed before the main runs.
+
+phase: smoke              # smoke | pilot | main
+tag: v1
+model: hier               # hier (primary) | horseshoe (stress)
+sampler: mala             # rwm | mala (core samplers, S = diag(frozen MAD scales))
+device: cuda
+mem_bytes: 1073741824     # blocked kernel reductions
+# gpu: sampling and kernel statistics; cpu: learned spans and NUTS comparisons.
+# reeval: recompute comparisons from a completed run into <unit>_<reeval_tag>.
+stage: gpu
+reeval_tag: eval2
+parts_gpu: [setup, sigma, ens_I0, ens_I1, ens_I2, ens_I3, pilotrun_stationary, pilotrun_confined]
+parts_cpu: [conv_I0, conv_I1, conv_I2, conv_I3, pilots_stationary, pilots_confined, evaluate, nuts_I1, nuts_I2,
+            evaluate_nuts]
+
+# Reference sets (run IDs under german_credit/reference/). Evaluation references are
+# never used for anything except delta-hat; the pool set supplies starting states (I0, I1, I3,
+# stationary pilots, branched-pair starts) and the calibration run supplies kernel + landmarks.
+references:
+  hier:
+    evaluation: {primary: hier_c_dense_reference_v1}
+    pool: hier_nc_diag_reference_v1
+    calibration: hier_c_dense_kernel_calibration_v1
+    kernel_key: hier_mad
+    choices:              # reference budget sensitivity: name -> [set, first_run, last_run]
+      all: [primary, 0, 15]
+      A: [primary, 0, 7]
+      B: [primary, 8, 15]
+  horseshoe:
+    evaluation: {v1: horseshoe_nc_diag_reference_v1, v2: horseshoe_nc_diag_v2_reference_v1}
+    pool: horseshoe_nc_dense_reference_v1   # post-hoc cross-check set (outlier run 6 kept; caveat)
+    calibration: horseshoe_nc_diag_kernel_calibration_v1
+    kernel_key: horseshoe_mad
+    choices:
+      v1_all: [v1, 0, 15]
+      v1_A: [v1, 0, 7]
+      v1_B: [v1, 8, 15]
+      v2_all: [v2, 0, 15]
+      v2_A: [v2, 0, 7]
+      v2_B: [v2, 8, 15]
+  # The additional datasets use the same reference roles as German Credit.
+  hier_pima:
+    evaluation: {primary: pima_c_dense_reference_v1}
+    pool: pima_nc_diag_reference_v1
+    calibration: pima_c_dense_kernel_calibration_v1
+    kernel_key: hier_pima_mad
+    choices:
+      all: [primary, 0, 15]
+      A: [primary, 0, 7]
+      B: [primary, 8, 15]
+  hier_australian:
+    evaluation: {primary: australian_c_dense_reference_v1}
+    pool: australian_nc_diag_reference_v1
+    calibration: australian_c_dense_kernel_calibration_v1
+    kernel_key: hier_australian_mad
+    choices:
+      all: [primary, 0, 15]
+      A: [primary, 0, 7]
+      B: [primary, 8, 15]
+  hier_ionosphere:
+    evaluation: {primary: ionosphere_c_dense_reference_v1}
+    pool: ionosphere_nc_diag_reference_v1
+    calibration: ionosphere_c_dense_kernel_calibration_v1
+    kernel_key: hier_ionosphere_mad
+    choices:
+      all: [primary, 0, 15]
+      A: [primary, 0, 7]
+      B: [primary, 8, 15]
+  hier_sonar:
+    evaluation: {primary: sonar_c_dense_reference_v1}
+    pool: sonar_nc_diag_reference_v1
+    calibration: sonar_c_dense_kernel_calibration_v1
+    kernel_key: hier_sonar_mad
+    choices:
+      all: [primary, 0, 15]
+      A: [primary, 0, 7]
+      B: [primary, 8, 15]
+kernel_file: configs/experiment/exp_r2_german_credit_kernel.yaml
+
+representation:
+  n_landmarks: 512        # evenly spaced calibration draws
+  nystrom_rel_cutoff: 1.0e-12
+
+# Step-size tuning: core's stage_tune (bisection to the target acceptance, verification run),
+# starts drawn from the pool (approximately stationary).
+tune:
+  target_accept: {rwm: 0.234, mala: 0.574}
+  J: 4096
+  n_steps: 200
+  inner_tol: 0.003
+  tol: 0.01
+  max_expand: 40
+  max_bisect: 30
+  curve_mults: [0.5, 0.8, 1.25, 2.0]
+
+# Grid rules (pilot): I1 ensemble (J=4096), reference-based U-statistic MMD vs the primary
+# reference (all runs). T = first power of two with MMD < tmax.threshold, capped at tmax.cap
+# (record when the cap binds). t* = 2^round(log2(T)/2) (geometric midpoint of [1, T]).
+tmax:
+  J: 4096
+  cap: 16384
+  threshold: 0.01
+# Fixed after pilot tuning, before main runs: extend the evaluation grid to
+# max(T, horizon_min). Conventional diagnostics use windows up to horizon_min/2.
+horizon_min: 4096
+
+ensembles:
+  J: 4096
+  G: 32                   # replica groups (debiasing and jackknife)
+  K_conv: 64              # first K rows recorded every step: 16 groups of 4 chains
+  conv_group: 4           # conventional diagnostics: 4 chains, second-half window
+  overdispersion: 3.0     # I1
+  box_radius: 2.0         # I2
+  quantiles: [0.05, 0.25, 0.5, 0.75, 0.95]
+
+sigma:
+  N: 8192                 # branched blocks (4N chains); X from pool runs 0-7, X' from runs 8-15
+
+pilots:
+  n_fit: 30
+  n_chains: 4
+  lengths: [1024, 4096, 16384]   # nested prefixes of one pilot run
+  tica_rel_cutoff: 1.0e-10
+  coord_rel_cutoff: 1.0e-10
+
+# Practical NUTS comparison (once per model, inside its `in_sampler` unit): J independently adapted
+# numpyro NUTS chains (vectorized, CPU) from I1 / I2; checkpoints at iterations 0,1,2,4,..,W+S
+# (warmup included) with mean cumulative gradient evaluations; evaluated with the same spans.
+nuts:
+  in_sampler: mala
+  laws: [I1, I2]
+  J: {hier: 256, horseshoe: 256, hier_pima: 256, hier_australian: 256, hier_ionosphere: 256, hier_sonar: 256}   # lockstep vectorized NUTS on CPU; cost measured in the pilot
+  n_warmup: 1000
+  n_sample: 1048          # W + S = 2048 = 2^11
+  settings:               # matches the primary reference settings
+    hier: {parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true}
+    horseshoe: {parameterization: noncentered, target_accept_prob: 0.99, max_tree_depth: 10, dense_mass: false}
+    hier_pima: {parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true}
+    hier_australian: {parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true}
+    hier_ionosphere: {parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true}
+    hier_sonar: {parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true}
+
+m_grid: [1, 2, 4, 8]
+resolution_factor: 3.0
+
+# Stream separation: seed_for(f"gc-{model}__{sampler}", stage, rep_offset + i). Main uses offset
+# 0, pilot 1000, smoke 2000, so the main seeds are disjoint from everything else.
+rep_offset: {smoke: 2000, pilot: 1000, main: 0}
+
+# Sampler steps and horizons fixed from independent pilots. For both horseshoe
+# samplers the 16384-step cap binds; these slow-mixing cases are retained.
+frozen:
+  hier__mala: {h: 0.681540787738799, accept_verify: 0.5702, T: 64, t_star: 8, cap_binds: false}
+  hier__rwm: {h: 0.40108827968079785, accept_verify: 0.2364, T: 1024, t_star: 32, cap_binds: false}
+  horseshoe__mala: {h: 0.17305749453041505, accept_verify: 0.5798, T: 16384, t_star: 128, cap_binds: true}
+  horseshoe__rwm: {h: 0.1795905668836173, accept_verify: 0.2329, T: 16384, t_star: 128, cap_binds: true}
+  # Sampler steps and horizons fixed from pilot v1 before the main runs:
+  hier_pima__mala: {h: 0.9003131780949203, accept_verify: 0.5744, T: 16384, t_star: 128, cap_binds: true}
+  hier_pima__rwm: {h: 0.7207133759219776, accept_verify: 0.2304, T: 256, t_star: 16, cap_binds: false}
+  hier_australian__mala: {h: 0.8058659924056495, accept_verify: 0.5734, T: 16384, t_star: 128, cap_binds: true}
+  hier_australian__rwm: {h: 0.5456174057067793, accept_verify: 0.2357, T: 512, t_star: 16, cap_binds: false}
+  hier_ionosphere__mala: {h: 0.2863220179017006, accept_verify: 0.5720, T: 2048, t_star: 64, cap_binds: false}
+  hier_ionosphere__rwm: {h: 0.2315579292147931, accept_verify: 0.2337, T: 8192, t_star: 64, cap_binds: false}
+  hier_sonar__mala: {h: 0.2853960895988543, accept_verify: 0.5745, T: 16384, t_star: 128, cap_binds: true}
+  hier_sonar__rwm: {h: 0.18972588353511996, accept_verify: 0.2340, T: 16384, t_star: 128, cap_binds: false}
+
+hydra:
+  run:
+    dir: ${oc.env:MCMC_PAPER_OUT}/german_credit_r2/hydra_logs/${now:%Y-%m-%d_%H-%M-%S}_${model}_${sampler}
+  output_subdir: null

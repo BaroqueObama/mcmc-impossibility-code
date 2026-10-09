@@ -1,0 +1,3369 @@
+{
+  "status": "REFERENCE-BASED, EMPIRICAL. Learned lag-1 TICA spans vs the reference-estimated time-t optimum V_m(S_t-hat); the envelope is a Davis-Kahan EMPIRICAL SENSITIVITY ENVELOPE with e_t = 3 ||S^A - S^B||_op / 2 (not a certified bound or a confidence interval). No theorem bound (theorem_bound_status = UNAVAILABLE): the logistic transition spectra are unknown; finite TICA eigenvalues are never substituted for true rates.",
+  "selection": {
+    "file": "selection_logistic.json",
+    "sha256": "2c56d56a507b7485755316560ea17bbf6fcb71a0f4e27b93a0376b01d874279f"
+  },
+  "evaluation_config": {
+    "tag": "v1",
+    "selection_file": "selection_logistic.json",
+    "selection_sha256": "2c56d56a507b7485755316560ea17bbf6fcb71a0f4e27b93a0376b01d874279f",
+    "pairs": {
+      "hier_pima__mala": {
+        "m": [
+          3,
+          1
+        ],
+        "t_max": 4
+      },
+      "hier_pima__rwm": {
+        "m": [
+          1,
+          3
+        ],
+        "t_max": 32
+      },
+      "hier_australian__mala": {
+        "m": [
+          1
+        ],
+        "t_max": 8
+      },
+      "hier_australian__rwm": {
+        "m": [
+          1
+        ],
+        "t_max": 64
+      },
+      "hier_ionosphere__mala": {
+        "m": [
+          1
+        ],
+        "t_max": 512
+      },
+      "hier_ionosphere__rwm": {
+        "m": [
+          1
+        ],
+        "t_max": 2048
+      },
+      "hier_sonar__mala": {
+        "m": [
+          1
+        ],
+        "t_max": 512
+      },
+      "hier_sonar__rwm": {
+        "m": [
+          1
+        ],
+        "t_max": 4096
+      }
+    },
+    "not_evaluated": {
+      "hier__mala": [
+        1,
+        3
+      ],
+      "hier__rwm": [
+        3
+      ],
+      "hier_australian__mala": [
+        3
+      ],
+      "hier_australian__rwm": [
+        3
+      ]
+    },
+    "none_eligible": [
+      "horseshoe__mala",
+      "horseshoe__rwm"
+    ],
+    "sigma": {
+      "n_batches": 4,
+      "n_blocks": 8192,
+      "pool_runs": [
+        [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            8,
+            9,
+            10,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            8,
+            9,
+            10,
+            11
+          ]
+        ],
+        [
+          [
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            12,
+            13,
+            14,
+            15
+          ]
+        ],
+        [
+          [
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            12,
+            13,
+            14,
+            15
+          ]
+        ]
+      ],
+      "halves": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "half_budgets": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "e_factor": 1.5,
+      "seed_stage": "b-logistic-sigma-v1",
+      "start_seed_stage": "b-logistic-sigma-starts-v1"
+    },
+    "pilots": {
+      "n_fit": 30,
+      "n_chains": 4,
+      "lengths": [
+        4096,
+        16384
+      ],
+      "start_law": "I0",
+      "lag": 1,
+      "tica_rel_cutoff": 1e-10,
+      "seed_stage": "b-logistic-pilot-v1",
+      "start_seed_stage": "b-logistic-pilot-starts-v1"
+    },
+    "display_rule": "per (unit, m) the curve is the maximal run of consecutive DK-applicable checkpoints from the first applicable one (b_logistic.curve_cutoffs); every checkpoint keeps its row and reason",
+    "mem_bytes": 1073741824
+  },
+  "covariance_source": {
+    "protocol_32768": "branched-pair Sigma_t-hat (german_credit_r2.branched_operator_stats): per batch N blocks, starts X / X' drawn with replacement from disjoint NUTS pool-run subsets (cross-check set <dataset>_nc_diag_reference_v1); halves = batches {0,1} vs {2,3}; shared NUTS pool -> reference bias unquantified",
+    "expanded_<N>": "branched-pair Sigma_t-hat as the protocol tier; starts from the R2 pool with replacement (units without a new pool) or from the new bpool1 NUTS pools without replacement (German Credit hier, Australian; four run quarters give the X / X' subsets of the two halves); see expanded_config"
+  },
+  "samplers": {
+    "hier_pima__mala": {
+      "kind": "mala",
+      "h": 0.9003131780949203,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_pima__rwm": {
+      "kind": "rwm",
+      "h": 0.7207133759219776,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_australian__mala": {
+      "kind": "mala",
+      "h": 0.8058659924056495,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_australian__rwm": {
+      "kind": "rwm",
+      "h": 0.5456174057067793,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_ionosphere__mala": {
+      "kind": "mala",
+      "h": 0.2863220179017006,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_ionosphere__rwm": {
+      "kind": "rwm",
+      "h": 0.2315579292147931,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_sonar__mala": {
+      "kind": "mala",
+      "h": 0.2853960895988543,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    },
+    "hier_sonar__rwm": {
+      "kind": "rwm",
+      "h": 0.18972588353511996,
+      "preconditioner": "diag(frozen MAD kernel scales)"
+    }
+  },
+  "features": "512 Nystrom landmarks (evenly spaced calibration draws), MAD-scaled RBF, saved R2 basis (german_credit_r2/main/<unit>_v1/setup.npz); fixed finite feature geometry, not full-RKHS angles",
+  "numerical_method": "float64 throughout (GPU sampling and branched sums, CPU eigh); angles by the sine route sigma_max((I - V V^T) W)",
+  "margins": "no numerical margin (empirical_sensitivity = e_t); budget-doubling check: half budgets {0,2} and {1,3} must be DK-applicable with angle(V_full, V_half) <= dk_full + dk_half",
+  "columns_not_applicable": [
+    "sin_angle_upper",
+    "angle_upper",
+    "mode_error_deg",
+    "rate_a",
+    "rate_b",
+    "c_m_squared",
+    "kappa_squared",
+    "numerical_allowance"
+  ],
+  "runs": {
+    "hier_pima__mala/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 4422662050260130772,
+          "start_seed": 4947096240196163212,
+          "grid": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 9014747253107326085,
+          "start_seed": 8978246012946599273,
+          "grid": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 8692538365905186093,
+          "start_seed": 8814906259059706933,
+          "grid": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 8177971776528754781,
+          "start_seed": 2438931724776632273,
+          "grid": [
+            0,
+            1,
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    "hier_pima__rwm/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 3197218412473375002,
+          "start_seed": 2232831323136145634,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 6586029526264368287,
+          "start_seed": 5478350893119886915,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 1809360337254256262,
+          "start_seed": 5701741899519058936,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 1050517115080961716,
+          "start_seed": 7612434953196321432,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        }
+      ]
+    },
+    "hier_australian__mala/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 3125064479414071164,
+          "start_seed": 8944339116209166980,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 4149494672209301650,
+          "start_seed": 7989755217176811425,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 1929166739056620821,
+          "start_seed": 2236115869332247500,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 7338306693614522110,
+          "start_seed": 8135947757298310259,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        }
+      ]
+    },
+    "hier_australian__rwm/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 3768799888964057833,
+          "start_seed": 5313939210932010984,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 6043349118158486563,
+          "start_seed": 6070511864294024129,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 3012835130429222654,
+          "start_seed": 8270140118974003033,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 7948845748158035017,
+          "start_seed": 7937093332252381576,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ]
+        }
+      ]
+    },
+    "hier_ionosphere__mala/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 4627983315523249367,
+          "start_seed": 7214238468558627258,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 6357642784094703101,
+          "start_seed": 5681247420741051964,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 6558920090398376364,
+          "start_seed": 4500608955429884179,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 5819576712124153680,
+          "start_seed": 4405537727790575245,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        }
+      ]
+    },
+    "hier_ionosphere__rwm/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 3089996089969374792,
+          "start_seed": 8366605673881950976,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 8611986696607598522,
+          "start_seed": 4836867856694851280,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 8155746630090601642,
+          "start_seed": 97209054885524807,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 5827180626888046560,
+          "start_seed": 2180125659568535001,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        }
+      ]
+    },
+    "hier_sonar__mala/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 1567021792591786596,
+          "start_seed": 7254287017794838184,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 5564400268432631338,
+          "start_seed": 5393739794800181730,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 7042148499219105995,
+          "start_seed": 1666198299048147198,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 2979689235939583016,
+          "start_seed": 8997578135618364768,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        }
+      ]
+    },
+    "hier_sonar__rwm/protocol_32768": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 5613425223010228443,
+          "start_seed": 1742266096359885266,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "xprime_pool_runs": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "seed": 6347993386657288524,
+          "start_seed": 5182094335769373897,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 5965619001516769969,
+          "start_seed": 2512330339167969134,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 8192,
+          "x_pool_runs": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "xprime_pool_runs": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "seed": 4085178346035993355,
+          "start_seed": 997368889839092971,
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        }
+      ]
+    },
+    "hier__mala/expanded_589824": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 147456,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 9,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "xprime_runs": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 147456,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 9,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "xprime_runs": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 147456,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 9,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "xprime_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 147456,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 9,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "xprime_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        }
+      ]
+    },
+    "hier__rwm/expanded_131072": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 32768,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 2,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "xprime_runs": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 32768,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 2,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "xprime_runs": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 32768,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 2,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "xprime_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 32768,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 2,
+          "starts": {
+            "pool": "hier_nc_diag_reference_bpool1",
+            "x_runs": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "xprime_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128
+          ]
+        }
+      ]
+    },
+    "hier_pima__mala/expanded_65536": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8
+          ]
+        }
+      ]
+    },
+    "hier_pima__rwm/expanded_65536": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "pima_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        }
+      ]
+    },
+    "hier_australian__mala/expanded_917504": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 229376,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 14,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "xprime_runs": [
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 229376,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 14,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "xprime_runs": [
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 229376,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 14,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71
+            ],
+            "xprime_runs": [
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 229376,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 14,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71
+            ],
+            "xprime_runs": [
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        }
+      ]
+    },
+    "hier_australian__rwm/expanded_1769472": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 442368,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 27,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "xprime_runs": [
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 442368,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 27,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35
+            ],
+            "xprime_runs": [
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 442368,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 27,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71
+            ],
+            "xprime_runs": [
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 442368,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 27,
+          "starts": {
+            "pool": "australian_nc_diag_reference_bpool1",
+            "x_runs": [
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71
+            ],
+            "xprime_runs": [
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143
+            ],
+            "sampling": "without replacement within the quarter (disjoint across the half's batches)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256
+          ]
+        }
+      ]
+    },
+    "hier_ionosphere__mala/expanded_65536": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        }
+      ]
+    },
+    "hier_ionosphere__rwm/expanded_65536": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "ionosphere_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048
+          ]
+        }
+      ]
+    },
+    "hier_sonar__mala/expanded_65536": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+          ]
+        }
+      ]
+    },
+    "hier_sonar__rwm/expanded_65536": {
+      "batches": [
+        {
+          "batch": 0,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b0",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        {
+          "batch": 1,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "xprime_runs": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b1",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        {
+          "batch": 2,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b2",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        },
+        {
+          "batch": 3,
+          "N_blocks": 16384,
+          "sub_batch_blocks": 16384,
+          "n_sub_batches": 1,
+          "starts": {
+            "pool": "sonar_nc_diag_reference_v1",
+            "x_runs": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "xprime_runs": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "sampling": "with replacement (R2 pool, as the protocol tier)"
+          },
+          "seed_stage": "b-logistic-sigma-x1-b3",
+          "grid": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096
+          ]
+        }
+      ]
+    }
+  },
+  "outputs_sha256": {
+    "angles_logistic.csv": "2bc927757cd3dd9f5365c5435be91001c07b6218fb99b7d7d08f8cf1b810b17a",
+    "reference_logistic.csv": "6e62dba57339ea55631b9b5ccd0a94e2e74c47080d85fcdb68005004e84ffd0d",
+    "status_logistic.csv": "03e85777e261674959053e58484f531bfc5eca302958968fa5309183f8d98c23",
+    "summary_logistic.csv": "d3e31d1a5f9b70045b4f26e2365e66854c949cf6451e2bb6d9b2cd93ba259a1c"
+  },
+  "tiers": {
+    "protocol_32768": "protocol budget: 4 batches x 8192 branched blocks, R2 pool halves",
+    "expanded_<N>": "Expanded reference budget: per-unit block counts for DK applicability x1.5 over the calibration window (expanded_design_logistic_x1.json); new NUTS pools (bpool1) for hier and australian"
+  },
+  "smoke_replay": "evaluation seeds depend on unit, stage and batch but not on phase, so the post-freeze smoke runs replay production streams exactly (e.g. Pima/RWM expanded batches 0-3 are byte-identical in smoke/ and main/); smoke and production are not independent replications; each production result is counted once",
+  "expanded_config": {
+    "tag": "x1",
+    "design_file": "expanded_design_logistic_x1.json",
+    "design_sha256": "f7ab5dc5efecaf04a8d442e7f40f84b5dacd1a8d4da3e021bd778b542af8f5b7",
+    "n_batches": 4,
+    "seed_stage": "b-logistic-sigma-x1",
+    "start_seed_stage": "b-logistic-sigma-starts-x1",
+    "perm_seed_stage": "b-logistic-sigma-perm-x1",
+    "pool_runs": [
+      [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      [
+        [
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ]
+      ],
+      [
+        [
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ]
+      ]
+    ],
+    "new_pools": {
+      "hier": {
+        "set": "hier_nc_diag_reference_bpool1",
+        "n_runs": 48
+      },
+      "hier_australian": {
+        "set": "australian_nc_diag_reference_bpool1",
+        "n_runs": 144
+      }
+    },
+    "pilots_from_protocol_tier": true
+  },
+  "expanded_design_sha256": "f7ab5dc5efecaf04a8d442e7f40f84b5dacd1a8d4da3e021bd778b542af8f5b7",
+  "supersedes": {
+    "angles_logistic.csv_sha256": "a6b302231b1907e61080afc59d5ca1213e82c4dd0903fe700dc499b53817facd",
+    "note": "protocol-tier-only export; its rows are reproduced exactly as the budget=protocol_32768 subset (checked)"
+  },
+  "column_notes": {
+    "budget": "protocol_32768 = protocol tier (4 x 8192 blocks); expanded_<N> = expanded tier with N total blocks (4 batches)",
+    "sin_theta / angle_deg": "largest principal angle between the learned span and V_m(S_t-hat) (point estimate against the reference-estimated optimum)",
+    "sin_uncertainty": "sin of the DK term arcsin(e_t / (gap - e_t)) when DK applies (an empirical sensitivity of the angle to the reference optimum), else nan",
+    "learned_angle_upper / learned_sin_upper": "min(90, angle + DK term): empirical sensitivity envelope for the angle to V_m(S_t), nan where DK does not apply",
+    "estimate_status": "EMPIRICAL_SENSITIVITY_ONLY | TRIVIAL(EMPIRICAL_SENSITIVITY_ONLY) (envelope reaches 90 deg) | UNAVAILABLE (gap <= 2 e_t) | FAILED_FIT (no learned span)",
+    "cutoff_reason": "display rule (BEFORE_RESOLVED_WINDOW, FIRST_FAILED_CHECKPOINT, BEYOND_FIRST_FAILED_CHECKPOINT(t=..), NO_RESOLVED_CHECKPOINT) and per-row reasons (REFERENCE_GAP_UNRESOLVED; HALF_BUDGET_UNRESOLVED = a half budget is not DK-applicable, not an angular disagreement; HALF_BUDGET_ANGULAR_DISAGREEMENT = angle(V_full, V_half) > dk_full + dk_half)",
+    "half{1,2}_status / doubling_status (reference_logistic.csv)": "CONSISTENT | HALF_BUDGET_UNRESOLVED | ANGULAR_DISAGREEMENT | FULL_BUDGET_UNRESOLVED",
+    "n_half_budget_inconsistent_displayed (status_logistic.csv)": "displayed checkpoints whose budget-doubling check is not CONSISTENT = n_half_budget_unresolved_displayed + n_half_budget_disagreement_displayed",
+    "empirical_sensitivity": "e_t = 3 ||S^A - S^B||_op / 2"
+  }
+}

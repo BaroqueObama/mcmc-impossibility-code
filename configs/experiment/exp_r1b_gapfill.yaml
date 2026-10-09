@@ -1,0 +1,11 @@
+# Projected residuals for MALA and one-factor RWM sensitivity settings.
+defaults:
+  - exp_r1b_constructions_suite
+  - _self_
+
+projected:
+  configs: [gauss-d10-c25__mala, mixture-d10-s6-w0.5__mala, studentt-d10-nu3__mala,
+            funnel-d10-sy3__mala,
+            gauss-d10-c1__rwm, gauss-d10-c100__rwm, mixture-d10-s2-w0.5__rwm,
+            mixture-d10-s10-w0.5__rwm, mixture-d10-s6-w0.1__rwm, studentt-d10-nu5__rwm,
+            studentt-d10-nu30__rwm, funnel-d10-sy1__rwm]

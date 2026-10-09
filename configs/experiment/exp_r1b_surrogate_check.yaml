@@ -1,0 +1,17 @@
+# Check the funnel Matern-3/2 surrogate's kernel error and first 40 eigenvalues.
+# Surrogate and exact-kernel calculations use identical landmarks and node rules.
+defaults:
+  - exp_r1b_gapfill_funnel_matern
+  - _self_
+
+surrogate_check:
+  units: [kernel_error, eigs_construction, eigs_eval, schur_bound]
+  n_pair_mc: 200000
+  m_max: 40
+  separation_thresholds: [0.01, 0.05, 0.1]
+  schur_n_y: 2000000          # estimated Schur sensitivity (numerical estimate; unit schur_bound)
+  schur_n_x: 1000
+  schur_n_axis: 400
+
+constructions:
+  surrogate: {table_r_max: 30.0, table_n: 300001}   # tabulated kernel rule (cubic Hermite in r)

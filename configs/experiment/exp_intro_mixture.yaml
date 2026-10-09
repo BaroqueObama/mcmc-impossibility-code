@@ -1,0 +1,9 @@
+# Figure 1: four trapped MALA chains; no warmup is discarded.
+mixture:
+  d: 10
+  separation: 16.0
+  n_gold: 20000
+  mala_step_size: 0.5
+  n_chains: 4
+  n_draws: 20000
+  init_basin: 0

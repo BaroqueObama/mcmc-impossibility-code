@@ -1,0 +1,95 @@
+# Regression anytime bounds at 18 shared checkpoints through 65,536 sweeps.
+# Uses the saved slow_R0.8 shifts and exact Gaussian checkpoint transitions.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_c_common_horizon
+study: r3_common_horizon      # $MCMC_PAPER_OUT/r3_common_horizon/<phase>/<run_id>; run_id starts with <dataset>_
+dataset: energy               # concrete | energy | airfoil | wine_red | kin8nm
+phase: smoke                  # smoke | pilot | main
+run_id: null
+resume: false
+device: cuda
+chunk_size: 10
+# exact: one Gaussian draw per checkpoint gap; stepwise: individual Gibbs sweeps
+# (smoke phase only, for comparison with the exact transition).
+transition: exact
+seed_namespace: c-horizon-v1  # per dataset: <seed_namespace>-<dataset>; disjoint from every r3-* namespace
+
+model:
+  prior_var: 1.0
+
+kernel:
+  bandwidth_draws: 2000       # verify bandwidth using the original pilot seed
+  ell_factor: 1.0
+
+# Per dataset: declared sigma^2 (asserted against the OLS rounding), the frozen bandwidth and the original
+# study it comes from (namespace of its pilot-bw stage; summary holding setup.shifts[0] and meta).
+datasets:
+  concrete:
+    sigma2_declared: 0.39
+    ell_frozen: 3.643070235239123
+    source_namespace: r3-concrete-v1
+    source_summary: paper/figures/data/r3_concrete/summary_main.json
+  energy:
+    sigma2_declared: 0.085
+    ell_frozen: 3.8979600175309055
+    source_namespace: r3-regression-v1-energy
+    source_summary: paper/figures/data/r3_regression/summary_energy.json
+  airfoil:
+    sigma2_declared: 0.49
+    ell_frozen: 3.1939665103070483
+    source_namespace: r3-regression-v1-airfoil
+    source_summary: paper/figures/data/r3_regression/summary_airfoil.json
+  wine_red:
+    sigma2_declared: 0.64
+    ell_frozen: 4.556214746859326
+    source_namespace: r3-regression-v1-wine_red
+    source_summary: paper/figures/data/r3_regression/summary_wine_red.json
+  kin8nm:
+    sigma2_declared: 0.59
+    ell_frozen: 4.096001398473259
+    source_namespace: r3-regression-v1-kin8nm
+    source_summary: paper/figures/data/r3_regression/summary_kin8nm.json
+
+setting: {name: slow_R0.8, direction: slow, r_init: 0.8, source_index: 0}
+
+checkpoints: [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+m_grid: [8]
+n_dirs: 8
+J_grid: [16384]
+N_grid: [2048]
+N_pi: 65536
+
+landmarks:
+  M: 2048
+  rtol: 1.0e-8
+  numerical_margin: 1.0e-8
+  # Avoid cancellation when Gamma_t = A^t C (A^t)^T is small.
+  closed_form: stable
+
+operator:
+  rtol: 1.0e-11
+  head: 256
+
+# beta = 0.05 per dataset/initialization: replicas 0.025 over 18 checkpoints x 1 J (0.025/18 per cell),
+# target reference 0.0125 once per ensemble, operator 0.0125 over 18 checkpoints x 1 N (0.0125/18 per cell).
+budget:
+  total: 0.05
+  components: {replicas: 0.025, target: 0.0125, operator: 0.0125}
+
+tolerances: [0.05, 0.10]
+
+# Disjoint ensemble seeds for smoke, pilot and main runs.
+phases:
+  smoke: {n_ensembles: 2, rep_offset: 0}
+  pilot: {n_ensembles: 10, rep_offset: 1000000}
+  main: {n_ensembles: 500, rep_offset: 2000000}

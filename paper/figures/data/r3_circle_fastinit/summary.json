@@ -1,0 +1,80 @@
+{
+  "n_ensembles": 2000,
+  "radius": 0.6497252560513762,
+  "delta_cell": 0.0011363636363636365,
+  "replica_radius_mcdiarmid": {
+    "1024": 0.14632404127574447,
+    "4096": 0.07316202063787224,
+    "16384": 0.03658101031893612,
+    "65536": 0.01829050515946806
+  },
+  "replica_radius_bernstein": {
+    "1024": 0.12577644098022267,
+    "4096": 0.06163518236996472,
+    "16384": 0.030508919696540363,
+    "65536": 0.015177865862729196
+  },
+  "event_frequency": {
+    "mcdiarmid": 1.0,
+    "bernstein": 1.0
+  },
+  "event_min_abs_margin_sq": {
+    "mcdiarmid": 0.00022275609572229365,
+    "bernstein": 0.00011858112888076624
+  },
+  "truncation_error_bound": 4.536186507116362e-18,
+  "event_enclosure_abs": 1.0136562355690784e-09,
+  "event_unresolved_cells": {
+    "mcdiarmid": 0,
+    "bernstein": 0
+  },
+  "event_any_violation_ensembles": {
+    "mcdiarmid": 0,
+    "bernstein": 0
+  },
+  "truth_rounding_rel": 1e-09,
+  "event_rounding_abs": 1e-09,
+  "min_margin_covered_bound_minus_truth_hi": 0.0008431099111074852,
+  "design_disclosure": "post hoc comparison designed after examining the primary results",
+  "max_B4_minus_B3": {
+    "mcdiarmid": 0.0,
+    "bernstein": 0.0
+  },
+  "knapsack_infeasible_cells": {
+    "Kstatic_mcdiarmid": 0,
+    "Kdynamic_mcdiarmid": 0,
+    "Kstatic_bernstein": 0,
+    "Kdynamic_bernstein": 0
+  },
+  "truth_mmd": {
+    "0": 0.11685987777202204,
+    "1": 0.10891591717473005,
+    "2": 0.10151512999006722,
+    "4": 0.08819555207422387,
+    "8": 0.06658948506825782,
+    "16": 0.03799261091663583,
+    "32": 0.012391341165935904,
+    "64": 0.001321443236891959,
+    "128": 1.5048707275992287e-05,
+    "256": 1.9519939724674534e-09,
+    "512": 3.284263719659935e-17
+  },
+  "truth_tail_bound_max": 6.874792386530641e-128,
+  "max_event_error_over_radius": {
+    "mcdiarmid": 0.5780547132085536,
+    "bernstein": 0.6966007480905961
+  },
+  "phase": "stress",
+  "seed_entropy": 707004,
+  "wall_seconds_reanalysis": 4.2202890533953905,
+  "peak_rss_kib_self": 290488,
+  "source_simulation_cost": {
+    "wall_seconds_simulation": 32.50619165226817,
+    "cpu_seconds_children_simulation": 350.28000000000003,
+    "chunk_wall_seconds_per_ensemble": 0.17695867801643908,
+    "peak_rss_kib_self": 284808,
+    "peak_rss_kib_largest_worker": 85324,
+    "equivalent_transitions_total": 67108864000,
+    "binomial_checkpoint_draws_executed_total": 1310720000
+  }
+}

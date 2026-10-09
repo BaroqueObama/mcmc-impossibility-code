@@ -1,0 +1,13 @@
+UCI Statlog (German Credit Data), UCI ML Repository dataset id 144 (Hofmann 1994).
+Downloaded 2026-10-05 (UTC):
+  https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/{german.data-numeric,german.data,german.doc}
+The loader checks these three files against pinned SHA256 hashes.
+
+Used file: german.data-numeric (Strathclyde numeric encoding; 1000 rows; 24 integer predictors + label;
+label 1 = good (700), 2 = bad (300)).
+Preprocessing (mcmc.paperexp.german_credit.load_german_credit):
+  X_std = (X - mean) / std  with population std (ddof=0), all 24 std > 0, no epsilon added;
+  y = 1{label == 1}  (1 = good credit risk).
+No train/test split: the full data set conditions the posterior (sampling, not prediction).
+Cross-check against german.data: label, duration, age, checking-account status agree exactly;
+credit amount equals attribute 5 / 100 up to rounding (max abs error 0.5).

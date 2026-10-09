@@ -1,0 +1,26 @@
+# Two-dimensional funnel with a tapered Matern-3/2 surrogate.
+# Direct Matern quadrature is infeasible because sd(x1 | y) = exp(y/2). Use
+#     k(r) = int exp(-r^2/(2 lam)) Phi((log lam - log lam0)/tau) Gamma(lam; 3/2, 3/2) dlam,
+# which equals (1 + sqrt3 r) e^{-sqrt3 r} without the taper Phi; the taper removes components
+# narrower than ~lam0 = 0.01 (sup |k - k_Matern| ~ 1.6e-3, at r = 0) that the frozen y rules
+# cannot resolve. Cell integrals, means and cell Grams are w-weighted sums of the semi-analytic
+# RBF funnel integrals (independent u = log lam rules per level); the second moment for the
+# Nystrom spectrum uses node quadrature near the landmarks.
+defaults:
+  - exp_r1b_constructions_suite
+  - _self_
+
+constructions:
+  targets: [funnel-d2-sy3]
+  kernels: [matern32]
+  funnel_matern:
+    taper: {log_lam0: -4.605170185988091, tau: 0.35}       # lam0 = 0.01
+    kernel_rule: {h: 0.25, log_lam_max: 4.5, offset: 0.0}  # the kernel object (K_ZZ, monitors)
+    rule_construction: {h: 0.4, log_lam_max: 4.5, offset: 0.0}
+    rule_eval: {h: 0.3, log_lam_max: 4.5, offset: 0.15}    # independent nodes
+    rel_cutoff: 1.0e-10                                    # second-moment route (as the RBF funnel)
+    landmarks_construction: {h_L: 0.5, eta_rel: 1.0e-6, box_sd: 6.0, r_box: 30.0, x_cap: 150.0}
+    landmarks_eval: {h_L: 0.25, eta_rel: 1.0e-7, box_sd: 6.0, r_box: 30.0, x_cap: 200.0}
+    nodes_construction: {h_y: 0.75, q_y: 6, h_x: 0.5, q_x: 4, cap: 0.6, margin_bw: 14.0, s_cut: 7.65}
+    nodes_eval: {h_y: 0.6, q_y: 8, h_x: 0.35, q_x: 6, cap: 0.45, margin_bw: 14.0, s_cut: 8.22}
+    workers: 4                                             # processes for the mixture components

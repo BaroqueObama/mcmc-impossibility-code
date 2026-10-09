@@ -1,0 +1,119 @@
+# Synthetic anytime bounds with estimated operators and sampled target references.
+# mode=reference generates independent truth intervals; mode=ensembles evaluates
+# coverage; mode=witness checks an analytic Gaussian case.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r3b_anytime_suite
+study: r3b_suite
+protocol_version: v2      # part of the seed namespace
+freeze_label: main-v3     # main/stress operator settings; seed namespace remains v2
+mode: ensembles           # reference | ensembles | witness
+phase: smoke              # smoke | pilot | screen | main | stress
+run_id: null              # required
+reference_run_id: null    # required for mode=ensembles (r3b_suite/reference/<id>)
+resume: false
+device: cuda
+
+config_id: gauss-d10-c25__rwm   # frozen_suite_v1 config (target + frozen sampler)
+kernel:
+  kind: rbf               # rbf (primary) | matern32 (sensitivity; no exact mu_pi -> sampled reference)
+  bw: ell                 # ell (primary) | ell_half | ell_double (frozen bandwidths)
+eps: 0.8                  # known init radius R_init = eps (primary 0.8; sensitivity 0.2)
+init:                     # initial law: known_radius (A3 holds, R = eps) | point | dispersed
+  kind: known_radius      # point/dispersed: conventional starts, (A3) FAILS; bounds use the ASSUMED R = eps
+  scale: 3.0              # point: m + scale s_j e_j (j = widest frozen scale); dispersed: m + scale (x - m)
+
+# R3 inspection schedule {0,1,2,4,...,T3}, T3 = min(cap, max(floor, factor * t_max_frozen))
+schedule: {factor: 4, floor: 64, cap: 8192}
+m_grid: [2, 8, 32]
+n_dirs: 32
+J_grid: [4096, 8192, 16384, 32768]   # nested replica prefixes (cost-matched pairs J + 4N exist)
+N_grid: [1024, 2048]                 # nested operator block counts (4N endpoints each)
+N_pi: 65536                          # exact target draws for the sampled target reference (primary H)
+kernel_chunk: 1024
+chunk_size: 5                        # ensembles per resumable output file
+rep_offset: 0                        # first global rep id (extension runs: e.g. 500)
+
+operator:
+  rtol: 1.0e-11           # relative cutoff on the difference Gram (truncation term added to e)
+  head: 1024              # exact block of the compressed-norm bound (slack recorded)
+  method: fp64            # operators.estimate_operator: fp64 (exact two-eigensolve) | fp32-enclosed
+  n_refined: 128          # enclosed methods: leading Ritz vectors refined in fp64
+  fallback: null          # on EigensolveNotConverged: recompute that solve with this method (counted)
+
+kernel_sums:
+  fused: false            # fp64 fused RBF row sums (gaussian_linear.AnisoRBF.rowsum); applies to the
+                          # RBF kernel only (Matern always uses the dense sums; effective value recorded)
+batch_ensembles: 1        # ensembles sampled together in one loop (own generators: same streams)
+
+budget:                   # beta = 0.05, shared by every method (one event each)
+  total: 0.05
+  components: {replicas: 0.02, target: 0.01, operator: 0.02}
+
+reference:
+  J_ref: 262144           # independent replicas for [L_t, U_t] (stage ref-*; never in a tested bound)
+  beta_ref: 0.01          # simultaneous over the schedule (split 1/2-1/2 with a sampled mu_pi)
+  N_ref_target: 262144    # only without a known embedding (Matern)
+  quad_abs_err: 1.0e-10   # declared |error| of quadrature mu_pi values / ||mu_pi||^2 (measured <~1e-13)
+  N_refop: 131072         # blocks for the Nystrom plug-in reference operator Sigma_t^ref
+  n_landmarks: 1024
+  landmark_rtol: 1.0e-8    # K_ZZ cutoff; 1e-10 gave whitening error ~1e-6 (funnel), above the 1e-6 check
+  feat_chunk: 8192
+
+tolerances: [0.05, 0.10]
+
+phases:
+  smoke: {n_ensembles: 2}
+  pilot: {n_ensembles: 20}
+  screen: {n_ensembles: 200}
+  main: {n_ensembles: 500}      # main-v3, repetitions 0..499
+  stress: {n_ensembles: 200}
+
+# These settings override the values above, including command-line overrides.
+# fp32-enclosed includes rounding allowances; chol-fp64 uses the same enclosure
+# if the fp32 eigensolve fails. Fallback events are recorded in op_fallback.
+phase_overrides:
+  reference:
+    kernel_sums: {fused: true}
+  main:
+    N_grid: [2048]
+    operator: {method: fp32-enclosed, n_refined: 128, fallback: chol-fp64}
+    kernel_sums: {fused: true}
+    batch_ensembles: 8
+    chunk_size: 8
+  stress:
+    N_grid: [2048]
+    operator: {method: fp32-enclosed, n_refined: 128, fallback: chol-fp64}
+    kernel_sums: {fused: true}
+    batch_ensembles: 8
+    chunk_size: 8
+
+witness:                  # analytic AR(1) chain on the frozen Gaussian target (same init law)
+  target_id: gauss-d10-c25
+  rho_slow: 0.9           # along q_min (the event direction)
+  rho_fast: 0.6
+  t_max_threshold: 0.01   # same t_max rule as the suite, on the analytic MMD
+  n_ensembles: 100
+
+
+# Applied after phase_overrides; chosen before evaluating sensitivity results.
+# d=2 uses fp64 with a larger cutoff to avoid unresolved eigenvalue clusters.
+# The omitted rank contributes to the operator error allowance e.
+config_overrides:
+  funnel-d2-sy3__rwm: {operator: {method: fp64, rtol: 1.0e-9}}
+  funnel-d2-sy3__mala: {operator: {method: fp64, rtol: 1.0e-9}}
+  gauss-d2-c25__rwm: {operator: {method: fp64, rtol: 1.0e-9}}
+  gauss-d2-c25__mala: {operator: {method: fp64, rtol: 1.0e-9}}
+  mixture-d2-s6-w0.5__rwm: {operator: {method: fp64, rtol: 1.0e-9}}
+  mixture-d2-s6-w0.5__mala: {operator: {method: fp64, rtol: 1.0e-9}}
+  studentt-d2-nu3__rwm: {operator: {method: fp64, rtol: 1.0e-9}}
+  studentt-d2-nu3__mala: {operator: {method: fp64, rtol: 1.0e-9}}

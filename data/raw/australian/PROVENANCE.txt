@@ -1,0 +1,8 @@
+Data set australian (hierarchical logistic model).
+Source: https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/australian/ (UCI 143)
+Downloaded 2026-10-05 (UTC). The loader checks the retained data and source documentation against pinned SHA256 hashes.
+Used file: australian.dat. n = 690, raw predictors = 14, positives = 307.
+Label rule: y = last column (1 = '+', credit approved).
+Dropped columns (0-based, verified exactly constant): []. Retained predictors p = 14; d = p + 2.
+Preprocessing: X_std = (X - mean)/std with population std (ddof=0), no epsilon; no train/test split.
+Australian notes: the Statlog numeric encoding is used as supplied (8 categorical attributes coded as integers, like German Credit's numeric file); missing values were already replaced by the provider (mode/mean, see australian.doc).

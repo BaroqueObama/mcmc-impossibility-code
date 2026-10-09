@@ -1,0 +1,8 @@
+Data set pima (hierarchical logistic model).
+Source: https://api.openml.org/data/v1/download/37 (OpenML file 37; md5 3cbaa3e5... matches OpenML's description)
+Downloaded 2026-10-05 (UTC). The dataset loader verifies pinned SHA256 hashes.
+Used file: dataset_37_diabetes.arff. n = 768, raw predictors = 8, positives = 268.
+Label rule: y = 1{class == tested_positive}.
+Dropped columns (0-based, verified exactly constant): []. Retained predictors p = 8; d = p + 2.
+Preprocessing: X_std = (X - mean)/std with population std (ddof=0), no epsilon; no train/test split.
+Pima notes: UCI removed this data set; OpenML 37 (version 1, uploaded 2014-04-06) is used, and the ARFF md5 3cbaa3e54586aa88cf6aacb4033e4470 equals OpenML's published md5_checksum. Zeros that code missing values (plas 5, pres 35, skin 227, insu 374, mass 11 rows) are kept as recorded (no imputation).

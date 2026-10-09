@@ -1,0 +1,23 @@
+{
+  "description": "Seed-0 MALA run for the trapped-mixture example.",
+  "seed": 0,
+  "config": {
+    "d": 10,
+    "separation": 16.0,
+    "n_gold": 20000,
+    "sampler": "mala",
+    "mala_step_size": 0.5,
+    "n_chains": 4,
+    "n_warmup": 1000,
+    "n_draws": 20000,
+    "init_basin": 0,
+    "coord_aligned_control": true
+  },
+  "warmup_draws_discarded": 0,
+  "warmup_note": "The original MALA helper does not use the YAML n_warmup field.",
+  "diagnostic_definition": "Rank-normalized split Rhat and bulk ESS on the ten original coordinates, using all four chains; max/min over coordinates.",
+  "final_rhat_max": 1.0013312805989003,
+  "final_ess_min": 4959.175640767814,
+  "draws_in_negative_halfspace": 0,
+  "draws_total": 80000
+}

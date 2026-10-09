@@ -1,0 +1,129 @@
+# Logistic slow-mode alignment using NUTS references.
+# Gaps and envelopes are empirical.
+stage: calibrate
+tag: v1
+study: b_logistic
+
+source:
+  study: german_credit_r2
+  phase: main
+  tag: v1          # sampling outputs (setup, sigma, pilots)
+  eval_tag: eval2  # corrected evaluations
+
+# (model, sampler) units; the horseshoe is German Credit's stress model (appendix).
+units: [hier__mala, hier__rwm, hier_pima__mala, hier_pima__rwm, hier_australian__mala,
+        hier_australian__rwm, hier_ionosphere__mala, hier_ionosphere__rwm, hier_sonar__mala,
+        hier_sonar__rwm, horseshoe__mala, horseshoe__rwm]
+appendix_models: [horseshoe]
+datasets: {hier: german_credit, horseshoe: german_credit, hier_pima: pima, hier_australian: australian,
+           hier_ionosphere: ionosphere, hier_sonar: sonar}
+kernel_file: configs/experiment/exp_r2_german_credit_kernel.yaml
+
+calibration:
+  pilot: stationary          # pilotrun_stationary.npz: n_fit x n_chains chains, states 1..Lmax
+  half_split: fits           # A = fits 0..n_fit/2-1, B = fits n_fit/2..n_fit-1 (disjoint chains)
+  rel_cutoff: 1.0e-10        # reference whitening cutoff (primary)
+  rel_cutoff_sensitivity: 1.0e-8
+  n_keep: 32                 # TICA eigenvalues kept per fit (embedded spans: top 17)
+  n_span: 17
+  out_dir: paper/figures/data/r2_real_alignment
+
+# Projection of fresh branched batches (protocol: begin with 4 batches of 8192 blocks; e_t =
+# 3 ||S^A - S^B||_op / 2 with halves = batches {0,1} vs {2,3}). The DK term is informative when
+# arcsin(e_t / (Delta_t - e_t)) <= dk_informative_deg.
+fresh:
+  n_batches: 4
+  n_blocks: 8192
+  e_factor: 1.5
+  dk_informative_deg: 30.0
+
+# Half-split sensitivity uses max over j <= m+2, as in the regression study.
+# This choice preceded fresh evaluation.
+amendment:
+  id: A1
+  rules: b-logistic-select-v2
+  amends_file: selection_logistic_v1.json
+  out_name: selection_logistic.json
+  csv_tag: v2
+  reason: >-
+    Use the regression study's half-split sensitivity, max_{j<=m+2} ||rho_j^A|-|rho_j^B||/2,
+    in place of max over {m, m+1}. Retain strict |rho_m| > |rho_{m+1}| at the longer lag;
+    this differs from the regression selection rule only on exact ties.
+
+# Evaluation settings were fixed before sampling.
+unit: null
+device: cpu
+phase: main              # stage 2 run phase (smoke for code-path checks)
+evaluation:
+  tag: v1
+  selection_file: selection_logistic.json
+  selection_sha256: 2c56d56a507b7485755316560ea17bbf6fcb71a0f4e27b93a0376b01d874279f
+  # unit -> evaluated counts (A1 pairs with a projected DK-applicable window at 4 x 8192) and
+  # t_max = first R2 grid time after the last projected-applicable t (checked against the
+  # selection's window CSV at run time). Grid = 0, 1, 2, 4, ..., t_max. Lag = the selected lag.
+  pairs:
+    hier_pima__mala: {m: [3, 1], t_max: 4}
+    hier_pima__rwm: {m: [1, 3], t_max: 32}
+    hier_australian__mala: {m: [1], t_max: 8}
+    hier_australian__rwm: {m: [1], t_max: 64}
+    hier_ionosphere__mala: {m: [1], t_max: 512}
+    hier_ionosphere__rwm: {m: [1], t_max: 2048}
+    hier_sonar__mala: {m: [1], t_max: 512}
+    hier_sonar__rwm: {m: [1], t_max: 4096}
+  # selected pairs with NO projected window (reported with projection + lag-2t check, no fresh run)
+  not_evaluated:
+    hier__mala: [1, 3]
+    hier__rwm: [3]
+    hier_australian__mala: [3]
+    hier_australian__rwm: [3]
+  none_eligible: [horseshoe__mala, horseshoe__rwm]
+  sigma:
+    n_batches: 4
+    n_blocks: 8192            # branched blocks per batch (4 chains per block: Y, Z from X; Y', Z' from X')
+    # pool-run subsets per batch: [X runs, X' runs] (disjoint subsets for the two halves)
+    pool_runs: [[[0, 1, 2, 3], [8, 9, 10, 11]], [[0, 1, 2, 3], [8, 9, 10, 11]],
+                [[4, 5, 6, 7], [12, 13, 14, 15]], [[4, 5, 6, 7], [12, 13, 14, 15]]]
+    halves: [[0, 1], [2, 3]]  # e_t = 3 ||S^A - S^B||_op / 2
+    half_budgets: [[0, 2], [1, 3]]   # budget-doubling check (each: one batch per pool subset)
+    e_factor: 1.5
+    seed_stage: b-logistic-sigma-v1          # seed_for(gc-<unit>, stage, k), k = batch
+    start_seed_stage: b-logistic-sigma-starts-v1
+  pilots:
+    n_fit: 30
+    n_chains: 4
+    lengths: [4096, 16384]    # nested prefixes of one run (states 1..L)
+    start_law: I0             # uniform over the pool set (R2 convention)
+    lag: 1
+    tica_rel_cutoff: 1.0e-10
+    seed_stage: b-logistic-pilot-v1
+    start_seed_stage: b-logistic-pilot-starts-v1
+  display_rule: >-
+    per (unit, m) the curve is the maximal run of consecutive DK-applicable checkpoints from the
+    first applicable one (b_logistic.curve_cutoffs); every checkpoint keeps its row and reason
+  mem_bytes: 1073741824
+
+# Expanded reference design, fixed before sampling; reuse the learned spans.
+# e_t = 3 ||S^A - S^B|| / 2; halves {0,1}, {2,3}; half budgets {0,2}, {1,3}.
+expanded:
+  tag: x1
+  design_file: expanded_design_logistic_x1.json
+  design_sha256: f7ab5dc5efecaf04a8d442e7f40f84b5dacd1a8d4da3e021bd778b542af8f5b7
+  n_batches: 4
+  seed_stage: b-logistic-sigma-x1               # seed_for(gc-<unit>, stage + "-b<k>", sub-batch j)
+  start_seed_stage: b-logistic-sigma-starts-x1  # with-replacement starts (R2 pool), per batch k
+  perm_seed_stage: b-logistic-sigma-perm-x1     # without-replacement starts (new pool), per half/subset
+  # R2 pool subsets (units without a new pool), as the protocol tier
+  pool_runs: [[[0, 1, 2, 3], [8, 9, 10, 11]], [[0, 1, 2, 3], [8, 9, 10, 11]],
+              [[4, 5, 6, 7], [12, 13, 14, 15]], [[4, 5, 6, 7], [12, 13, 14, 15]]]
+  # Independent NUTS pools, disjoint from the evaluation and calibration sets.
+  # Run quarters: A-X = q0, B-X = q1, A-X' = q2, B-X' = q3.
+  # Starts are drawn without replacement within each quarter.
+  new_pools:
+    hier: {set: hier_nc_diag_reference_bpool1, n_runs: 48}
+    hier_australian: {set: australian_nc_diag_reference_bpool1, n_runs: 144}
+  pilots_from_protocol_tier: true   # reuse <unit>_fresh_v1/pilotrun.npz where it exists
+
+hydra:
+  run:
+    dir: ${oc.env:MCMC_PAPER_OUT}/b_logistic/hydra_logs/${now:%Y-%m-%d_%H-%M-%S}_${stage}
+  output_subdir: null

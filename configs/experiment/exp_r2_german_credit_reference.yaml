@@ -1,0 +1,78 @@
+# Independent NUTS references and diagnostics for logistic posteriors.
+# Comparisons against these draws are empirical, not certified population errors.
+mode: run
+study: german_credit
+phase: reference          # smoke | reference
+version: v1
+role: reference           # reference (R runs) | kernel_calibration (1 run, separate seeds)
+sets: [hier_c_dense]      # presets below to run in one worker pool
+
+# Sampling budget per run. Each run is an independent NUTS run with its own warmup/adaptation and a
+# dispersed initialization; runs are reference draws of the posterior, never pooled as observations
+# of one transition operator.
+n_runs: 16
+n_runs_calibration: 1
+n_warmup: 5000
+n_draws: 25000
+thin: 1                   # retain every draw
+
+# Dispersion law: x0 ~ Uniform([-radius, radius]^d) in the DECLARED unconstrained coordinates
+# (alpha, log sigma, beta[, log tau]), independently per run; mapped deterministically to the
+# sampling parameterization (noncentered: z = beta / scale).
+init_radius: 2.0
+
+# Both parameterizations save draws in the coordinates declared in german_credit.py.
+presets:
+  hier_c_dense:       {model: hier, parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true, cost_rank: 3}
+  hier_nc_diag:       {model: hier, parameterization: noncentered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: false, cost_rank: 4}
+  horseshoe_nc_diag:  {model: horseshoe, parameterization: noncentered, target_accept_prob: 0.99, max_tree_depth: 10, dense_mass: false, cost_rank: 2}
+  horseshoe_c_dense:  {model: horseshoe, parameterization: centered, target_accept_prob: 0.99, max_tree_depth: 10, dense_mass: true, cost_rank: 1}
+  # Added after the centered horseshoe sampler failed (352-19739 divergences/run).
+  # Shares the primary noncentered parameterization: a weaker independence check.
+  horseshoe_nc_dense: {model: horseshoe, parameterization: noncentered, target_accept_prob: 0.99, max_tree_depth: 10, dense_mass: true, cost_rank: 1}
+  # Stricter horseshoe reference: noncentered, diagonal mass, 10k warmup.
+  # Both v1 and v2 comparisons are reported; this preset preceded evaluation.
+  horseshoe_nc_diag_v2: {model: horseshoe, parameterization: noncentered, target_accept_prob: 0.995, max_tree_depth: 12, dense_mass: false, n_warmup: 10000, cost_rank: 0}
+  # Additional hierarchical models, with settings fixed before sampling:
+  # the hier-primary settings (centered/dense, ta 0.95) as evaluation reference and the noncentered/diag
+  # set as the independent starting-state pool (as for German Credit hier).
+  pima_c_dense: {model: hier_pima, parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true, cost_rank: 3}
+  pima_nc_diag: {model: hier_pima, parameterization: noncentered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: false, cost_rank: 4}
+  australian_c_dense: {model: hier_australian, parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true, cost_rank: 3}
+  australian_nc_diag: {model: hier_australian, parameterization: noncentered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: false, cost_rank: 4}
+  ionosphere_c_dense: {model: hier_ionosphere, parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true, cost_rank: 3}
+  ionosphere_nc_diag: {model: hier_ionosphere, parameterization: noncentered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: false, cost_rank: 4}
+  sonar_c_dense: {model: hier_sonar, parameterization: centered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: true, cost_rank: 3}
+  sonar_nc_diag: {model: hier_sonar, parameterization: noncentered, target_accept_prob: 0.95, max_tree_depth: 10, dense_mass: false, cost_rank: 4}
+
+# Primary reference set per model (the kernel calibration run uses this preset) and the
+# cross-parameterization check sets (each compared with the primary).
+primary: {hier: hier_c_dense, horseshoe: horseshoe_nc_diag, hier_pima: pima_c_dense, hier_australian: australian_c_dense,
+          hier_ionosphere: ionosphere_c_dense, hier_sonar: sonar_c_dense}
+crosscheck: {hier: [hier_nc_diag], horseshoe: [horseshoe_c_dense, horseshoe_nc_dense], hier_pima: [pima_nc_diag],
+             hier_australian: [australian_nc_diag], hier_ionosphere: [ionosphere_nc_diag], hier_sonar: [sonar_nc_diag]}
+# The separate kernel-calibration run of each model (never used in any comparison).
+calibration: {hier: hier_c_dense, horseshoe: horseshoe_nc_diag, hier_pima: pima_c_dense, hier_australian: australian_c_dense,
+              hier_ionosphere: ionosphere_c_dense, hier_sonar: sonar_c_dense}
+
+# One NUTS chain per CPU process.
+cores: auto  # one available CPU; set an allowed list/range (e.g. "0-7") for parallel runs
+
+# Reference-quality analysis.
+model: hier
+analysis:
+  device: cuda            # Device for kernel diagnostics; NUTS runs on CPU.
+  batch_size: 500         # batch-means batch length (draws); n_draws must be a multiple
+  block_batches: 16       # Gram block = block_batches * batch_size points per side
+  bandwidth_multipliers: [1.0, 0.5, 2.0]   # 1.0 = frozen median bandwidth (primary); others = sensitivity
+  n_bandwidth_points: 2000                 # calibration draws (evenly spaced) for the median heuristic
+  cross_permutations: 200000               # Monte Carlo run-label permutations for the cross-set test
+  permutation_seed_stage: refquality-perm
+  kernel_file: configs/experiment/exp_r2_german_credit_kernel.yaml
+  scale_rule: sd          # sd: entries <model>; mad: entries <model>_mad
+  tag: v1                 # quality run id = quality_<model>_<tag>
+
+hydra:
+  run:
+    dir: ${oc.env:MCMC_PAPER_OUT}/german_credit/hydra_logs/${now:%Y-%m-%d_%H-%M-%S}
+  output_subdir: null

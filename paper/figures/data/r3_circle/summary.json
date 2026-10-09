@@ -1,0 +1,80 @@
+{
+  "n_ensembles": 2000,
+  "radius": 0.6497252560513762,
+  "delta_cell": 0.0011363636363636365,
+  "replica_radius_mcdiarmid": {
+    "1024": 0.14632404127574447,
+    "4096": 0.07316202063787224,
+    "16384": 0.03658101031893612,
+    "65536": 0.01829050515946806
+  },
+  "replica_radius_bernstein": {
+    "1024": 0.12577644098022267,
+    "4096": 0.06163518236996472,
+    "16384": 0.030508919696540363,
+    "65536": 0.015177865862729196
+  },
+  "event_frequency": {
+    "mcdiarmid": 1.0,
+    "bernstein": 1.0
+  },
+  "event_min_abs_margin_sq": {
+    "mcdiarmid": 0.00024309481876271985,
+    "bernstein": 0.00013891985192119243
+  },
+  "truncation_error_bound": 2.664812165719637e-29,
+  "event_enclosure_abs": 1.1229060792960274e-09,
+  "event_unresolved_cells": {
+    "mcdiarmid": 0,
+    "bernstein": 0
+  },
+  "event_any_violation_ensembles": {
+    "mcdiarmid": 0,
+    "bernstein": 0
+  },
+  "truth_rounding_rel": 1e-09,
+  "event_rounding_abs": 1e-09,
+  "min_margin_covered_bound_minus_truth_hi": 2.3921372162777474e-05,
+  "design_disclosure": "primary configuration fixed before the main run",
+  "max_B4_minus_B3": {
+    "mcdiarmid": 0.0,
+    "bernstein": 0.0
+  },
+  "knapsack_infeasible_cells": {
+    "Kstatic_mcdiarmid": 0,
+    "Kdynamic_mcdiarmid": 0,
+    "Kstatic_bernstein": 0,
+    "Kdynamic_bernstein": 0
+  },
+  "truth_mmd": {
+    "0": 0.3505796333160661,
+    "1": 0.34632133265310616,
+    "2": 0.34212238426753894,
+    "4": 0.3338972871879152,
+    "8": 0.31810460482463826,
+    "16": 0.2889180193593618,
+    "32": 0.23871828182736995,
+    "64": 0.16337725279030074,
+    "128": 0.0766616782305182,
+    "256": 0.01688542606036576,
+    "512": 0.0008191885385351463
+  },
+  "truth_tail_bound_max": 6.874792386530641e-128,
+  "max_event_error_over_radius": {
+    "mcdiarmid": 0.5763553039819965,
+    "bernstein": 0.6910654173287497
+  },
+  "phase": "main",
+  "seed_entropy": 606003,
+  "wall_seconds_reanalysis": 3.8916297238320112,
+  "peak_rss_kib_self": 262692,
+  "source_simulation_cost": {
+    "wall_seconds_simulation": 25.33915939182043,
+    "cpu_seconds_children_simulation": 256.96000000000004,
+    "chunk_wall_seconds_per_ensemble": 0.12929250319022687,
+    "peak_rss_kib_self": 256492,
+    "peak_rss_kib_largest_worker": 85472,
+    "equivalent_transitions_total": 67108864000,
+    "binomial_checkpoint_draws_executed_total": 1310720000
+  }
+}

@@ -1,0 +1,36 @@
+# Residual constructions and projected discrepancies for Gaussian regressions.
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r1c_real
+study: r1_real
+part: A
+phase: smoke
+run_id: null
+threads: 4
+only_units: []
+seed_tag: ${phase}    # appended to every random-stream stage: pilot / main streams are disjoint
+
+part_a:
+  datasets: [concrete, energy, airfoil, wine_red, kin8nm]
+  rel_floor: 1.0e-13      # Mehler mode floor (relative to the top uncentered eigenvalue)
+  n_out: 64               # exact centered eigenpairs kept
+  m_values: [2, 4, 8, 16, 32]
+  R_values: [0.5, 0.2]
+  n_grid: [16, 32, 64]
+  select_n: 16            # plane selection grid (construction quadrature only)
+  n_dir: 4
+  n_combo: 6              # secondary combination search
+  floor: 0.01             # density >= 0.01
+  rank_tol: 1.0e-10       # rank-revealing null space (plane projections of monitors can coincide)
+  quad_construction: {h: 0.25, q: 8, cut: 9.0, gram: gl}
+  quad_eval: {h: 0.2, q: 10, cut: 9.5, gram: owen}
+  landmarks: {M: 2048, rtol: 1.0e-8}   # as the bounds R3 regression runner
+  mc: {m_values: [2, 4, 8], R: 0.5, n_samples: 32768, n_batches: 32}

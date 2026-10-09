@@ -1,0 +1,94 @@
+# Regression slow-mode alignment with the reversible Gaussian AR sampler.
+
+defaults:
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+  - _self_
+
+experiment_name: exp_b_real_alignment
+study: b_real_alignment
+part: setup               # setup | calibrate | freeze | population | learned | precision | learned_refine
+dataset: concrete         # concrete | airfoil | energy | wine_red | kin8nm (posterior/kernel = R3 regression)
+phase: pilot              # RunDir phase (smoke | pilot | main)
+run_id: null              # completed runs are not overwritten
+setup_run: null           # calibrate / population / learned: directory of the setup run
+calibration_run: null     # population / learned: directory of the calibration run
+selection_file: paper/figures/data/r2_real_alignment/selection.json
+
+sampler:                  # same rule for every dataset
+  base_rate: 0.95         # h = -s_1 log(0.95), rho_j = exp(-h / s_j), s = eig(D^{-1} C D^{-1})
+  rotation_seed: 20261006 # numpy default_rng(seed).standard_normal((d, d)), QR with R diag > 0, reset per dataset
+
+spectrum:
+  n_top: 17               # top 17 Hermite eigenvalues + complete tie clusters
+  tie_tol_log: 1.0e-12    # |log rho^alpha - log rho^beta| <= tol -> same cluster
+
+features:
+  n_landmarks: 512        # primary (nested prefix of one 1024-point exact target draw)
+  n_landmarks_sensitivity: 1024
+  landmark_stream: landmarks   # seed_for("b-real-<dataset>", stream, 0); numpy PCG64; N(mu, C) via Cholesky
+  gram_rel_cutoff: 1.0e-12     # relative Gram eigenvalue cutoff
+
+checks:
+  mc_n: 4194304           # exact draws for the Monte Carlo low-degree Hermite-moment check
+  mc_landmarks: 8
+  mc_max_degree: 3
+  mc_stream: mc-moments
+  hermite_recon_degree: {concrete: 10, airfoil: 12, energy: 10, wine_red: 8, kin8nm: 10}
+  mp_spot_pairs: 64       # random (a, b) landmark pairs checked against a 60-digit direct formula
+  mp_spot_times: [0, 8, 64, 512]
+
+calibration:
+  n_chains: 4             # independent stationary AR trajectories (exact target starts)
+  n_transitions: 32768    # 2^15 transitions each
+  stream: calibration     # seed_for("b-real-<dataset>", stream, chain)
+  halves: [[0, 1], [2, 3]]
+  lags: [1, 4, 16, 64, 256]           # 256 is the stability partner of 64 only
+  candidate_lags: [1, 4, 16, 64]
+  m_max: 16
+  whitening_cutoff: 1.0e-10           # reference whitening cutoff
+  whitening_cutoff_sensitivity: 1.0e-8
+  rules:                              # prespecified selection rules (not confidence levels)
+    gap_units: 5.0                    # |rho_m| - |rho_{m+1}| > 5 half-split sensitivity units
+    max_half_angle_deg: 10.0
+    max_stability_angle_deg: 10.0
+    max_counts: 2
+
+population:
+  t_grid: [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+  t_extension_max: 4096   # geometric extension only if the evaluated bound predicts an informative window > 512
+  op_factor: 20.0         # lambda_m > 20 e_t and lambda_m - lambda_{m+1} > 20 e_t
+  sin_factor: 10.0        # positive point only if s_t > 10 e_sin,t, else BELOW_NUMERICAL_SENSITIVITY
+  max_precision_change_deg: 0.1
+  allowance_factor: 2.0   # e_t = 2 ||S_t^fp64 - S_t^ld||_op + r u ||S_t^fp64||_op (declared margin)
+  gate:
+    min_checkpoints: 3    # resolved checkpoints with a nontrivial bound (g_t < 1) ...
+    max_sine_bound: 0.5   # ... including one with g_t < 0.5
+
+learned:                  # independent TICA fits
+  n_fits: 30
+  n_chains: 4
+  lengths: [4096, 16384]  # nested prefixes of each chain
+  stream: learned         # seed_for("b-real-<dataset>", stream, fit * 4 + chain); disjoint from calibration
+  start: exact_target
+
+precision:                # exact-integer operator calculations at two precisions
+  m: 2                    # a selected count whose curve reaches an fp64 resolution limit
+  times: [256]            # checkpoints listed in selection.json numerical_refinements
+  dps: [40, 55]           # two exact-integer tiers; allowance = 2 ||S_40 - S_55|| + D rounding bound + Ritz residual
+  extra_vectors: 3        # Rayleigh-Ritz block size m + 3
+  iters: 6
+  workers: 8
+
+population_run: null      # learned: directory of the population run (operators, eigenvectors, true rows)
+precision_run: null       # learned_refine: directory of the precision run (Ritz vectors at full precision)
+learned_run: null         # learned_refine: directory of the learned run (stored learned spans, spans.npz)
+
+threads: 8
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  job:
+    chdir: false

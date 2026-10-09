@@ -1,0 +1,839 @@
+{
+ "status": "PRESPECIFIED expanded reference tier (frozen before any expanded batch); reference-based, empirical",
+ "rule": "Choose block counts and time windows from the logistic calibration results.\n\nFor a calibration gap g(t), need(t) = 8192 * (2 e_saved(t) / g(t))^2\nextrapolates the blocks needed for gap > 2 e_t under 1/sqrt(N) error scaling.\nUse lag-2t gaps at t=2,8,32,128 and branched gaps elsewhere. Start from the\nprojected window at 4*8192 blocks; if empty, use the contiguous lag-2t window\nwith gap > 3 eps, or {1,2} if that is empty too.\n\nTake 1.5 times the largest need(t) in this window, round to four equal\nbatches in multiples of 16384, and extend the window while that budget\nsuffices. Simulate one additional checkpoint. Costs are capped at 4 GPU-hours\nper dataset. Above 100,000 blocks, use a new NUTS pool with at least\n2*N_batch states in each of its four disjoint quarters.",
+ "safety": 1.5,
+ "sub_batch_blocks": 16384,
+ "cost_s_per_chain_step": {
+  "mala": 3e-07,
+  "rwm": 2e-07
+ },
+ "cap_gpu_h_per_dataset": 4.0,
+ "new_pool_threshold_blocks": 100000,
+ "inputs_sha256": {
+  "selection_logistic.json": "2c56d56a507b7485755316560ea17bbf6fcb71a0f4e27b93a0376b01d874279f",
+  "window_projection_logistic_v2.csv": "4577de8eb9e91e630edc4f6d3e1d8e1a406d7d12fe17931d9dcf62a0b4e7c7ea",
+  "lag2t_check_logistic_v2.csv": "306a0581ee7140d297b3b450819c9e71f6eb79379e32661592a98259f61708f7"
+ },
+ "units": {
+  "hier__mala": {
+   "m": [
+    1,
+    3
+   ],
+   "N_batch": 147456,
+   "N_total": 589824,
+   "t_max": 32,
+   "new_pool": true,
+   "pool_states_per_subset_needed": 294912,
+   "projected_gpu_s": 22.6492416,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8
+     ],
+     "basis": "lag-2t evidence window t <= 8",
+     "required_blocks": 526671.1974602643,
+     "extended_to": 16,
+     "need_blocks": {
+      "1": 351114.13164017623,
+      "2": 340259.7097440817,
+      "4": 145407.83194224164,
+      "8": 260550.27275254964,
+      "16": 586102.3033862519,
+      "32": 12796877.79164825,
+      "64": 17776845.401400015,
+      "128": 454786888.47925234,
+      "256": 62799905.1303876,
+      "512": 6497032.640467341,
+      "1024": 6697544.876830831,
+      "2048": 14016381.152466316,
+      "4096": 30186757.395305578
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    },
+    "3": {
+     "W0": [
+      1,
+      2,
+      4,
+      8
+     ],
+     "basis": "lag-2t evidence window t <= 8",
+     "required_blocks": 76995.45064438818,
+     "extended_to": 16,
+     "need_blocks": {
+      "1": 40345.516753615266,
+      "2": 46539.99902695429,
+      "4": 51330.30042959213,
+      "8": 44485.69996447971,
+      "16": 428121.26712688076,
+      "32": 48788475.289335094,
+      "64": 11205375.801428126,
+      "128": 278901811.8257303,
+      "256": 23282772.760294624,
+      "512": 29593562.65110891,
+      "1024": 25118506.072194092,
+      "2048": 65882171.10884444,
+      "4096": 9870768.81800718
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    }
+   }
+  },
+  "hier__rwm": {
+   "m": [
+    3
+   ],
+   "N_batch": 32768,
+   "N_total": 131072,
+   "t_max": 128,
+   "new_pool": true,
+   "pool_states_per_subset_needed": 65536,
+   "projected_gpu_s": 13.4217728,
+   "pairs": {
+    "3": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+     ],
+     "basis": "lag-2t evidence window t <= 32",
+     "required_blocks": 87203.22313884889,
+     "extended_to": 64,
+     "need_blocks": {
+      "1": 53248.72597620623,
+      "2": 56649.91006046549,
+      "4": 48495.50430760255,
+      "8": 47689.85544356687,
+      "16": 58135.48209256592,
+      "32": 44967.13654001998,
+      "64": 56419.29894239208,
+      "128": 492442.94112531375,
+      "256": 136296418.66325182,
+      "512": 49842981.446890935,
+      "1024": 138985423.24002033,
+      "2048": 14345634.058047995,
+      "4096": 16258667.227720676
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    }
+   }
+  },
+  "hier_pima__mala": {
+   "m": [
+    3,
+    1
+   ],
+   "N_batch": 16384,
+   "N_total": 65536,
+   "t_max": 8,
+   "new_pool": false,
+   "pool_states_per_subset_needed": 32768,
+   "projected_gpu_s": 0.6291456,
+   "pairs": {
+    "3": {
+     "W0": [
+      1,
+      2
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 9699.742562333911,
+     "extended_to": 4,
+     "need_blocks": {
+      "1": 4709.451369661851,
+      "2": 6466.4950415559415,
+      "4": 37077.544960523286,
+      "8": 310532.21801077534,
+      "16": 2452034.6390471426,
+      "32": 9039662332.01507,
+      "64": 6868202.713630214,
+      "128": 18927667582.58796,
+      "256": 42427399.88437633,
+      "512": 295495333.48030204,
+      "1024": 4848038.6069889385,
+      "2048": 19216645.11530213,
+      "4096": 16290455.161940848,
+      "8192": 22324128.49433064,
+      "16384": 30861955.57030023
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched",
+      "16384": "branched"
+     }
+    },
+    "1": {
+     "W0": [
+      1,
+      2
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 22722.611066689813,
+     "extended_to": 4,
+     "need_blocks": {
+      "1": 14888.115954025492,
+      "2": 15148.407377793208,
+      "4": 33536.4472345841,
+      "8": 148921.83471215935,
+      "16": 1126196.6631292661,
+      "32": 601010751.0162896,
+      "64": 588306.0616962528,
+      "128": 670390334.3886011,
+      "256": 6985600.5804081615,
+      "512": 2180395.975183024,
+      "1024": 2363196.2855820367,
+      "2048": 6924105.649961543,
+      "4096": 8799118.89696973,
+      "8192": 930271.9809378732,
+      "16384": 2269309.9333724403
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched",
+      "16384": "branched"
+     }
+    }
+   }
+  },
+  "hier_pima__rwm": {
+   "m": [
+    1,
+    3
+   ],
+   "N_batch": 16384,
+   "N_total": 65536,
+   "t_max": 32,
+   "new_pool": false,
+   "pool_states_per_subset_needed": 32768,
+   "projected_gpu_s": 1.6777216,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 45306.44109403263,
+     "extended_to": 16,
+     "need_blocks": {
+      "1": 27355.54465483461,
+      "2": 26421.65308343444,
+      "4": 21986.15605309738,
+      "8": 19471.64538954813,
+      "16": 30204.29406268842,
+      "32": 146751.55649447275,
+      "64": 462895400.3808648,
+      "128": 39246950.98112275,
+      "256": 13657094.051804502,
+      "512": 3488730.7307927175,
+      "1024": 13911905.123609513,
+      "2048": 50601563.40348543,
+      "4096": 5328051.942056975
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    },
+    "3": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 33158.4604818601,
+     "extended_to": 16,
+     "need_blocks": {
+      "1": 9420.078307585796,
+      "2": 9890.570037780362,
+      "4": 8762.353258542209,
+      "8": 8344.730740584897,
+      "16": 22105.640321240066,
+      "32": 149190.08188008424,
+      "64": 10106035.664676627,
+      "128": 1253451838.642349,
+      "256": 18556601.403458618,
+      "512": 48885108.71612553,
+      "1024": 89767761.67856777,
+      "2048": 13626378.976679882,
+      "4096": 9494765.139808169
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    }
+   }
+  },
+  "hier_australian__mala": {
+   "m": [
+    1,
+    3
+   ],
+   "N_batch": 229376,
+   "N_total": 917504,
+   "t_max": 32,
+   "new_pool": true,
+   "pool_states_per_subset_needed": 458752,
+   "projected_gpu_s": 35.2321536,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 44682.4646825219,
+     "extended_to": 16,
+     "need_blocks": {
+      "1": 29788.309788347935,
+      "2": 24797.61025562695,
+      "4": 29459.673004907003,
+      "8": 34966.781480272424,
+      "16": 868803.750965461,
+      "32": 1809066203.2860117,
+      "64": 7849006.916084091,
+      "128": 95518757.733306,
+      "256": 48991989.70033463,
+      "512": 1381712.750321886,
+      "1024": 4721222.972460984,
+      "2048": 2612327.581462189,
+      "4096": 8261152.60993836,
+      "8192": 5584006.758912472,
+      "16384": 17579156.70983779
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched",
+      "16384": "branched"
+     }
+    },
+    "3": {
+     "W0": [
+      1,
+      2,
+      4,
+      8
+     ],
+     "basis": "lag-2t evidence window t <= 8",
+     "required_blocks": 911187.986948868,
+     "extended_to": 8,
+     "need_blocks": {
+      "1": 258736.80867156218,
+      "2": 290576.26862902375,
+      "4": 294163.5093615207,
+      "8": 607458.657965912,
+      "16": 54848243.86027173,
+      "32": 199211682.33682385,
+      "64": 30493168.14892208,
+      "128": 2037743663.243806,
+      "256": 30549884.211850874,
+      "512": 20316949.82417208,
+      "1024": 49928444.52095774,
+      "2048": 260438127.24109682,
+      "4096": 8907917.602188036,
+      "8192": 591908235.8415784,
+      "16384": 326302987.79117817
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched",
+      "16384": "branched"
+     }
+    }
+   }
+  },
+  "hier_australian__rwm": {
+   "m": [
+    1,
+    3
+   ],
+   "N_batch": 442368,
+   "N_total": 1769472,
+   "t_max": 256,
+   "new_pool": true,
+   "pool_states_per_subset_needed": 884736,
+   "projected_gpu_s": 362.3878656,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 34744.56329748984,
+     "extended_to": 128,
+     "need_blocks": {
+      "1": 21416.84123789598,
+      "2": 23060.913886625298,
+      "4": 20952.51241111842,
+      "8": 20687.069192438248,
+      "16": 12788.882501262608,
+      "32": 23163.04219832656,
+      "64": 108761.11426834184,
+      "128": 1241463.242034725,
+      "256": 6099060.185296703,
+      "512": 5477360.791185099,
+      "1024": 7439638.182834015,
+      "2048": 10478541.914475363,
+      "4096": 16688864.021064177
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    },
+    "3": {
+     "W0": [
+      1,
+      2
+     ],
+     "basis": "fallback {1, 2}: lag-2t gap <= 3 eps at t = 2",
+     "required_blocks": 1769016.5754621169,
+     "extended_to": 32,
+     "need_blocks": {
+      "1": 1179344.3836414113,
+      "2": 371701.8353180789,
+      "4": 950805.7097671775,
+      "8": 350905.9934028116,
+      "16": 272160.18240538496,
+      "32": 595269.0615407932,
+      "64": 2022793.6922559345,
+      "128": 50842721.21414232,
+      "256": 26147037.213217646,
+      "512": 55755551.47805169,
+      "1024": 510474865.5554551,
+      "2048": 11374159.536458706,
+      "4096": 17722430.840983026
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    }
+   }
+  },
+  "hier_ionosphere__mala": {
+   "m": [
+    1
+   ],
+   "N_batch": 16384,
+   "N_total": 65536,
+   "t_max": 512,
+   "new_pool": false,
+   "pool_states_per_subset_needed": 32768,
+   "projected_gpu_s": 40.2653184,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 27037.811895296,
+     "extended_to": 256,
+     "need_blocks": {
+      "1": 1112.4453521093612,
+      "2": 972.7003765765397,
+      "4": 1005.4251350480912,
+      "8": 786.1592082835109,
+      "16": 769.4553435816454,
+      "32": 610.9055833318872,
+      "64": 739.2507242515882,
+      "128": 1856.349034682359,
+      "256": 18025.20793019733,
+      "512": 2066888.351658934,
+      "1024": 6855750.515944571,
+      "2048": 4055122.5092882155,
+      "4096": 1260951.7201969721
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched"
+     }
+    }
+   }
+  },
+  "hier_ionosphere__rwm": {
+   "m": [
+    1
+   ],
+   "N_batch": 16384,
+   "N_total": 65536,
+   "t_max": 2048,
+   "new_pool": false,
+   "pool_states_per_subset_needed": 32768,
+   "projected_gpu_s": 107.3741824,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      1024
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 35200.708388129926,
+     "extended_to": 1024,
+     "need_blocks": {
+      "1": 1384.7404623203433,
+      "2": 1429.630299042623,
+      "4": 1253.4045459319832,
+      "8": 1278.6199122482822,
+      "16": 1132.6016093719184,
+      "32": 1249.1319542861397,
+      "64": 1376.0798842491065,
+      "128": 1458.4473368234248,
+      "256": 786.9793070533624,
+      "512": 1744.9240403466167,
+      "1024": 23467.13892541995,
+      "2048": 179555.1218063337,
+      "4096": 730106.5904173594,
+      "8192": 16857429.48612304
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched"
+     }
+    }
+   }
+  },
+  "hier_sonar__mala": {
+   "m": [
+    1
+   ],
+   "N_batch": 16384,
+   "N_total": 65536,
+   "t_max": 512,
+   "new_pool": false,
+   "pool_states_per_subset_needed": 32768,
+   "projected_gpu_s": 40.2653184,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 7565.8813022864815,
+     "extended_to": 256,
+     "need_blocks": {
+      "1": 1820.6434334627847,
+      "2": 1772.417267534966,
+      "4": 1548.5943202639708,
+      "8": 1456.8471341052568,
+      "16": 1686.1546747672069,
+      "32": 1710.0447907262296,
+      "64": 1788.5608020719444,
+      "128": 2861.7805470226167,
+      "256": 5043.920868190988,
+      "512": 75026.66058299334,
+      "1024": 8594040.252206579,
+      "2048": 3129839.69667439,
+      "4096": 7657945.8650232125,
+      "8192": 5134126.804871605,
+      "16384": 5688589.597277258
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched",
+      "16384": "branched"
+     }
+    }
+   }
+  },
+  "hier_sonar__rwm": {
+   "m": [
+    1
+   ],
+   "N_batch": 16384,
+   "N_total": 65536,
+   "t_max": 4096,
+   "new_pool": false,
+   "pool_states_per_subset_needed": 32768,
+   "projected_gpu_s": 214.7483648,
+   "pairs": {
+    "1": {
+     "W0": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      1024,
+      2048
+     ],
+     "basis": "A1 projected DK-applicable window at 4 x 8192",
+     "required_blocks": 23370.718988547025,
+     "extended_to": 2048,
+     "need_blocks": {
+      "1": 1067.6547813915488,
+      "2": 1125.7618038579344,
+      "4": 1021.3246322925902,
+      "8": 1093.7213649741389,
+      "16": 1030.4666299525916,
+      "32": 1010.7706936202335,
+      "64": 741.6727940960578,
+      "128": 891.081452681713,
+      "256": 670.096950642534,
+      "512": 1015.6483547587501,
+      "1024": 1796.0574171382418,
+      "2048": 15580.479325698017,
+      "4096": 330172.09890404675,
+      "8192": 17555896.739165638,
+      "16384": 184372496.96272242
+     },
+     "gap_source": {
+      "1": "branched",
+      "2": "lag2t",
+      "4": "branched",
+      "8": "lag2t",
+      "16": "branched",
+      "32": "lag2t",
+      "64": "branched",
+      "128": "lag2t",
+      "256": "branched",
+      "512": "branched",
+      "1024": "branched",
+      "2048": "branched",
+      "4096": "branched",
+      "8192": "branched",
+      "16384": "branched"
+     }
+    }
+   }
+  }
+ },
+ "new_pools": {
+  "hier": {
+   "runs_per_subset": 12,
+   "n_runs": 48,
+   "states_per_subset": 300000
+  },
+  "hier_australian": {
+   "runs_per_subset": 36,
+   "n_runs": 144,
+   "states_per_subset": 900000
+  }
+ },
+ "projected_gpu_h_per_dataset": {
+  "hier": 0.010019726222222221,
+  "hier_pima": 0.0006407964444444445,
+  "hier_australian": 0.11045000533333334,
+  "hier_ionosphere": 0.041010972444444446,
+  "hier_sonar": 0.07083713422222222
+ },
+ "projected_gpu_h_total": 0.23295863466666666
+}

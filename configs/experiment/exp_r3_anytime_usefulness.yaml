@@ -1,0 +1,58 @@
+# Circle anytime bounds with shared replicas, confidence event and source radius.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r3_anytime_usefulness
+study: r3_circle
+phase: smoke          # smoke | pilot | main
+run_id: null          # required for pilot/main
+resume: false         # continue an unfinished run, skipping completed chunks
+reanalyze_source: null  # recompute summaries from this completed run
+design_disclosure: "primary configuration fixed before the main run"
+n_workers: 12         # single-threaded worker processes
+chunk_size: 20        # ensembles per resumable output file
+
+# Initial law: von Mises(0, kappa0) for every replica; R^2 = I0(2 kappa0)/I0(kappa0)^2 - 1 is the
+# known (A3) radius and, by L2 contraction, the (A1) radius with r = 1/2 at every time.
+kappa0: 1.0
+init_symmetry: 1     # 1 = von Mises(0, kappa0) (primary); s > 1: exp(kappa0 cos(s x)) stress arm
+sampler:
+  p: 0.1
+  sigma: 0.5
+checkpoints: [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+m_values: [2, 8, 32]
+replica_counts: [1024, 4096, 16384, 65536]   # nested prefixes of one ensemble's replicas
+beta: 0.05            # total failure budget of the single uniform Hilbert-norm event
+kernel_sup: 1.0       # kappa with k(x, x) <= kappa^2
+# Event weights: w_{t,J} = 1/(n_checkpoints * n_replica_counts) = 1/44 (union bound over all
+# checkpoints AND all nested replica counts). One event serves every m and every bound.
+radius_multipliers: [1.0, 2.0]   # 1 = primary R; 2 = valid conservative radius 2R (sensitivity)
+tolerances: [0.05, 0.10]
+n_fourier: 20         # saved frequencies (monitored coordinates need <= 16; event check uses all)
+series_terms: 40      # Bessel series terms for the true MMD (rigorous tail bound recorded)
+# Outward rounding (floating-point evaluation error), validated against 50-digit mpmath and an
+# extended-precision recomputation in tests/test_r3_bounds_circle.py:
+truth_rounding_rel: 1.0e-9   # truth MMD^2 enclosure [partial (1 - rel), (partial + tail)(1 + rel)]
+event_rounding_abs: 1.0e-9   # absolute margin on ||mu_hat - mu_t||^2 in the event check
+candidates:
+  bernstein: true     # Hilbert-space Bernstein (Pinelis) radius, a priori variance proxy kappa^2
+  knapsack: true      # joint source-ellipsoid U_{t,m}, static and dynamic classes
+
+phases:
+  smoke:
+    n_ensembles: 4
+    seed_entropy: 404001
+  pilot:
+    n_ensembles: 20
+    seed_entropy: 505002
+  main:
+    n_ensembles: 2000
+    seed_entropy: 606003

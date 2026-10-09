@@ -1,0 +1,90 @@
+# Anytime Gibbs bounds for Energy, Airfoil, Wine and kin8nm.
+# Uses the Concrete model and budgets, with the per-dataset settings below.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r3_regression
+dataset: airfoil            # energy | airfoil | wine_red | kin8nm
+phase: smoke                # smoke | pilot | main
+run_id: null
+resume: false
+device: cuda
+chunk_size: 10
+seed_namespace: r3-regression-v1   # per-dataset namespace: <seed_namespace>-<dataset>
+
+model:
+  prior_var: 1.0
+
+kernel:
+  bandwidth_draws: 2000
+  ell_factor: 1.0
+
+# sigma^2: OLS residual variance rounded to two significant figures.
+# Energy reaches the 4096-sweep cap (slow eigenvalue 0.99978); kin8nm mixes in
+# about one sweep (eigenvalue moduli <= 0.005). Bandwidths use independent pilots.
+# kin8nm uses both operator budgets; the other budgets were fixed at 2048 before main runs.
+datasets:
+  energy:
+    sigma2_declared: 0.085
+    ell_frozen: 3.8979600175309055   # median heuristic from 2000 exact draws
+    checkpoints: [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+    N_grid: [2048]       # operator blocks
+  airfoil:
+    sigma2_declared: 0.49
+    ell_frozen: 3.1939665103070483   # median heuristic from 2000 exact draws
+    checkpoints: [0, 1, 2, 4, 8, 16]
+    N_grid: [2048]       # operator blocks
+  wine_red:
+    sigma2_declared: 0.64
+    ell_frozen: 4.556214746859326   # median heuristic from 2000 exact draws
+    checkpoints: [0, 1, 2, 4, 8, 16, 32]
+    N_grid: [2048]       # operator blocks
+  kin8nm:
+    sigma2_declared: 0.59
+    ell_frozen: 4.096001398473259   # median heuristic from 2000 exact draws
+    checkpoints: [0, 1]
+
+# Directions (regression_data.registry_directions):
+# slow = largest-modulus Gibbs eigenvalue (real eigenvector; complex pair -> real part of its eigenvector,
+# kin8nm); fast = real nonzero eigenvalue closest to the median modulus (ties -> larger modulus, wine_red).
+settings:
+  - {name: slow_R0.8, direction: slow, r_init: 0.8}
+  - {name: slow_R0.2, direction: slow, r_init: 0.2}
+  - {name: fast_R0.8, direction: fast, r_init: 0.8}
+  - {name: fast_R0.2, direction: fast, r_init: 0.2}
+
+t_max_threshold: 0.005
+t_max_cap: 4096
+m_grid: [2, 8, 32]
+n_dirs: 32
+J_grid: [1024, 4096, 16384]
+N_grid: [1024, 2048]
+N_pi: 65536
+
+landmarks:
+  M: 2048
+  rtol: 1.0e-8
+  numerical_margin: 1.0e-8
+
+operator:
+  rtol: 1.0e-11
+  head: 256
+
+budget:
+  total: 0.05
+  components: {replicas: 0.025, target: 0.0125, operator: 0.0125}
+
+tolerances: [0.05, 0.10]
+
+phases:
+  smoke: {n_ensembles: 2, rep_offset: 0}
+  pilot: {n_ensembles: 20, rep_offset: 1000000}
+  main: {n_ensembles: 500, rep_offset: 2000000}

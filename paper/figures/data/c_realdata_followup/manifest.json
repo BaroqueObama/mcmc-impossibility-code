@@ -1,0 +1,1666 @@
+{
+  "design_sha256": "0382ba129707dd5fd2ea03fc83e365ddbc9f902d030b80ed3fceac77dbfe65e8",
+  "units": {
+    "hier__mala": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "9703a915fbb4faff634e999e9edc260bea96a02093d4d9136f95b8fca6870a6f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "0c571e4f9a109e7cb3287419aaa9281021a5fe6524f913dc32ff4a3111f128ac"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "803c9010c87cc016130d612f0cb7bbcee4e67df5127f4b3e41a7ffb926c2a7d0"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "e54ce1faf8fe138bdb9664aa379358dc00f3d4ccefc44174ac0b00ffaaa3dac4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "c8ec961b5354d8a79dac06bf5e619cf16259a6f31dcccc219cbdd6331792116c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "e54f1efe672336ca33ec76d930a08bedad0a434feea08b83117868a720ed238a"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "51f03a5fc142e53bad052182fe95db8fd4186aff5014a3024885c8de649e95cb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "1c2c6579214c7b7cf3fa7c52fb69b8cb8769cb6256f71a23323658d2c448bff3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "4e22f5677c827f65ba1d20e3461fdcf67385aede081c931a24d7a27dd2c05867"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__mala_states_v1/states_I0.npz": {
+          "role": "replica states",
+          "sha256": "2b3e4409a0f928d2e9906d8c463442614d6ea2a9f5e5439fdf58e07fcb64bc74"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "d69af831f09cec937296f73d2b82763c0182270f88d0d4b83e1b5132264fc6e4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "e87f2c38ff02fdae788518375498e868a11632c57cb9ec4a5086c447cc7560b0"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "0ea33097f7c61a75a33f3ea81a35f967c8f5dc0229cda256f922f041ef1710ce"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__mala_states_v1/states_I1.npz": {
+          "role": "replica states",
+          "sha256": "f0b5a21807bdc905596c7fc79566d97d69b51bd20330625823029b1146a7d800"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "79053e21ce532574175b3aae1c53d0a59a27ef6a32b353b83ce8aae1f1745819"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "3f7dacc89c37ce517276f9e9ef6e9aea6070b6198073ed1dc60043760a227fa3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "b526056757828ce64a7302cd46daabd28c9607ea77f408e0e66b320cf2424b0c"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__mala_states_v1/states_I2.npz": {
+          "role": "replica states",
+          "sha256": "4ff3bab3237f7c6e6d10dfbb05b5767d846f30dc7589db82f443ac33d2aa4ee2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "0841afc6ecf26867c7e92cb8141583a16e5ac4b3c7f20987657d799050d2a917"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "7b50e491fdde1eecef3cb01c36eb44c509dfe80650dd4baa1e4697d9817560cf"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__mala_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "3efa9b42b64dd09b7a7a92f6a30fb4a0314bc5a47c6e06810c4b88f6fb4e2343"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__mala_states_v1/states_I3.npz": {
+          "role": "replica states",
+          "sha256": "4a97ddaf5dbfe76aed1330de2c40eab936dbfa463f4e8a6fc334de3bae839983"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set hier_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run hier_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set hier_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "hier_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 64,
+            "reference_choice": "all"
+          },
+          {
+            "T": 64,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier__rwm": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "07b8e7beda651a19665f04e8d408328b7c5db017178378559ee57bd0c960b7d5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "0c571e4f9a109e7cb3287419aaa9281021a5fe6524f913dc32ff4a3111f128ac"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "198f2393be60f817831b091ab6fc51755e20c891b7d786fcac653f95f8457f2c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "0b01646400045a1ae750b07fdf335fdfaf7eb98ec19e685699e219f3b059cc90"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "fc949e27694c3cd8045c1b77346cf8ed8bd6eada478a277d237881fe9f0e3550"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "08184c39eb75cceb392dd3a47aabb5b6c25dee63aa4634820a6ef83818400477"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "de49172714043a6fd77e7e443349847a3fbf0d84fa9a4b4832625f5d6fee9612"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "4f50b796d034d4c75114079be7980b8e3f114e89eac77207bba852aa2c9ce117"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "7cdc029cd481b7e0b31d3a160732e29253e469aa63b62082a60088b9686357fb"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__rwm_states_v1/states_I0.npz": {
+          "role": "replica states",
+          "sha256": "2870100632e3854439dd1b40b69a3f693614bbaf81438f412f28c7506cf0da66"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "9a4d2288a8214f020b1a3911e057e924be595fe6171cbc26170f98ee3ff117d4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "e890fb28b8794fe130ff47761b377b3013f5acdc040cd0216bc43357b3bf34f7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "81a7490c17f0db9017578c51fb50ade7e74eac7578e4fa97d55ac2a30cdae712"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__rwm_states_v1/states_I1.npz": {
+          "role": "replica states",
+          "sha256": "fb75433872da825fecbc769245f2ccae1d412fdc18d51aa47bf83727cc16d580"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "ded014d8d1e77761b3696ba0eebb3133a7e9e1f2e4af7d7cbdc82086d3468dc6"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "3a841a6a351422a475ba52537348893e5b506956b9461f5b20e2d51b8f29ceb9"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "32b4d355b86f60a14664396f20bdc9d6215dc31e7741b23bcc335bc4da876441"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__rwm_states_v1/states_I2.npz": {
+          "role": "replica states",
+          "sha256": "83389c58c5d124c9882cb0b3175389bd62294a7e9fd7d58a88d578b41f5eea2f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "8741328e279f2367c50f564b44474d48f35d067cf5fa659830b0df65b24b9e38"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "ee7e87f44155478999aec9c02a2d9ecab13e3e1a75d2a7f847c3a2387fd334c7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier__rwm_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "489f90ade44b34810e13487090e77ac3ec28da5f15c6ac5169486d1502ad8503"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/hier__rwm_states_v1/states_I3.npz": {
+          "role": "replica states",
+          "sha256": "bc6631cc3deb1ee7a1e71adc8c9a61bc0c5df667563c0ca686a0bff8ff8cff5f"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set hier_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run hier_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set hier_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "hier_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 1024,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_pima__mala": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "3e461bfc14a234a5cfd33fe8cf1792b1b5afb3a80bf8659e311b5d9971de81ef"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "7d6d4a12598cdde41c78609a954638c3c850488a72f4093ca5c7edf17a3ff408"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "f3918d1fc4d3b85d95eef9d223338cdd96619267226848ec3bf745429285c487"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "412565d2cefad8fd6133e27e25a10a02856ddb06fe0612658dad0922ca5e2c41"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "85ead6b42f1c09528e64a21ba54071fb7882324f1a3e2081007f4d6c9ea520cb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "d353aac62a48923fbd0b9e3f0567ac28f59195da842823507e608ddfc3716940"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "b97be77a2320f6db880a70d54e1da1e9e72001ee8a192f52be5e1614eb9e7ae2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "d3f8e049816e9dfe08cda2e80f4a51c905835eb7bc483b0e9ecc70b27a2c11cc"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "e2b1816f1fd3ddbe50a84b359c66b96a1ae15048b9ed99fe93613c7915c2bf4b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "78bdeed65a2e97fd7facf02e36f1c4f9781a96ebf9db27bce36b13db0b5a7142"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "7dc9e02e15fcef51e6d3bb2d1eab459c8e5309c44081c22acd35fcfb157e34a0"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "480ce7e8532d428b03db6576ff36e172af68f4a8cfe79e4960da860bc41a0798"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "df970afb5c43fa290daf37fcbd36f81a32cad1232da83e65f54aac2a147a6fd3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "eeb18a66a4cff301b0a6c0be9a55a7d674931f7581b039d92be1096d9c229200"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "9c8179bd338200ade44e49a35b5e1dedebdb1e711900b05560fe0635ef503509"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "d62998e5417ca9860c8bc3102b8c7917c0c63d5116c2d694d0b12000e2867d83"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "cd4e5c398f6163c26ffebfee6f470e10dfcfa31a570ed2a6e115f0e9cd5f4055"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "3a58d0edb8a7628d4da7facd5b65b87904d2df8ae3fe888a4f889644e5167e2c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "e2846fdab9faa4bd14623bf78c7caba2b3aa0251dfd3480f8a965a4fae8e2370"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "a3616288eb74f0572bc625007ed0cb8b9ffae4d2647fee01d6296f04cb3a7807"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "4da305f36867ba11359f70814cb808cf289a404f6e454e11781e319ff1e8e337"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__mala_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "111f38430a9291c4f7d862aa90d02fca69fcb424bd1a10934c4ee3bdab6709f0"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set pima_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run pima_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set pima_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "pima_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 16384,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_pima__rwm": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "a58183f4ce664610b64f6695bcbaba2882108581cadb4ab0c7946fdec660eb8c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "7d6d4a12598cdde41c78609a954638c3c850488a72f4093ca5c7edf17a3ff408"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "5468d8fbacfcbba54d2f14b3cf47dcf155065d1a192b979f5f37b2c08dbc3fbb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "147e9d9a7f9fa6ad91a51339cc0606aefc4038e3e1aa4dff64648185a49862a8"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "9f041d716d4285ba05afb304671f85ac07c09459eb9dbfcf5c8b9b9c0c487102"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "6fcc95a71d87dd52e11b61d192e104e3460d95d4fcb5baf3ee28ad13cdb1eca7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "960fc765998ca1e34b12c147d12d526d2554e9c602c09b9e52016abbbb30ed7d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "638cd823454eab1044b5198722b3bbb21a50a51b210bacc89a17eda8b8e5e46a"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "e98d7a04cb04f666b19fc15de2b48ee4490bae55d67f30348a8a0e5a0898fb23"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "aa34b1b3460af581bc6bdccb7aef2150a59265b530829b1b7c138eec08cd2b98"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "e337545bd844b407edc625bdf7b1df7269533c1fa6436b9806c116ae3d083760"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "241a2264199f801cf4a313b75a9b1f4019b6a8b1dd2403490a1d6c99f1a3a763"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "d2f0fae3633af0501473dfc36c469c260fa453b8b8797379760e4ed786633a20"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "f58df39c1849df46773d88916e5d341fc64801db63022d3346444610c8ea83a4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "8dc63d9719b52ab95d95ff8aa17e8d3a0b38ce5ead3bb7c8bca74b95359c34eb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "5ab602a14967a2f39c0d8ead7094defa582f6607ca4779e1c7c5eb5f4ec9803e"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "0990f0618a4596c46637ad59c5591ce79b41da287cc2f333102d11925bb7b752"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "e0051d78fdb0bece5a06d2c73ed0b425c5d807edb14b679be26662c00370c641"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "ed4c4039693d8267cca430a278470e163b39145e28a209ee447c2a1cb08f08c2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "b63b36f900edd7d6100cc63a53f308fcee49b27c2acf72815eeac8f8ab1dc2d9"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "7bc0e2e614032779743f6391440ceee5163ccdea3679dff41944e8e0ef427fd2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_pima__rwm_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "49b441a15cf5525df799aaff46b38036c1ec3e0e96d362b31f2496c518319c06"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set pima_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run pima_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set pima_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "pima_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 256,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_australian__mala": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "b91a76a8de51d9c339631c4b1331f627bd1f9803c766740a3b4a6dfe262bc6fd"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "93f840905f182d98ebb00132bffdc4f4276648460d9b9d3198c8a1ebf998dd47"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "9a7e467b7d4dfed08ca954cf989649d0f41cd8ea77e1b3f01c06c2c68348a0b8"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "fba7b350f92ace94aa09d293bfc5079d8d7b2051de0cc2faec68676ea6de5afd"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "96bd84e3bd4c84cc8773a32eea21cf03a6a16ce3c26fe282c845c0f253054067"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "2b8dbed6f9eec9091bf33b509fde431ed248cfa11a099cdb4adcd07f3b6af23c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "5770ebc92e8d9c4fdbc5fb25bc548111cbb4e9f0375f7e46f8430ce5e8c3f09a"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "c2a570c43baa6a90d88445e3f50e7b0f695d892bfa08cc60646e31782732530b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "8dd71acb68d735aa8d3315c3ee5e46fecc3f190d2783a500425e6db72c77ad84"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "78198e1c6fc33b7a3ebc85975b65674bcaff55a120fdf036a6c1623dbc84e014"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "cb2e1e74b9a45851b748bc17a4f1687763403fc6004f23a6f146842a1eabd247"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "ce00d77e0c1eb52ee6afd3911f7a23f1f574559027b236f38d15b2928c9be82f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "62304c46cee1f0e54a827ebba203e413ca14bbdd5fc6a6afbc3b53d10e5051d3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "a788989e68fb3b0e91e5f5290d17a5a7cca84c30a070d8871990bc4d339dcbdf"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "8a92fe103e890c4ec238247e8a11b79bbae9e7a14504b9c98e9cb9d04ed40945"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "a578409238ab0b3be7f9dbbe0b1e83d4152fd50d59afbc75a97919b40d1947c7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "5cc3a8d52b8235b6c9b48ab1556985d23b1adbcc37fe835c40e6a5f99ee60bf3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "71dc84243f8ca187e3bfb6722291f00923eae590904fcdcdc796df265861bdcd"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "9b89c8134538c6ddd415b25bad54baf57ba45306b6a9c1a5d4b62be7643f86c3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "58b420d944d3fac61d70dcff7ab9eadeb1ee99d68986878f068e1108b5a3d53d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "e7f82b31f56f5c5bb2eeabb3e58f5d2ca879b8f0c2388da0d9c1e8a0bd259276"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__mala_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "e9928924a637b65e4fcf66dcb0aca44697681024c8408553045c382ca4d7e414"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set australian_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run australian_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set australian_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "australian_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 16384,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_australian__rwm": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "5e7640ae911365abf21881ddba6b4b05335570229b9bcc3198246e9c57383576"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "93f840905f182d98ebb00132bffdc4f4276648460d9b9d3198c8a1ebf998dd47"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "66ef5e9ae935a8cc2233c5e0c34609fcac8ff138468bd60d73e7f81b32abd4ce"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "ee3c006cba5d8dd2b4a8163aba5d514cce15aa91915e0858d0cb861fc9064335"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "4ecd9e20ede77f74a2a5076e44ac61a20abf58298d68705667b2a834b72a01f6"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "7f5124ea21e611c2f2e84dbafb69d833d64e8f8b7475846c8420882834f64869"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "020f08fe02ff9c843ed6c741adc3316d3be035451ee0453ed1439a85ea96a72b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "dbc6c220e460b27715006f83095f1078f7756769fbce636bc57639e23ea5b870"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "11909f8879b515ef0e14ae52c68ea325895927ed07ee856fcc98201a56fdea62"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "e49e4a1ae15285839b7c6c4aab7f500e3837d9bdcffd3b71da61e480ada5f5d4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "7498f052592fb03f49733c95a07180948d1909ec094096970be961988fd8bd75"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "35719a54196b39bc7098011b13577204ef12c8627544afce1e4a1fd20e702385"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "f57b6bbfe6fbc4cc3146792611876f7f7c47c884c51c6526720fcd60b885bafc"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "1c6fa7855cadb0684670def474e88dac819828705848e5738773a2a2bfcbdae9"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "bff3a7d6d358957d0d50ca236cabd9968d865d58111bd1a9649e47b64e788c6c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "b162845516c112313b6ffff3a89a66ba094e824941c3cb7cfdb0a7d9d71b8056"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "4fd7ba08b9b1b922b39d8aa9ece73cc2fa5b07a268e28f15305864a4b8fc12d2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "422a78b022303fc9c41e11eae963f913817a6ea2c6976155bd8d7d7fd855f3b8"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "86eeca428c8b5e37ae7a246ffc014ea7b7abfe284b75ada96163af6941d61f84"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "9780c6b2da2baa626cf25cce966cb41ee202e219d525bf3523f55012958fbc9b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "1fd2228a37ac6104e766ab7609039d70c1a40a6776e1cba417fe98e972036e2b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_australian__rwm_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "dd0d5103a6ef04e126b74f72e152b4e53813968115dce14049b62572b2ffac46"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set australian_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run australian_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set australian_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "australian_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 512,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_ionosphere__mala": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "4c796a68e289577a9e1a0bb8edd860eae3ed0a3a192675daa0bbddc50877b758"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "34a68fba2394a531929a911a925c44d3c588f0f88e331c190344444f5d04a3a5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "3e0aec0ca563a5a78a71386b9a8e6207073c32bfa7827ff08ec1e4c12988e7aa"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "70cff001b59acd4912e69cbb0633db8dc653c1e44547195f277104de942ba125"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "69e247035f24a99eaeefba91daa91c0225202f8cd0760e135dffbd45a1b88133"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "aa444b349634118c57d645f97c2120aa32130ab188c0f9d0fe1d64b958cb4666"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "afb2a5a6ee56db0940fcab3805d02def2362a16af3d8679607e89e1d20a2765b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "42c8f00b0d35ee0b11b7d34f5563363fd08704222c170243e95e772647b1c028"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "56772eeae4246361fd844f3284fdd219de1c18e18ce6cd0e7b1b92cbc975cfae"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "6ad4ef59b9be666db4e8c94fda1af4b9230d6faeb6ac69d0d336fe95935aac7b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "2bd519ae8ece7502cf9ef248eff355e2050a254c384768a6660663770f5eb305"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "0c1c5c045da4fa83eec22a57c19f1d0db39b09f18a5b704ba1781fe854da2e75"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "ea5c3bf75711ffe646262159b07a547ec9e9ccfc86d1e9633851dbb253a2086a"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "d78edcd467dd29aa555e4486a2db12ef7c51ff5126fe17b33667a0bf44a99bd6"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "37e8c5013686ae271db1bc6060dea869f931cfcd6910a5187c4770ec13a2b7da"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "609b6e26d41c93d8c9889e4f9bd3a7141022cecd9bf8de7875a3dbee32ba3e88"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "2c1e229710f2ac986d40e75ef20bfc8b845147ff06a74bb0e330f5ab1ad4ad3e"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "0692b9604ae6a5146600542850c7ff69d1e479bafb652cf3b3cc1858a9d97edb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "b4db2dcbd47e192e396973aa22c992078b460d3df610df2b16919297590bddd4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "16a3115f9161361a5bbedd74e8bd519ae796a1c435d7cd584e2ee10167df18c7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "7da82292efa1fed7b0712dbbaebe23f517174605f8695dde2025ddf3fea51212"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__mala_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "62a7ad7159346f1a47d1d779361c898b353d9d604a1d716f6ee85037008d5982"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set ionosphere_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run ionosphere_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set ionosphere_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "ionosphere_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 2048,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_ionosphere__rwm": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "c01e8ed873d7448d662263871e598a29da8f1dbfad9af95e9279d06da9225869"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "34a68fba2394a531929a911a925c44d3c588f0f88e331c190344444f5d04a3a5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "ffbce405fc3322b2a7d1ab5195a78168fb7911523775be128fda23c0efa11eb0"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "c4268c50d3bb7b9a9530b08cbe6dce43c9d370c44fe739d7bb8b178fd0ecf4f0"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "30c65f2307235dd6c1f98d639f032a1b70d3c1e762f33f2562b41a7f00506372"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "8f28886386555c07d7061dc4d7dcc26ee3423ddd8e7d2bd8285e3dc4712e7de0"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "ee7ef85864a88924f39db7e32ac322619b29d95140e6245fa552d66a80707aa8"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "3eba48a490e82aac873164fd666fe7f96b70a97de93f97d65d76d3cd4c75ef39"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "dc865709dafdb6c9b429fa254d338b6ec0c8a901b6472512c6767a766a7cc90d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "3f0312de74413383a968673e88eca8d25877b15a33ad7678b2095daaaa11a35c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "3b1bcdb14662571dff3c139d6b98dd2cfb8f1d88f1d4f7ed2f70a827b1e74aa7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "eaf479bf00f93869c1ac9cf5bdd458b8529848e37fcad3169287ef99b49ed779"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "c7ea033ae3a09c2e0e91d5a69a656c942a587a41a2f3cad034374683f72a9ffd"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "d033085843fdde61753f1336edb0c9bb6a2a8d0ee390bfd0ce230ed165026999"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "45351108d0c666707fc91389d6a4585938537fa34b7de391ae31489f30d9e41d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "9b5040e11f7e73e16ad51ce6566fc166de2604ece742567cf34c3b7227242a61"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "4a8df525c7802857bf3219774690d7895837f69e3337a394397014d3767c6789"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "e7bf15da5be233091d6924494792f709e2b31bd5e0af419ef4473e5871642272"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "bb35417268b4d1313e9e30731e73ad7c49a2d96ea64d7c6ec668d1a8539a4b78"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "d004f94dbe3021a15f822c92248a38bf8ed0dc8a8d1edd9b819d61973e6ed89d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "b7e8a97143dfdcce824e29925767bcf591a895a449b8f3d3544c7e7bdd548ac7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_ionosphere__rwm_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "e84019b0122b758be57849519f85cd6d3253ab5ea70b657bed8e9e1ec43aafd1"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set ionosphere_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run ionosphere_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set ionosphere_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "ionosphere_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 8192,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_sonar__mala": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "abaaf8ff0a67ee0c0c510664c687b11211c22a66ff4fd249753e6c5fd78173f2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "9bd48a2c0bbfab0c62c68dfb6a50cfdc26e02c808d99ffa7b012036ae4685755"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "dbbd5b86603025560f4b499b11b10dc22b52cfdbb82be42b0bcfb8715ae87a5d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "59b3a75b9871ed76b6090c97c800fed6418f3e8b85671136da145293ddf6cc7f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "0579a38302b686b827a33bf2862608109b1c4c0e2c350af9ed5b830a71c3e7c7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "6cc38ae4ad8d232416a1e39bd45b560db1ac60deedc88763ef3d5ad2edb8dfa5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "89c68514ab51b786d5be81f3a374907839060615f5374b15548fd61034e725a7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "ecc5c601d09ce5ee74781cb4b6ab72bb858f2dabf0ae10cf6863de5fdc4047ea"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "11796065418b74ab728a8add643411c50d9cc99d8e9a42e76a5cf6db7d529a5c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "8126324cf1f4924a1cf09daf08498a8178b73dc52dfdbd83c94729baa869e337"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "18f1ef9e04600c0ac52e449f3a34f65862ad4356bab087f3ef64d554e5e56c97"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "b389bc7b63bc07b344fcd44922e01d0e3b05881ec6add4bb8b1590ef006f2630"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "82aee60afe97fc4fe9ce84933a47744c538d603037efa8b948dfa7636a831cb5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "b93710aebcb8d8ae76f54b4b04f1c065577e904662c3395e24f662450218f5d1"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "fbb1526f1ffcfce52236d83d1d51f9fc407486473b171c48ad925e899613b154"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "87111be7da458b5c7f4d7f9b0cdc54e3a544bd41b3c6e665eb7f712a95658d02"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "44b54d446dd1d538a7a26fb465a4cc1fb4db8f5a3c7d2abf288883e719a4c1f7"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "9fde471f7636074e114060df47dbfc5927d35dcf1b13e94cc275c7a268f29f6d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "2a3ee472573dbc236e0c05c7c58e5d18075dec16b720808d768263f691c57b17"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "42ee00d874d76257aff9039ed671c6445442f58e4e1f4642de84203568c56b5d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "00b7c11828fa9bb0fcf628cb84b391bf7399358dfeb709d0b3bc56a7921ab9f6"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__mala_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "f4732bc11e1f99b7196558c80ddc062595be5f43bf644be1055ff99b72415fb3"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set sonar_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run sonar_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set sonar_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "sonar_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 16384,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "hier_sonar__rwm": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "602d6cef9ce4141e659421d5d4da416db6098eb804936cab5f1060670b3b99ab"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "9bd48a2c0bbfab0c62c68dfb6a50cfdc26e02c808d99ffa7b012036ae4685755"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "bfb6131d01272fdf4705a9e485fc73c577021aa3e51dca0dfa48a5650947c0f5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "60acf52ff9fb829a6d1b19dc9d04cd88c2313ecd564307d0e76fc1eab9fe62d5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "95116e9f67d007651245bcd1bd413721a0ead9cf6a341fa73749a40b766eda7b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "229caec8b2f4a351bc5b549bbfdb47e4e17d80fc668cec4bbd023d7968e97f40"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "21b5b72620b37c8dcc8cccbfbe9ff7e9f06b27359c66aaf035deb6eec6fd00eb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "9dc94c13c9c408231be6a8a3c8afb7e88c22b2e104381e63ba7e5fd320bc3f03"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "3d1c59daae671b24fb4a09e518c9500d998fde7a65df6d405a3c3df58201aeab"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I0_states.npz": {
+          "role": "replica states",
+          "sha256": "5278ae6b1c7f8003eab153e02fc14ef4f8593a5b0226a985d9303a7ebc1c2d97"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "a1ac0417e82fa0ed933112984113cff01bdd160e196738d7507c8a578bc48ecf"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "8f3614e868f5cb59cbb24fdd74c2b3885aa6218b679c1df366f30777dae7268c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "a3b0ed0805f8a7183cd3743042d630e1c89f35c3e5b9900613f10dd490491b78"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I1_states.npz": {
+          "role": "replica states",
+          "sha256": "b4a31fb524e23beb3017f18d263cc52d3734306e125ab32f438ff97e03ce1ef3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "14394d4167c643bf8646c343266f9c6b8eb875ed29fa295115cf0284affe6275"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "b5264783e82cbc765d5a93d49512b38b92d124c1fe0e3ba4d5970e98d7ada66c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "227004f1e52218a4b0dbef189ddaade69e4a2d8dda1ca81b33f7a620ec8c136c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I2_states.npz": {
+          "role": "replica states",
+          "sha256": "4b0ee0e10c3cbc72b05eddff8de50788392602a0874c7642fb1d954fc6e3bfeb"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "8feb6f5214047e680e329aeea6f7719c6cfc5dd4096b56c64b7883fc8d5fb044"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "7c01a982277d3d47f5c71c76b777c9c708ecea9a5350a97e09a9fd245b3e65c4"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "d94bb6fc9c9b9a49ade71426fd062fdeae6c0131d5463de457cc5feb3a2b4250"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/hier_sonar__rwm_v1/ens_I3_states.npz": {
+          "role": "replica states",
+          "sha256": "9fa08351d2e3e58e5f6923672c733dbfefce95dc288f7ea93964e9a9ca1d3e0f"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set sonar_nc_diag_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run sonar_c_dense_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set sonar_nc_diag_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "primary": "sonar_c_dense_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 16384,
+            "reference_choice": "all"
+          }
+        ]
+      }
+    },
+    "horseshoe__mala": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "852c4749dbde5a46b0ddb49099941cd0db47c503036be9b14c37b2b67d0d0772"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "db31190bfca5a9d625473252123b29170e9d98f0f3d58f0312c1a459e5601a1f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "7c39424d3c93bef9e14cb6ffb76ce5354ba64fc4b3fbb6ead3ae3cd664077805"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "4fca7faabf5c30d8873782f856e48c4fd58dbb402a16104cd13dfd37cc88b55c"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "f6c52727392e8b4dc2c8f99bb4880729d789ed166458430d14df6effc025b3a1"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "49ad5c999b58644735a92abe547f9d28586d57f8021ab06c61cd48916cc98216"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "f8a7632fca36d80157d319eba5e27fa4dbf961e96c2936baea3b05b3f96e04b9"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "2bbb9619d662fe313405177fc201baf164e65a665078cbdc482caabf13f071ed"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "e592c14a79ae362bbacba4f5e0f82f8416465fc4cc5c620371243873b512258c"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__mala_states_v1/states_I0.npz": {
+          "role": "replica states",
+          "sha256": "314b2f7a951aecee10c06abc3575e41eb9fb48c1a621f161575f0f7975ff405b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "59bfd4a58d897368a283e41a70f100fbdf3399c2386ebbeb4a15d8a4b8203d24"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "e59768a8ff464f748bb55f5342d8d338f3797ba141e3d5e48908b540add18523"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "20f1989ae233c1153d310f5ac0aa2108585fd3a8a295baa723b6b64bb269584a"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__mala_states_v1/states_I1.npz": {
+          "role": "replica states",
+          "sha256": "7351b79369e45e2bee215aab60355c99720815dd9a0c7a2c59105bfdcfca9073"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "b11698eab2b22e4188ba8e65d4d2afc0c11ab812dff85d44489380d26240e3b3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "c65232e5d8973ee5e5e3528dae54d2a8ae5e51c0b6af6652ec3226634dd12c8b"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "36df6c67258275e309a02a28a45161e585b1a30fc152870f68ae9ea4723db500"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__mala_states_v1/states_I2.npz": {
+          "role": "replica states",
+          "sha256": "54516d71240c066f41962a60978a87a32619007115c3109e9781bba08726c546"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "112cad7787559422c8666b0cabd4df74b10184cdbe62d6b7c4b4ec64a7708afe"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "9a767901351d210682acaa25dd50cb380010913e0cfb0b97b92906324e03f73a"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__mala_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "bb64fe675328166094344c11010b731cb2490805ce3618e388770a735fab106a"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__mala_states_v1/states_I3.npz": {
+          "role": "replica states",
+          "sha256": "96970a3e8e58cb179d06097e699118b0d6c99eb54cfcb8558f1f8fad35fa2dfa"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set horseshoe_nc_dense_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run horseshoe_nc_diag_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set horseshoe_nc_dense_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "v1": "horseshoe_nc_diag_reference_v1",
+          "v2": "horseshoe_nc_diag_v2_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 16384,
+            "reference_choice": "v1_all"
+          }
+        ]
+      }
+    },
+    "horseshoe__rwm": {
+      "sources": {
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/config.yaml": {
+          "role": "R2 resolved config (frozen h, T, t*, grid, references)",
+          "sha256": "50813bbe2e50b6454a615647ed7c8fe7df175f4a20722e60b816f482af337cac"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/setup.npz": {
+          "role": "Nystrom basis, reference run feature means and inner products",
+          "sha256": "db31190bfca5a9d625473252123b29170e9d98f0f3d58f0312c1a459e5601a1f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/setup.json": {
+          "role": "kernel, start laws",
+          "sha256": "ecb855bd26287fd5183bcac4096a643e0173460a13644257e8220bad828cb38f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/sigma.npz": {
+          "role": "branched-pair operators O_t, O_A, O_B",
+          "sha256": "4da2bc2b8de50a60604ca2d7caf70961bc322b12285a645781757310bdbbc5f8"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/sigma.json": {
+          "role": "operator provenance and cost",
+          "sha256": "a676ab653e841b2862e3766db8b8c82c8a3fb32dc6aea54e4d1c927bd31a8960"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1_eval2/eval.npz": {
+          "role": "full-ensemble MMD^2 (check)",
+          "sha256": "b2b4aa3f5a58c5f5ab87d1e0814285aa341e6e45dabf31d5869d7230e29cd195"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I0.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "e30b59253e2a5b2dcc9d2f4423c738d270b382243b560801303220e4c5c32d70"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I0.json": {
+          "role": "trajectory cost",
+          "sha256": "36209e25cffe77304bf351b969e67552b825a33a92bc44ac74df1d1f4d5629e5"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/conv_I0.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "071fa508cdc27ef92e97169ebea66aa950005f1de6c6ab5afcc3b5c43f4c7c37"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__rwm_states_v1/states_I0.npz": {
+          "role": "replica states",
+          "sha256": "a307d4fd76b70d35e4eed624c638e444b3ec13a5117ca3d79da501c354f0b82d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I1.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "e95e490656b25ca381dd5b5832a7b89b580b96cf681f7462c4e98b9315863bf2"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I1.json": {
+          "role": "trajectory cost",
+          "sha256": "286f037e4dd57a0e97b2eb6f575a175a1ce6a426534d5163096258c05e6ecd67"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/conv_I1.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "91852c83a22e6d4137325d1bfd7fca3b3a4cab366fef9cfd5d498bfca1b4bcda"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__rwm_states_v1/states_I1.npz": {
+          "role": "replica states",
+          "sha256": "8441b706d517c050cd8267845248d05d2701c22b6f77d6d7ac9be5507020b66d"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I2.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "3cf286e71b4091cc7f1f9e0f39b821317e9f2e255197f85249b798250ad94fde"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I2.json": {
+          "role": "trajectory cost",
+          "sha256": "7ff1b8a14b066f7ec6edb9b4c3d3f44825bb5b542e515050ead892d41d22a5f3"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/conv_I2.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "36d988621c76b9e6d4827ae26d44bf1c6bb0fe73ca86888c0e30a511ddd4c8f9"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__rwm_states_v1/states_I2.npz": {
+          "role": "replica states",
+          "sha256": "29ddb09fa0f1cdc9aa07ca0193df6e31a12a7e18f8d96ef9f06436ea3fea068f"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I3.npz": {
+          "role": "saved checkpoint summaries",
+          "sha256": "ad3d10159fbea7305f84047a3bab458e8059ddbc4b9ab911a4b81f3794aa3139"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/ens_I3.json": {
+          "role": "trajectory cost",
+          "sha256": "095edec1341f2b4092e41caacba31f7a46d65b1ca3db2353cffd20d3d7350d1a"
+        },
+        "$MCMC_PAPER_OUT/german_credit_r2/main/horseshoe__rwm_v1/conv_I3.npz": {
+          "role": "conventional diagnostics of the 16 saved four-chain groups",
+          "sha256": "94f591b425f7a5b2758eaa57ac2a3d9675f6495252169e6eafebad353f06b102"
+        },
+        "$MCMC_PAPER_OUT/realdata_r1_export/main/horseshoe__rwm_states_v1/states_I3.npz": {
+          "role": "replica states",
+          "sha256": "66c0a6f15e0088255589b98103ccebda95bf3a8649c5ff837ad6cfd70d7441cc"
+        }
+      },
+      "independence": {
+        "operators": "sigma.npz: branched pairs started from the pool set horseshoe_nc_dense_reference_v1 (X from pool runs 0..R/2-1, X' from R/2..R-1), simulated with their own stream 'r2-sigma'; they use no ensemble replica and no evaluation NUTS run (neither runs 0-7 nor 8-15)",
+        "monitors": "V*_m(0), V*_m(t) are eigenvectors of the saved O_0, O_t only",
+        "features": "landmarks = evenly spaced draws of the calibration run horseshoe_nc_diag_kernel_calibration_v1",
+        "start_laws": "I0, I1, I3 from the pool set horseshoe_nc_dense_reference_v1; I2 uniform box",
+        "evaluation_sets": {
+          "v1": "horseshoe_nc_diag_reference_v1",
+          "v2": "horseshoe_nc_diag_v2_reference_v1"
+        },
+        "uses_evaluation_replicas_or_heldout_runs": false,
+        "disclosed_conditionality": "the inspection horizon T was fixed in R2 by an independent pilot (rep offset 1000) whose I1 MMD curve used ALL 16 runs of the evaluation set (reference_choice below), including the held-out runs 8-15; the grid is reused unchanged",
+        "pilot_tmax": [
+          {
+            "T": 16384,
+            "reference_choice": "v1_all"
+          }
+        ]
+      }
+    }
+  },
+  "reference_sets": {
+    "hier_nc_diag_reference_v1": {
+      "role": "pool",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/hier_nc_diag_reference_v1",
+      "units": {
+        "unit_000.npz": "e84d7ceed99f49f598b40b93b6bf1bf69b96a75a62172b924faff7896890b0f7",
+        "unit_001.npz": "08399090cc528f5e08a4951e77b68e52e4fb3b18c567101107b55947d3fae05f",
+        "unit_002.npz": "94b98f357e43ecdce62ca77ae7c5662e2286485023f27230cb29857ff3de93eb",
+        "unit_003.npz": "724e099c542691e60a836e72df30bd6887bcd3d1b0d2b52c9f827c1e12189be5",
+        "unit_004.npz": "9c1a4e383f65daff42c36b808dbf357936ae146e8b38ae0cd8642c59614940eb",
+        "unit_005.npz": "52b06da0af9f3dff6d9cd20c70ba96465cfc120c0892c1a70c1cb716a9bae0d4",
+        "unit_006.npz": "991a04d87d69f594c6cca619d381612b31e9b5f7ce1441e4e72a7c9a5cfcbf9d",
+        "unit_007.npz": "ec6b627c6ebc737bde3c04a483f0435194e65d038fb51d555ba6ff79e40267b9",
+        "unit_008.npz": "ac35b8b759a3ff4a7795a389b12412776df6710d501b3f30b2eaae5c9a503398",
+        "unit_009.npz": "143cf8370411a75ac458a919981d0fbd0cc40ffb9ab1dc27b4c9fa6109d9030b",
+        "unit_010.npz": "17d80343ef26a3e1add87c3d6247dace7b215bc5395048eb943ff27a185640d8",
+        "unit_011.npz": "959dc247120730bd6baf0aece0e5e2d0506ce6fe97f72a749a2948e6c26f32ca",
+        "unit_012.npz": "4d0df6908bcac61ac023801ba84f06980ca5b65f4699822e61f5d24c5cc79545",
+        "unit_013.npz": "a832205a2bd57571433ad9173889858ccce2008d4d00fccbb8ef4446cb13596c",
+        "unit_014.npz": "7d51e810e3e17baaeed4f74555107482f9283c98417260a32ff751688ed57077",
+        "unit_015.npz": "f6768cdb05dd74df3f1dfbcd51cfa3e4e395fdd8a39917b0e788d906ffb71ecf"
+      }
+    },
+    "hier_c_dense_kernel_calibration_v1": {
+      "role": "calibration",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/hier_c_dense_kernel_calibration_v1",
+      "units": {
+        "unit_000.npz": "44e6721074e70434515da3f622bf45bc726c5582c91e030201a9b4fd446cf260"
+      }
+    },
+    "hier_c_dense_reference_v1": {
+      "role": "evaluation:primary",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/hier_c_dense_reference_v1",
+      "units": {
+        "unit_000.npz": "34c6b030a6f16535767374a53eb39b47d5e0317515ac69005ce3fa8e5827a6fd",
+        "unit_001.npz": "0e9f1c328eae56a74090fe5536b6224495ce4310297328472d85d2c999ca572d",
+        "unit_002.npz": "0faafc02219bbf6eb75d97715df2ee32ca4720e4e723648ab83ec9d0dd8c5972",
+        "unit_003.npz": "e257268084e3e73e2e76a68e6a3b726991c5a6612487081f6c17a3063537cf13",
+        "unit_004.npz": "cb0463c1711b3f6e141cdabfed81ad30c0a629dfb63a91c0950ba96764860ab0",
+        "unit_005.npz": "1455f1a62200151c04a0014b7703f3ab7e5779e79e0489043ea7cfd19f2f716b",
+        "unit_006.npz": "605c507c959ea7c4ca71aeeb64959ea0dcd34920ac009a299859f75b7f1bc7c2",
+        "unit_007.npz": "fc16820bcb1c7ed2b49137b7e4a6c96eafaed8027d80fb022217f1def7f8f2bf",
+        "unit_008.npz": "056812ebffcc3c0ce81a036a2316d6f9589684cceb4ba52f1ae1386a2f6c6f41",
+        "unit_009.npz": "14fa1b41bd4780f698fcab4b17990383e4b042de0e2d425907a2fcac2862df74",
+        "unit_010.npz": "08fae258aca5d4e5fbfbc5d3c9517488b4e7e7e575ce94c4ad6e14dbf3cd4f2e",
+        "unit_011.npz": "78b71c8dc2a96b373531e8bb6f876459b09654615d6092d691263452b244504a",
+        "unit_012.npz": "858e837be3b983245bfd8cb897f2cc8f285741cb220189bd7b8764f4fd9b260f",
+        "unit_013.npz": "ff919bfe02bec3a389e90c8f217567be70065cf3be8543f9fa774980dc706d9f",
+        "unit_014.npz": "51438ae36ad8324f22788c2362708aaa22f2f52cf37cfce0907b914e89f73d8f",
+        "unit_015.npz": "032d2ed8bc7566df82e5dc684f95ef9f37aa16c6131ec4479ec3985f630db621"
+      }
+    },
+    "pima_nc_diag_reference_v1": {
+      "role": "pool",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/pima_nc_diag_reference_v1",
+      "units": {
+        "unit_000.npz": "ead360f9642c6c6125e61dc75fc9ca9d0266e5f8afdbdd6d588e0853dd7a6f2b",
+        "unit_001.npz": "3b14582a0190ef0ce7560bb0e92af45cda92c787bfb96872cf3b3e08812bb345",
+        "unit_002.npz": "6aa99e01b1b15bae4b299e9076e15839aebcaffc18de2d125a96bf0e0aaf95fe",
+        "unit_003.npz": "a0e2184d79fed691e99ba8fc389b72f9b1700c5c29a2a9959bddf6ef3473f170",
+        "unit_004.npz": "925d2059c746b55846d900d8265159651d79bc20be01e52eb7d1fd786c97e69e",
+        "unit_005.npz": "c42e022b095085d21ae704f06cba43820b951d0d4e6407a242b623322b66beeb",
+        "unit_006.npz": "6dece76075946b392e8360b7774cedc5c226b3069c628bc13a557b2f6083f514",
+        "unit_007.npz": "5cc2c7f923bf96c9d3fd763ad33f2c814ac0d5ff2b9169841c089bd7f0977bdf",
+        "unit_008.npz": "f10e8e3cdcfd2a71acf5a852d54d52f78acb9375be6f4c2335a34a4e8e353b71",
+        "unit_009.npz": "dc871e6cbba10732196c5caf97e7131cb45f1aa13c9dd259bbc9c5b0de7d71ad",
+        "unit_010.npz": "d1e0baec309b60d0684d937a50d30cf0c1ad269afc3b592579bde25f084b3a59",
+        "unit_011.npz": "1e4354f2e8f457edf1e9677cc4e68add2be7fba8f43cbf604c3ab37b3b6d8edd",
+        "unit_012.npz": "6d750ca185bf17a6a12560ddf5c4dcc0af968c8bf99458a2c16f1ccd42c9e938",
+        "unit_013.npz": "39de363bc13af80f4dc1568610bf31cd9edaf3ce7cd6995efafb7ccb15358b7b",
+        "unit_014.npz": "5c415ec17a1af5da8c004e9b47da65ffdfbef3aa68ef5aa83d8eb66cb2c103b5",
+        "unit_015.npz": "6ab96d6597ca6a2c2ef0da9105ebaf9c11e5183e1a48a570798665ea4db81c25"
+      }
+    },
+    "pima_c_dense_kernel_calibration_v1": {
+      "role": "calibration",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/pima_c_dense_kernel_calibration_v1",
+      "units": {
+        "unit_000.npz": "fb89a9436c721a9c4be95f9eae57173ee03024a5760f90358ee47ac8823f275e"
+      }
+    },
+    "pima_c_dense_reference_v1": {
+      "role": "evaluation:primary",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/pima_c_dense_reference_v1",
+      "units": {
+        "unit_000.npz": "22b289b807bd1133e0c53abcfbf1c34de3b5c28cab57fd06b56999c84b658d9f",
+        "unit_001.npz": "55b95f9b264c84181b08d5f618ac1fd275931326b23bcdf75398ea1ec75141e8",
+        "unit_002.npz": "953f853c809a6f7b110729b4604b16fb620b897fc96f4635b84dc4feb78185d0",
+        "unit_003.npz": "1bf9868c7b28b6446ec8eea0cce9d4d189a4f5298cd0c2b031d2d0edb60bffc6",
+        "unit_004.npz": "170a08acb243575f6fe7dff2b7630106815d31853982a118bb436a73a92ea710",
+        "unit_005.npz": "df4f18d98a442608e55e504b6afbc07ca086e319f4b79483c447d340e7ecdab9",
+        "unit_006.npz": "8e648785b88914f19245e6cd1fc03fb6563c05e5f4a25809f37969a6dab84f8a",
+        "unit_007.npz": "32465178759d97ce84fd15caa4fd44e77853dbabc24d8ecd03027990ff9f53e5",
+        "unit_008.npz": "686ed4ebf9706603ff292c86891dba1ec63833319be830e10e8a99d06ba03115",
+        "unit_009.npz": "fd891761d730a2088f2b1cf31512391452ba4a8cda1cdf31d608730e095098a5",
+        "unit_010.npz": "14e596485d9f8e9235d2f78061dfbf74d451a25663cdaf9cc2485d547baac8f9",
+        "unit_011.npz": "8e4671541ad838544e2b6a5d0e163da12f8b9425b3f327de50b9abc016b11b84",
+        "unit_012.npz": "1eeb1ce62537c21373630f7598e0bcb68a77619ebb4bd1da2a59dd63ac5234cf",
+        "unit_013.npz": "c40fefd65e8b428498c9362c8a9f906746a4ec45b52fceba83dd7a850141ee2c",
+        "unit_014.npz": "8013c5fcd4b9b5514344f80e4fe5bd02c2fc22ab09db3bb350a40c3a80e40b78",
+        "unit_015.npz": "207fba25e5da25b012da6c3074e8464e5a0ac9f0abf695ce61d3b75f7bcfbaa9"
+      }
+    },
+    "australian_nc_diag_reference_v1": {
+      "role": "pool",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/australian_nc_diag_reference_v1",
+      "units": {
+        "unit_000.npz": "bf1784a2fbd88905eac7c049addbdf567339d28e483b06a4279005b5473dd60e",
+        "unit_001.npz": "158d5d203f858a5c589240a51eaa3e252f5c22f0722c4a246d7b87b161ec200c",
+        "unit_002.npz": "0058aacf8b803528eb55dce8f419b0862c7d023c85610ac9767b86f22e2c0cda",
+        "unit_003.npz": "e6800137ae7a1fe05e81d34811ed9b634259aa26a2b2bb482f29ddb485ab8219",
+        "unit_004.npz": "89ccd00db2004bde98bb2581755e715509eeb17a909214481ed92e1aecf4296c",
+        "unit_005.npz": "5a5451c9f430880b658a5a78e15d075500c86165ff69d10a1af74892acc10e1e",
+        "unit_006.npz": "be1817efa21995a7cac667a914a8f86a8868e0689c7203e2f15014a20cfbe850",
+        "unit_007.npz": "242153e0da3fb382589d6d136ea2c1b23ee1c4b2e6a42f0f8d65b9f3768e9e48",
+        "unit_008.npz": "aed95f4a2b09be5e0e2262841b0851f0f15be624e8cef12346dee1b0b6fbe4a7",
+        "unit_009.npz": "81a9595049042976415363ea4365ae9b3ed7c53fc181fdfe5ee2382410a02fdc",
+        "unit_010.npz": "756b3aedbc1fd19b84328dab2f69e873fa4458ba683c9873bb5cef710d52787f",
+        "unit_011.npz": "f55ffcd485944cbe22953ce2198f6ac9583252c6c22aa3e8d4eadba46bf60445",
+        "unit_012.npz": "5bb6a609857e471c01090ad248644d43c4d19573ce68c8e022dd17fc86324bc8",
+        "unit_013.npz": "01650c69cd56d6546da3428b66bd0a5475df073f6512d16e507a4b1f303cef04",
+        "unit_014.npz": "f16aeda3e4b4316d6857aa6c836b495d54d61730f258240d886a639807ce894d",
+        "unit_015.npz": "87c6c2f1abffc05bd9b1f17d00d2bc901bca5cf61061795e73ee5174a0fa890c"
+      }
+    },
+    "australian_c_dense_kernel_calibration_v1": {
+      "role": "calibration",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/australian_c_dense_kernel_calibration_v1",
+      "units": {
+        "unit_000.npz": "806d51f4b375fb2117c462f25325fbd2fd2056589b7a8508dd002a7a381664cc"
+      }
+    },
+    "australian_c_dense_reference_v1": {
+      "role": "evaluation:primary",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/australian_c_dense_reference_v1",
+      "units": {
+        "unit_000.npz": "7027c7c879b1252d24f5084953250b9fa55e76633636f784681579e0161801f8",
+        "unit_001.npz": "6d321ef47282f4ebab13b848c7ec5902df92b50dfa542d86d14b84aa7a5cbebc",
+        "unit_002.npz": "2bfe19bf27b8498c3e73d8a9fcdaf0f28f58ff02368f1328e4fee03a620be078",
+        "unit_003.npz": "b61de36f2e1a9ff5fe185f2d1b8f37c40a98761f9490aa9233c046fa25adbfe6",
+        "unit_004.npz": "7a3882986319d23fa069dda9eb93ba3546b4217edc5e5059c05c3b7a71fd6483",
+        "unit_005.npz": "6c53b06d818c247668670bcb8bfae2294fc20e73b6f9cd713d7723109880a093",
+        "unit_006.npz": "d9351b923d8640cccec7cca1d5fbd24aca10453fa940d1636ecf909278324cce",
+        "unit_007.npz": "b0669874548e49b40a63e04ac6950eab43f1a70ed40108afbbfa8db015011a61",
+        "unit_008.npz": "8ea23d1696c105ba76255fe92c8364ffdad5ee0c11c880d11c83eec8e5eda1fd",
+        "unit_009.npz": "ac8d17bb4a6e6d575a2589cf367f026fd307fb511caa5ae7cec2768fb44a9332",
+        "unit_010.npz": "9c9c2493fcdf030b08107cac9f823404ba8896d98bfa6135a75cc794ac1c63d4",
+        "unit_011.npz": "d230af3c08c88a86b75b9df62faa6be106ed6fc687c1981da9b2adebf8da9404",
+        "unit_012.npz": "419ee3793d909868a7cec57930f27ab10dea7590bbcba8b01f4d85e15ed97fda",
+        "unit_013.npz": "c84aaeb079fdce8329538b891dec8788c231ed3fabf064f8f08b8c03b63b9b1c",
+        "unit_014.npz": "bffc86737ea12bc0b524629458931827f1d6513facc828eb0371a0378879c3f7",
+        "unit_015.npz": "db14d72bb816c11487e0c4a6f9740b217ed22812aedb03bf5d0fdec263e7b320"
+      }
+    },
+    "ionosphere_nc_diag_reference_v1": {
+      "role": "pool",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/ionosphere_nc_diag_reference_v1",
+      "units": {
+        "unit_000.npz": "59b72d6e30ecc54c101708c795b2d12e7661aa70656c91c415921c4888da6ae0",
+        "unit_001.npz": "8c0e6f7795fd768e6eb691d997f94f8d306e50f1713baaa5c2759ff79f2bdcee",
+        "unit_002.npz": "ce193214fe742f677647e305537998d0eeb6d4bf79b39ec1790184509bb56262",
+        "unit_003.npz": "551895e6dfffc04ce8c096af6627d4965255debeb405ee73eb4243a92a6c226a",
+        "unit_004.npz": "e70fd38507e54afce3b41536baf4cd96f0f65485a7429a8060a79e96ee12800a",
+        "unit_005.npz": "dcf879d40326264a1ca01049f946394c797d83adcf86521653e0274c5d54e432",
+        "unit_006.npz": "bc1580a468669530e58907f593e53785966c443aafa686574f8f6ae1e83bcf0e",
+        "unit_007.npz": "1ddc06c207558b598f23165cf109b73d0690fb26e605272df8dacda4d140de19",
+        "unit_008.npz": "4224ce26e35e30c9e166e4116a570e2add99aacf392638995304e5f667f08dd7",
+        "unit_009.npz": "1f6eaf209c28c372eb921977de299126161150ca088c00a0753041adeccd9e41",
+        "unit_010.npz": "8fc2e484460313a41c757c9a35784552abb29734d787f68af4b2d1d696441a62",
+        "unit_011.npz": "d065892963137ba27f2dea4862794ae46913f72b064a8b8ead9fc22567153ae4",
+        "unit_012.npz": "b85f9c7afdb2fc9eb2afc0bfc6ef5a6c3acbb4861d6dd6c253fdbfea7e8acfe0",
+        "unit_013.npz": "b151feefef9e03852ea5352143e9db019a66036ac002c69b0e386bb8fd38b9d9",
+        "unit_014.npz": "e136b852cbbd3766779d1834988c0c005f73b368c02d12a5607d32bf4c4a710f",
+        "unit_015.npz": "40d5d5be49df9a7b34b08b7d5329d02e1eebb25ac0f4a8f3cb4981f032bc8f93"
+      }
+    },
+    "ionosphere_c_dense_kernel_calibration_v1": {
+      "role": "calibration",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/ionosphere_c_dense_kernel_calibration_v1",
+      "units": {
+        "unit_000.npz": "49746aabb0a5fc17ad78be96c3c27a98b220494e8840c5b83f6da5880d01cb0a"
+      }
+    },
+    "ionosphere_c_dense_reference_v1": {
+      "role": "evaluation:primary",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/ionosphere_c_dense_reference_v1",
+      "units": {
+        "unit_000.npz": "47a60611522cdd626d0d3c339503da81430402dfd621f8f8dc8596aac032a25a",
+        "unit_001.npz": "927bd95af7c0dce0af527742151637743713d5a730144af44f0fc3857785fdc1",
+        "unit_002.npz": "77e2fc7f6ffd385f4ed59d6fceb3811d2bf8cc398d9c2e1b3eca0070c84a54ff",
+        "unit_003.npz": "cb50b1a38fd146fb7286c4ea758a47ce2c7f48df34d63de6200552d00a68e202",
+        "unit_004.npz": "dfea34689b94801d986af6701f62fd51105ad877c73d873cda9fff32c3d8b90d",
+        "unit_005.npz": "c82f0bed4b94d91eb61611cf4dc9fc09653e9270f721bd1a0ea3d4b1699a22db",
+        "unit_006.npz": "904eef95954a1024ba351dbd499395b4ab6415aa03b7033791abe2c1b8d7e9b0",
+        "unit_007.npz": "14c1e754582ac5563fe10bbf5864385d627eecd96167648b5c74d7f7e03317af",
+        "unit_008.npz": "42f38adfb897147ec91e14303cef8f021c653d5957df6821e46b09c93f26f216",
+        "unit_009.npz": "72653ce1ff415909aa662092c979a44b1a75eaf7d51e4307ae1979b7a58eb6ce",
+        "unit_010.npz": "1d9c8269f84a9d9fab4aefd99ff88e477eacb2b7685320bfdf1b693f2c1653fc",
+        "unit_011.npz": "aa98b8a69be525fe3af11ecf0529255e7eef9e48d232ce81d304231069f316a2",
+        "unit_012.npz": "29518fb69e471177b17d2574107e7e41b908f877c3fe5413110127fd69a2e31e",
+        "unit_013.npz": "f00bf8b3d91fbd24cc0c02c68d62e9f2a33a99f5b6f38b1a8296a2b5d85e5407",
+        "unit_014.npz": "573e7c9bcbe7d40990990e947310a937d30eb87e06acb8e8f682f12369662ee4",
+        "unit_015.npz": "cd98b7c9fa2a6212a0c708c592020dec6df538143a346431d3085e734f20d05b"
+      }
+    },
+    "sonar_nc_diag_reference_v1": {
+      "role": "pool",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/sonar_nc_diag_reference_v1",
+      "units": {
+        "unit_000.npz": "8e41a38944607fa7fe8455be2f2d2eeef0196c97ca7c51cd1125e0a9c35e1d6a",
+        "unit_001.npz": "40dcadada97125ff329e0824388035f1460095245440ac8d9682a114871699c5",
+        "unit_002.npz": "36ab8e233ea2e51f4610e465dd53f83a53e5756883262e333d6a947ee6a3846b",
+        "unit_003.npz": "0fa945fbc57902a0fc58a96274b70440a49a2ffee87b0467ce7a65cd93cdbdd7",
+        "unit_004.npz": "d2fc5bad764bce90137730d1dd62329c21195531c26049e5c84e48ec8cfe5253",
+        "unit_005.npz": "332fedbbca63d78ade4db61a8846bd8eb59edb3723eddd73ee2ae5f3e178181e",
+        "unit_006.npz": "b78f09bc6ff1f34c6d300257143895effbcc9917dd1e750ca1ac241659658357",
+        "unit_007.npz": "cde6ad75f7f7f55f13d75c5da9319d268a048a63be6de3009f40e1b6cb71adfa",
+        "unit_008.npz": "4be660669e4fc62a0c89c9d0692336416a226ed29988bfbfcbd455853ebdf492",
+        "unit_009.npz": "997904b1e93cd7bf95acc1e5dad395b5a141baf9c4117784fe2a4e29c501404c",
+        "unit_010.npz": "fe791a769ff3d9507ab2e4b6c9e332246b2ee98fdc0998b273d5255a67cd7aa1",
+        "unit_011.npz": "6bd9fb43209bc1e0450c98d169997f8a4faeb365df82a2658bce76928bfdabef",
+        "unit_012.npz": "8fabf070888f215cbf305d00cb24065248d2939538e7c4d7be46600c0cf4bcdb",
+        "unit_013.npz": "fc4dd0ef2bfe6f7b7fcfb283ef7dc4312c35217653399fb128766bd538de5346",
+        "unit_014.npz": "7ef657466fb162422f15f60cdcfc22b70b4bbc8e15d4ee49bdd3454deb006688",
+        "unit_015.npz": "e8fd6d30ecd4f88379204c8461439790dc8da054c67c8473e8d9b11bf2e25318"
+      }
+    },
+    "sonar_c_dense_kernel_calibration_v1": {
+      "role": "calibration",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/sonar_c_dense_kernel_calibration_v1",
+      "units": {
+        "unit_000.npz": "8524f69c4d368bc981688672d909a7a31957fde7035115b7959127a689d00d4a"
+      }
+    },
+    "sonar_c_dense_reference_v1": {
+      "role": "evaluation:primary",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/sonar_c_dense_reference_v1",
+      "units": {
+        "unit_000.npz": "689c21f3c6fdeb451e2f460ad48e2242ba58320f0ca027da4bba2fa71817231f",
+        "unit_001.npz": "6e4fb1729c3a83ff40ee6ace643dad464a4c9bba5bc92b0a3721ffad2b92d54a",
+        "unit_002.npz": "14a02ce7e2edcd1265d2e32cadbfc2e81a172dc3d2a5ba25c45ac8c54e5bc10d",
+        "unit_003.npz": "546ed2187c82616456a26dd4e19f63bec840c4368db2898d8de0f0d1d2366705",
+        "unit_004.npz": "d7b722b9a10fb7f41d9c52ed6c2cd65f87f121c5b66639f10da94be35d92cd43",
+        "unit_005.npz": "388094c784bfbc24e869e7b0869322e337427ef9f25f9429a39c3875b5dcf513",
+        "unit_006.npz": "6879ec5b7da4a258a98f2e546d35a0f2865d952aa7f226fcc216ca6b3c81dd56",
+        "unit_007.npz": "15e3c34d10ab3cea38ace7947c7660fdd2f31ad76307acb6211883251f1699be",
+        "unit_008.npz": "c6cd95da3c7bf1b99d19614da83791e503ca18a0c17f2ee55dfcb5fe36835906",
+        "unit_009.npz": "5f21c30558fba776e50689cb306a2b98be24f85fc3b51a71d447dddcd47514fe",
+        "unit_010.npz": "b5d6c6da41feba1cda0027e78c0aac3aa78ffb2fdb3b2556645c4592374e300b",
+        "unit_011.npz": "b2f8e007d4a39e9e32197ca90829c4af2b5ee88facc89d3ce3b1f2c297f4e485",
+        "unit_012.npz": "87825898c0b1493026b9f402aa42ac527eff14a9efcd014ea83164a27d132fcb",
+        "unit_013.npz": "29a07d5323c29f5a3edbe93c4c9513b6faf254a0166eb80093d1154339beb541",
+        "unit_014.npz": "4a5c80d19701b20ff6150980d95c695de20f6871e3af466e90c22487deed6982",
+        "unit_015.npz": "db953c7ce1f05b8f6c45df28917616502232e6619499dc33c69663189720eb27"
+      }
+    },
+    "horseshoe_nc_dense_reference_v1": {
+      "role": "pool",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/horseshoe_nc_dense_reference_v1",
+      "units": {
+        "unit_000.npz": "308f1daea28af404262aec9c475bb009b34b4589fbb1910c275de32b3df90cd4",
+        "unit_001.npz": "5bfe38f7d1950e76b6f14a0639c59ee7376b141661bf5cfe02f36e91afb4df9a",
+        "unit_002.npz": "c8002189b83d5fd958289bef98533ee50c45bcade1ba6d997e55a9f9b4ed3ac8",
+        "unit_003.npz": "ab2904fe2fa42d07ee649553d7477bbb98c16432d05f445f479efcf49fdc17eb",
+        "unit_004.npz": "4f457c86affb9069a1bd024558962dccdd359b45a9b1086b38b1b21b3b233218",
+        "unit_005.npz": "e570d1c408d95401992e905141f073aebab033c3c914646cef0065e906c8acff",
+        "unit_006.npz": "9413fa2829e2449bef95e563eca78a45d1c5961f665a3fcc6b26dafc4741b41f",
+        "unit_007.npz": "5094deba03692fa35cd86a5bcbd56325feac93194411c58d69392332f1572ed6",
+        "unit_008.npz": "5c4f87d3fee428a2bce9d837062e64217ce0ead8eef112d164ecafa51a0d24a6",
+        "unit_009.npz": "e60d003351f415edac17e5c7818ff8434c0e8012df5c4b1a39dc400eaa26bcb8",
+        "unit_010.npz": "2e7fb65856b98b224e7ad7368f2e6d38a9ff127b105f647960b8119b9fa90073",
+        "unit_011.npz": "6d2f35e77dd300df42c8e09b26e8cf99ef5d23f41419d6e132e93eafb1d8f9f0",
+        "unit_012.npz": "d30095c49d103d47392cd7ad06e5ab4a74b705fe63e7b57cc87f6dae30bdcd1c",
+        "unit_013.npz": "124938e4a29910b104d19a548dbc5dc8d281bc3444c204bd610d2c36d76f30d0",
+        "unit_014.npz": "ae1bbefbd84ad39de00dc1564011b19491801c07d12f1e5a84558fc19bfe5bcc",
+        "unit_015.npz": "9088f57d6abf6046e66cfdd2567740aaba1434275899ccfce22c54ab1c40970d"
+      }
+    },
+    "horseshoe_nc_diag_kernel_calibration_v1": {
+      "role": "calibration",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/horseshoe_nc_diag_kernel_calibration_v1",
+      "units": {
+        "unit_000.npz": "da5489d4d559bedb44705f0d4f4b6a1a300a6e06373b7af20113f1e1d248a398"
+      }
+    },
+    "horseshoe_nc_diag_reference_v1": {
+      "role": "evaluation:v1",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/horseshoe_nc_diag_reference_v1",
+      "units": {
+        "unit_000.npz": "316a93c99b5251a1562dc9b7af637d7f5917f7cbb610fd984ebf87483077d5b2",
+        "unit_001.npz": "4b4643e17abcc5ebb6eb2962e10015cb091e4f44430b08ea7585907eddf443b2",
+        "unit_002.npz": "0dbb2a5fdeb5594c047cdb8add3fe41008cc167313ab7f40813c0e3955e388c7",
+        "unit_003.npz": "ca132797bef958dc5212ced4246540d9f62784e1cf07aed717d194f09557aa6f",
+        "unit_004.npz": "ccd0043d353f8f18d2acc447acb2422bba6be8487c582e545c8c360d96bab6a2",
+        "unit_005.npz": "c91d0c0cd20708fbf0dadafe6b75585934a31ac6f3bc42aa1f4087c62d652d5a",
+        "unit_006.npz": "c5db5a1497f96cfa21bb3eb00907fb870d0c6d0893cece15a706567a60c17e06",
+        "unit_007.npz": "3f6febffb094f3b251b54a70a8ca48129d4b4f3f9850858a03f1b87992ec7d88",
+        "unit_008.npz": "44ebf30ca0896dc5090e1860a699d3607163255fbe211a5ca3ecca5822b27d02",
+        "unit_009.npz": "89daef8d6cb9838c1548369a3c980493483f64695fb7f3d4623e667f17b7b4ec",
+        "unit_010.npz": "f48d41332df9ffdef255c69999a5bfe8dbf99a6d74ea0654fb18b9b37b2cc8e9",
+        "unit_011.npz": "bad23f133eac42945d5dc9a713926a212a9ff5d350d40d6a4897744940c479e2",
+        "unit_012.npz": "21cd2f7c8e5adb843d4fe998a6857b66328ff1e4d58565022bea1bda2c1a606f",
+        "unit_013.npz": "e897ccb4df785298b0bbf1aaa1df824d7501c0f417077eb47b5e2b7652275c0c",
+        "unit_014.npz": "0944963388f4aa3e48a8020b56151f420a7a9a24f36568b7fe4bec86a7719bf8",
+        "unit_015.npz": "b45240ccbda03a71ef827c23b9de757971494393ff03f2bceb92e42fb8d9e41f"
+      }
+    },
+    "horseshoe_nc_diag_v2_reference_v1": {
+      "role": "evaluation:v2",
+      "path": "$MCMC_PAPER_OUT/german_credit/reference/horseshoe_nc_diag_v2_reference_v1",
+      "units": {
+        "unit_000.npz": "578b6599b468b69bc506415c4f4dd6f0318ec3008b8eced99d057ea22dc0eab4",
+        "unit_001.npz": "6ebf903a21ea16a76f9ed939900665a9a46e723e97024774212b4e2a57b394f2",
+        "unit_002.npz": "4d0d63956e395ff377c1c8d666bf445d429bc31e499d0612498dd6501c8bcae5",
+        "unit_003.npz": "8d2716ab975947e2bf1b3e07918aba1a0abab87b742054a297a80e6927a843e4",
+        "unit_004.npz": "a332c5bb17fbd842f5c15b6690f05a7015d5016b3090d4df0ac91be270394145",
+        "unit_005.npz": "abbc7c53f1b5670d6777537e4e7818ec60514eb10968d885b9e911ba712bcdca",
+        "unit_006.npz": "162c85fb56c2a84054cc5e6de0275d174d1a660f71d697e552b323c41287f9c6",
+        "unit_007.npz": "3be485dddc79b0eb373293f825f668f1ad677d07397885ed812be041e9cfcf2d",
+        "unit_008.npz": "154c79c8b5debc6d2f1813402ed48b6b346283d5a6dc550a4d7bdc47b04be0a6",
+        "unit_009.npz": "26a5d644ae2b46cb47ccd3d769cfb1768938820469792148fe73a75b25f8a476",
+        "unit_010.npz": "0406293308a18c43a1958fe41443c3c7e7ae68d11d8b09ce852589b2b7040478",
+        "unit_011.npz": "9c9550eb7ada0f7a977f69c95c6d34430b512b5c53af48d9132972fdeff5ba54",
+        "unit_012.npz": "fe12d813944112bd6528a4adab133ce86df03687e9f92cb172688dce56dabf41",
+        "unit_013.npz": "3d3d8551410bf990a2b00f1a9221b2d8e45d68b6bf5825a12ecfbeebe41a1b57",
+        "unit_014.npz": "288bd2fe8bdb911fc7774092e6f859fe23d49e198cbaa68331f40096be293377",
+        "unit_015.npz": "9ba79952b5aa34c81617288cadd755c3a634ad4d3a6a85015f123e1284075c04"
+      }
+    }
+  },
+  "regression_summaries": {
+    "concrete": {
+      "r3_concrete/summary_main.json": "dbafd0a8840c578a1ada3b8fcf190de73dd3d8f0291797a0f73a55760b7811be"
+    },
+    "kin8nm": {
+      "r3_regression/summary_kin8nm.json": "e317bfb19ba786e0695b1591c4d85659b6a925ebc953eba5c7b05794c7b6e67e"
+    },
+    "airfoil": {
+      "r3_regression/summary_airfoil.json": "c8b43d21d20a18cf2bacdbea336623eb835b36b4a145fcb6f3c7ad286d55e7ea"
+    },
+    "wine_red": {
+      "r3_regression/summary_wine_red.json": "cf403734d250fa8181c2b6fded3adb9a79da64166e49d2606c3a3a9503128293"
+    },
+    "energy": {
+      "r3_regression/summary_energy.json": "8537a62301d85cfc7c16a098253c67f5b8724e984c1e5c4ec8085eaffc1617ff"
+    }
+  }
+}

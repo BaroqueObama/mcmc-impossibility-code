@@ -1,0 +1,72 @@
+# Anytime MMD bounds for systematic-scan Gibbs on UCI Concrete.
+# The posterior is Gaussian, so population MMD and coverage are analytic.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r3_concrete
+study: r3_concrete
+phase: smoke          # smoke | pilot | main | stress
+run_id: null          # required
+resume: false
+device: cuda
+chunk_size: 10        # ensembles per resumable output file
+seed_namespace: r3-concrete-v1
+
+model:
+  prior_var: 1.0          # beta ~ N(0, I_9) on the standardized scale
+  sigma2_declared: 0.39   # OLS residual variance of the standardized fit (0.38755) to 2 s.f.
+
+kernel:                   # diagonal-one anisotropic RBF, coordinate scales sqrt(diag C)
+  bandwidth_draws: 2000   # independent exact posterior draws (stage "pilot-bw") for the median heuristic
+  ell_frozen: 3.643070235239123   # median heuristic from 2000 independent exact draws
+  ell_factor: 1.0         # sensitivity: 0.5, 2.0
+
+# Initialization pi_0 = N(mu + a, C), R_init^2 = exp(a^T C^{-1} a) - 1 (known in advance).
+# slow: real eigenvector of the largest-modulus Gibbs eigenvalue (0.94030);
+# fast: real eigenvector of the real nonzero eigenvalue closest to the median nonzero modulus (0.16604).
+settings:
+  - {name: slow_R0.8, direction: slow, r_init: 0.8}
+  - {name: slow_R0.2, direction: slow, r_init: 0.2}
+  - {name: fast_R0.8, direction: fast, r_init: 0.8}
+  - {name: fast_R0.2, direction: fast, r_init: 0.2}
+
+# t_max = first power of two with analytic MMD(slow, R=0.8) < 0.005 (cap 4096); asserted at setup.
+t_max_threshold: 0.005
+t_max_cap: 4096
+checkpoints: [0, 1, 2, 4, 8, 16, 32, 64]
+m_grid: [2, 8, 32]
+n_dirs: 32
+J_grid: [1024, 4096, 16384]      # nested prefixes of one replica array per setting
+N_grid: [1024, 2048]             # nested operator block counts
+N_pi: 65536                      # exact target draws for the sampled target reference (primary H)
+
+landmarks:                # ideal known-operator bound (rigorous: compression + omitted trace)
+  M: 2048
+  rtol: 1.0e-8            # relative eigenvalue cutoff of K_ZZ (retained rank recorded)
+  numerical_margin: 1.0e-8   # added to lambda + tau (fp64 error measured <= 1e-9)
+
+operator:
+  rtol: 1.0e-11           # relative cutoff on the difference Gram G (truncation term added to e)
+  head: 256               # exact block size in the compressed-norm bound (slack recorded)
+
+budget:
+  total: 0.05
+  components: {replicas: 0.025, target: 0.0125, operator: 0.0125}
+
+tolerances: [0.05, 0.10]
+
+# Main and sensitivity budgets were fixed after the independent cost pilot.
+# Sensitivity: ell_factor=0.5 with rep_offset=3000000; ell_factor=2 with 3100000.
+phases:
+  smoke: {n_ensembles: 2, rep_offset: 0}
+  pilot: {n_ensembles: 20, rep_offset: 1000000}
+  main: {n_ensembles: 1000, rep_offset: 2000000}
+  stress: {n_ensembles: 100, rep_offset: 3000000}

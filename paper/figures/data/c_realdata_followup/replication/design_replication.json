@@ -1,0 +1,50 @@
+{
+  "study": "c_realdata_followup / replication",
+  "version": "v1",
+  "combinations": [
+    "hier__mala__I1",
+    "hier__mala__I2",
+    "hier__rwm__I1",
+    "hier__rwm__I2",
+    "hier_pima__mala__I1",
+    "hier_pima__mala__I2",
+    "hier_pima__rwm__I1",
+    "hier_pima__rwm__I2",
+    "hier_australian__mala__I1",
+    "hier_australian__mala__I2",
+    "hier_australian__rwm__I1",
+    "hier_australian__rwm__I2"
+  ],
+  "n_bundles": 20,
+  "bundle_size": 64,
+  "prefixes": [
+    4,
+    16,
+    64
+  ],
+  "grid": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "n_trajectories": 15360,
+  "seeds": "seed_for('c-repl-<model>__<sampler>', 'bundle-<law>', b), b = 0..19 (torch CUDA generator, one per bundle); benchmark bundle: stage 'bench-I1', rep 0 (not used in results)",
+  "frozen_from_R2": "per unit: config.yaml frozen h and start laws (pool set, overdispersion 3, box radius 2), kernel/Nystrom basis (setup.npz), operators O_t (sigma.npz), NUTS reference sets; the R2 code path (Context, StartLaws.sample, MHSampler.run)",
+  "readings": "identical to Stage 2: prefix-group feature means minus the mean feature embedding of NUTS runs 0-7 of the evaluation set; spans S3 / S4own / S4same, m = 8 (4), margins none / halfsplit, R in {0.5, 1, 2, 4}, eps in {0.10, 0.05}",
+  "heldout": "the Stage-2 held-out estimate (run main/c_v1, split 'heldout': saved-ensemble evaluation half, replicas 2048..4095, vs NUTS runs 8-15) at each t <= 4096; the bundles are new draws of the same chain law (same frozen sampler and start law), checked by a two-sample MMD^2 between all 1280 bundle chains and that evaluation half at every t (law-identity check)",
+  "comparisons": "bundle-to-bundle variation (quantiles over 20 bundles) vs the Stage-2 saved-state groups (512 x 4, 128 x 16, 32 x 64) at the same t; crossings restricted to t <= 4096 for both",
+  "statuses": "plug-ins: reference-based plug-in at an assumed radius (feature space); held-out: empirical estimate; no confidence statement beyond the Stage-1 floor table",
+  "conditioning": "all bundles share the NUTS references (runs 0-7 / 8-15), the pool (start laws), the calibration run (features), the operators O_t, the frozen h and the R2 grid choice (horizon pilot used all 16 runs); bundles are independent of each other and of the saved ensembles only given these; this is an empirical practicality replication, not a 95% coverage study",
+  "no_binomial_intervals": true
+}

@@ -1,0 +1,287 @@
+{
+  "provenance": {
+    "analysis": "Exact matrix calculations for the finite-state constrained-width example.",
+    "inputs": {
+      "finite_setup.npz": {
+        "sha256": "21aefe827ff8ec5289a63f6b93c7d7a9a853a34eefdaa87d5b78dfea38815e5c"
+      }
+    },
+    "diagnostic_count": 1,
+    "radius": 0.3,
+    "finite_state_scope": "Seven-dimensional centered RKHS on eight states; no infinite-dimensional rate claim."
+  },
+  "validation": {
+    "initial_class_density_lower_bound": 0.2062746066806228,
+    "number_of_independent_width_checks": 513,
+    "maximum_svd_eigen_width_difference": 5.551115123125783e-17,
+    "minimum_attaining_density": 0.43702868295940955,
+    "maximum_attaining_diagnostic_reading": 1.8214596497756474e-17,
+    "transition_matrix_modes_and_covariances_verified": true
+  },
+  "exact_time_comparison": [
+    {
+      "time": 0,
+      "method": "Embedded slow mode",
+      "width": 0.12847842463936968,
+      "oracle_width": 0.11868831960630125,
+      "ratio": 1.0824858340360957,
+      "angle_degrees": 40.09656213548381
+    },
+    {
+      "time": 0,
+      "method": "Static covariance",
+      "width": 0.1186883196063013,
+      "oracle_width": 0.11868831960630125,
+      "ratio": 1.0000000000000004,
+      "angle_degrees": 0.0
+    },
+    {
+      "time": 0,
+      "method": "Dynamic oracle",
+      "width": 0.11868831960630129,
+      "oracle_width": 0.11868831960630125,
+      "ratio": 1.0000000000000004,
+      "angle_degrees": 0.0
+    },
+    {
+      "time": 1,
+      "method": "Embedded slow mode",
+      "width": 0.061969120063930655,
+      "oracle_width": 0.06136978403984512,
+      "ratio": 1.0097659790312512,
+      "angle_degrees": 12.134250754291925
+    },
+    {
+      "time": 1,
+      "method": "Static covariance",
+      "width": 0.07123980299762604,
+      "oracle_width": 0.06136978403984512,
+      "ratio": 1.1608286408727246,
+      "angle_degrees": 49.377804776896824
+    },
+    {
+      "time": 1,
+      "method": "Dynamic oracle",
+      "width": 0.061369784039845124,
+      "oracle_width": 0.06136978403984512,
+      "ratio": 1.0000000000000002,
+      "angle_degrees": 1.9090959104164224e-06
+    },
+    {
+      "time": 2,
+      "method": "Embedded slow mode",
+      "width": 0.04143757804946836,
+      "oracle_width": 0.041290266196074114,
+      "ratio": 1.0035677138213328,
+      "angle_degrees": 5.834036032703285
+    },
+    {
+      "time": 2,
+      "method": "Static covariance",
+      "width": 0.04954344532403725,
+      "oracle_width": 0.041290266196074114,
+      "ratio": 1.199881954956925,
+      "angle_degrees": 44.6180749731358
+    },
+    {
+      "time": 2,
+      "method": "Dynamic oracle",
+      "width": 0.04129026619607412,
+      "oracle_width": 0.041290266196074114,
+      "ratio": 1.0000000000000002,
+      "angle_degrees": 0.0
+    },
+    {
+      "time": 3,
+      "method": "Embedded slow mode",
+      "width": 0.028989025636440516,
+      "oracle_width": 0.028964143703310172,
+      "ratio": 1.0008590598563942,
+      "angle_degrees": 2.6807590088052096
+    },
+    {
+      "time": 3,
+      "method": "Static covariance",
+      "width": 0.034839996768120204,
+      "oracle_width": 0.028964143703310172,
+      "ratio": 1.2028664518792078,
+      "angle_degrees": 42.14429393703295
+    },
+    {
+      "time": 3,
+      "method": "Dynamic oracle",
+      "width": 0.028964143703310172,
+      "oracle_width": 0.028964143703310172,
+      "ratio": 1.0,
+      "angle_degrees": 2.091309789151873e-06
+    },
+    {
+      "time": 4,
+      "method": "Embedded slow mode",
+      "width": 0.020378022568568487,
+      "oracle_width": 0.020373857673956736,
+      "ratio": 1.000204423466503,
+      "angle_degrees": 1.271868785306279
+    },
+    {
+      "time": 4,
+      "method": "Static covariance",
+      "width": 0.024541676093983295,
+      "oracle_width": 0.020373857673956736,
+      "ratio": 1.204566974341543,
+      "angle_degrees": 41.056986762330254
+    },
+    {
+      "time": 4,
+      "method": "Dynamic oracle",
+      "width": 0.020373857673956733,
+      "oracle_width": 0.020373857673956736,
+      "ratio": 0.9999999999999998,
+      "angle_degrees": 1.2074182697257333e-06
+    },
+    {
+      "time": 5,
+      "method": "Embedded slow mode",
+      "width": 0.01432357220128408,
+      "oracle_width": 0.014322864933462784,
+      "ratio": 1.000049380331699,
+      "angle_degrees": 0.6181900333618994
+    },
+    {
+      "time": 5,
+      "method": "Static covariance",
+      "width": 0.017270428213760534,
+      "oracle_width": 0.014322864933462784,
+      "ratio": 1.2057942523364373,
+      "angle_degrees": 40.56008272809746
+    },
+    {
+      "time": 5,
+      "method": "Dynamic oracle",
+      "width": 0.014322864933462784,
+      "oracle_width": 0.014322864933462784,
+      "ratio": 1.0,
+      "angle_degrees": 1.2074182697257333e-06
+    },
+    {
+      "time": 6,
+      "method": "Embedded slow mode",
+      "width": 0.010064141406255582,
+      "oracle_width": 0.010064020092482105,
+      "ratio": 1.000012054206208,
+      "angle_degrees": 0.3045293853874097
+    },
+    {
+      "time": 6,
+      "method": "Static covariance",
+      "width": 0.012142692601031001,
+      "oracle_width": 0.010064020092482105,
+      "ratio": 1.206544948186429,
+      "angle_degrees": 40.32394087632064
+    },
+    {
+      "time": 6,
+      "method": "Dynamic oracle",
+      "width": 0.01006402009248211,
+      "oracle_width": 0.010064020092482105,
+      "ratio": 1.0000000000000004,
+      "angle_degrees": 0.0
+    },
+    {
+      "time": 7,
+      "method": "Embedded slow mode",
+      "width": 0.007070065085893511,
+      "oracle_width": 0.007070044168397124,
+      "ratio": 1.0000029586090113,
+      "angle_degrees": 0.15105458931831311
+    },
+    {
+      "time": 7,
+      "method": "Static covariance",
+      "width": 0.008533260397184472,
+      "oracle_width": 0.007070044168397124,
+      "ratio": 1.2069599841154994,
+      "angle_degrees": 40.20905085925143
+    },
+    {
+      "time": 7,
+      "method": "Dynamic oracle",
+      "width": 0.007070044168397123,
+      "oracle_width": 0.007070044168397124,
+      "ratio": 0.9999999999999999,
+      "angle_degrees": 1.9090959104164224e-06
+    },
+    {
+      "time": 8,
+      "method": "Embedded slow mode",
+      "width": 0.004966600022145621,
+      "oracle_width": 0.004966596406787338,
+      "ratio": 1.000000727934784,
+      "angle_degrees": 0.07518725909696138
+    },
+    {
+      "time": 8,
+      "method": "Static covariance",
+      "width": 0.005995489146069027,
+      "oracle_width": 0.004966596406787338,
+      "ratio": 1.2071625425161598,
+      "angle_degrees": 40.15245051337109
+    },
+    {
+      "time": 8,
+      "method": "Dynamic oracle",
+      "width": 0.0049665964067873375,
+      "oracle_width": 0.004966596406787338,
+      "ratio": 0.9999999999999998,
+      "angle_degrees": 0.0
+    },
+    {
+      "time": 9,
+      "method": "Embedded slow mode",
+      "width": 0.003489177582769342,
+      "oracle_width": 0.003489176957338994,
+      "ratio": 1.0000001792486755,
+      "angle_degrees": 0.03748899215371584
+    },
+    {
+      "time": 9,
+      "method": "Static covariance",
+      "width": 0.004212235878305295,
+      "oracle_width": 0.003489176957338994,
+      "ratio": 1.2072290771740446,
+      "angle_degrees": 40.1243883029044
+    },
+    {
+      "time": 9,
+      "method": "Dynamic oracle",
+      "width": 0.003489176957338998,
+      "oracle_width": 0.003489176957338994,
+      "ratio": 1.000000000000001,
+      "angle_degrees": 0.0
+    },
+    {
+      "time": 10,
+      "method": "Embedded slow mode",
+      "width": 0.0024515254818654503,
+      "oracle_width": 0.0024515253736597823,
+      "ratio": 1.0000000441380983,
+      "angle_degrees": 0.018708247968599295
+    },
+    {
+      "time": 10,
+      "method": "Static covariance",
+      "width": 0.0029594855229957205,
+      "oracle_width": 0.0024515253736597823,
+      "ratio": 1.2072016691296266,
+      "angle_degrees": 40.110430760002835
+    },
+    {
+      "time": 10,
+      "method": "Dynamic oracle",
+      "width": 0.002451525373659781,
+      "oracle_width": 0.0024515253736597823,
+      "ratio": 0.9999999999999994,
+      "angle_degrees": 0.0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Data set ionosphere (hierarchical logistic model).
+Source: https://archive.ics.uci.edu/ml/machine-learning-databases/ionosphere/ (UCI 52)
+Downloaded 2026-10-05 (UTC). The loader checks the retained data and source documentation against pinned SHA256 hashes.
+Used file: ionosphere.data. n = 351, raw predictors = 34, positives = 225.
+Label rule: y = 1{class == 'g'}; attribute 2 (identically 0) dropped.
+Dropped columns (0-based, verified exactly constant): [1]. Retained predictors p = 33; d = p + 2.
+Preprocessing: X_std = (X - mean)/std with population std (ddof=0), no epsilon; no train/test split.

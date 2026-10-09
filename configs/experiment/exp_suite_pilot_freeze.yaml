@@ -1,0 +1,57 @@
+# Calibrate synthetic kernels, sampler steps and checkpoint schedules.
+
+experiment_name: exp_suite_pilot_freeze
+stage: pilot            # pilot | event_variant | freeze
+phase: pilot            # smoke | pilot (freeze reads pilot-phase runs only)
+tier: primary           # primary | stress (target lists in mcmc.paperexp.targets)
+only_targets: []        # optional subset of target ids within the tier
+samplers: [rwm, mala]
+run_id: null            # required for stage=pilot; outputs $MCMC_PAPER_OUT/suite_pilot/pilot/<run_id>
+resume: false
+device: cuda
+cpu_threads: 12         # torch CPU threads
+
+scale:
+  n_draws: 100000       # MAD scales from 1e5 target draws (stream "pilot-scale")
+  n_bw: 2000            # median pairwise scaled distance from 2000 draws (stream "pilot-bw")
+
+tune:
+  target_accept: {rwm: 0.234, mala: 0.574}
+  J: 16384              # chains started from exact target draws (SE of mean acc ~0.003)
+  n_steps: 200          # acceptance averaged over these steps
+  inner_tol: 0.003      # bisection stops when |acc - target| < inner_tol (common random numbers)
+  tol: 0.01             # required tolerance for an independent acceptance check
+  max_expand: 40
+  max_bisect: 60
+  curve_mults: [0.25, 0.5, 0.71, 1.0, 1.41, 2.0, 4.0]
+
+tmax:
+  J: 16384              # 2^14 replicas from the eps init law
+  eps: 0.8
+  threshold: 0.01       # pilot V-statistic MMD threshold
+  cap: 8192
+
+witness:
+  stationarity_times: [1, 10, 100]
+  n_mmd: 4000           # per side, two-sample permutation test
+  n_perm: 1000
+  mc_draws: 10000000    # >= 1e7 Monte Carlo draws for the embedding witness
+  mc_resolved_rel_se: 0.01  # z-scores only where the MC relative SE < 1% (else QUADPACK check)
+
+throughput:
+  J_list: [4096, 16384, 65536]
+  n_steps_gpu: 100
+  n_steps_cpu: 20
+
+freeze_runs: []         # stage=freeze: completed pilot run IDs
+
+event_variant:          # stage=event_variant: gauss target with A along the widest eigendirection
+  base_target: gauss-d10-c25
+  source_run: primary-r1  # pilot run holding the base target's scales/ell/h (must match the frozen file)
+  tmax_stage: pilot-tmax-ewide
+  n_event_mc: 1000000
+
+hydra:
+  output_subdir: null
+  run:
+    dir: ${oc.env:MCMC_PAPER_OUT}/suite_pilot/_hydra/${now:%Y-%m-%d_%H-%M-%S}

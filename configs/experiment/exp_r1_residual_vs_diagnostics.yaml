@@ -1,0 +1,60 @@
+# Circle residuals after satisfying the first m Fourier diagnostics.
+
+defaults:
+  - _self_
+  - override hydra/job_logging: stdout
+  - override hydra/hydra_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+experiment_name: exp_r1_residual_vs_diagnostics
+study: r1_circle
+task: main            # population residuals and sampled checks
+phase: smoke          # smoke | pilot | main
+run_id: null          # required for pilot/main; smoke defaults to smoke_<timestamp>
+n_workers: 12         # processes for the sampled check (each single-threaded)
+
+# Construction dQ_m/dpi = 1 + R lambda_{m+1}^{r-1/2} psi_{m+1} at the inspection time.
+R: 0.1
+r_values: [0.5, 1.0]
+m_values: [2, 4, 8, 16, 32, 64]   # complete sine/cosine pairs; psi_{m+1} = sqrt2 cos((m/2+1) x)
+sampler:
+  p: 0.1              # move probability of the lazy wrapped-Gaussian walk
+  sigma: 0.5          # increment standard deviation
+t_inspect: 10         # inspection time; initial coefficient = desired / rho_n^t
+
+quadrature:
+  start_nodes: 2048   # periodic trapezoid grid; double until relative MMD change < rel_tol
+  rel_tol: 0.01
+  max_nodes: 1048576  # reaching this without meeting rel_tol raises
+  check_nodes: 65536  # independent fine grid for positivity / normalisation / moment checks
+
+sampled:
+  m_values: [2, 4, 8, 16]
+  explicit_steps: 10  # explicit transitions (not the checkpoint shortcut)
+
+# Valid (distribution-free) interval for the sampled MMD from all reps*J pooled replicas:
+# ||mu_hat_N|| +- b, b = 1/sqrt(N) + sqrt(2 log(1/delta)/N) (Appendix E.2 radius, kappa = 1).
+# delta = beta per setting (pointwise); beta / n_settings for the simultaneous (Bonferroni) column.
+# The per-repetition Student-t interval is reported as NOMINAL (approximate, pointwise).
+valid_interval:
+  beta: 0.05
+
+
+phases:
+  smoke:
+    replica_counts: [1024]
+    repetitions: 2
+    seed_entropy: 101001
+  pilot:
+    replica_counts: [65536]
+    repetitions: 4
+    seed_entropy: 202002
+  main:
+    # Both replica budgets were fixed before examining the sampled residuals.
+    replica_counts: [65536, 1048576]
+    repetitions: 32
+    seed_entropy: 303003

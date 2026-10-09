@@ -1,0 +1,4497 @@
+version: frozen_suite_v1
+rotations:
+  path: configs/paperexp/rotations_v1.npz
+  sha256: d5293fcadbc4d536821cef8c4d235aee92efa87dd81a3196887c14a00abacf58
+  note: Haar SO(d) from seed_for(f'{family}-d{d}', 'rotation', 0); load the saved array
+conventions:
+  kernel_rbf: k(x,y) = exp(-||(x-y)/s||^2 / (2 ell^2)), s = scales, kappa2 = 1
+  kernel_matern32: k(x,y) = (1 + sqrt3 r/ell) exp(-sqrt3 r/ell), r = ||(x-y)/s||
+  sampler_rwm: y = x + h S xi
+  sampler_mala: y = x + (h^2/2) S^2 grad log pi(x) + h S xi, exact MH correction
+  init_law: d pi0/d pi = 1 + eps (2 1_A - 1), pi(A) = 1/2, R_init = eps
+  t_max_rule: first power of two with pilot V-statistic MMD < 0.01 (J=2^14, eps=0.8), cap 8192
+  config_id: <target_id>__<sampler>
+targets:
+  funnel-d10-sy3:
+    tier: primary
+    family: funnel
+    d: 10
+    params:
+      sigma_y: 3.0
+    event: y > 0
+    prob_A_abs_error: 0.0
+    scales:
+    - 2.9905064749563968
+    - 0.8598577997781524
+    - 0.8562100985439879
+    - 0.861464121389412
+    - 0.8579840920260106
+    - 0.8476163782516248
+    - 0.8569504855230976
+    - 0.8578250725249374
+    - 0.8594873863500072
+    - 0.8545881252798156
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 8.331452361212254
+    ell_half: 4.165726180606127
+    ell_double: 16.662904722424507
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5268339462339962
+      ell_double: 0.715019652721774
+      ell_half: 0.3234913608435974
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 1024
+        rel_change_mu_last_doubling: 4.8463583481755065e-14
+        rel_change_norm2_last_doubling: 9.525217779108036e-14
+        rule: trapezoid_y
+      ell_double:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 2.541763346086773e-14
+        rel_change_norm2_last_doubling: 4.782367733290907e-14
+        rule: trapezoid_y
+      ell_half:
+        method: quadrature
+        order: 1024
+        rel_change_mu_last_doubling: 4.8826913740321655e-14
+        rel_change_norm2_last_doubling: 9.55812580440433e-14
+        rule: trapezoid_y
+  gauss-d10-c25:
+    tier: primary
+    family: gauss
+    d: 10
+    params:
+      cond: 25.0
+    event: q_min^T x > 0, q_min = rotation[:, -1] (eigvec of smallest eigenvalue)
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.1425217655667819
+    - 1.3676067362940485
+    - 1.5436196268499947
+    - 1.168824204469016
+    - 1.1195759250957535
+    - 1.004019874327012
+    - 1.4047710611767736
+    - 1.5979685584218515
+    - 1.2002741102635515
+    - 1.0345324525038715
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.176854142248981
+    ell_half: 2.0884270711244906
+    ell_double: 8.353708284497962
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5926004264083965
+      ell_double: 0.8697831489175997
+      ell_half: 0.17883257146865592
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    rotation_key: gauss-d10
+    rotation_seed: 2619761748403303171
+  mixture-d10-s6-w0.5:
+    tier: primary
+    family: mixture
+    d: 10
+    params:
+      sep: 6.0
+      w: 0.5
+    event: (Q^T x)_1 > c_star
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.0213655321125068
+    - 1.0129895253076238
+    - 1.0311184441710888
+    - 1.6414215824078064
+    - 1.6594761136811897
+    - 0.9989291868360461
+    - 1.0646501713840186
+    - 1.014817056674264
+    - 3.4277506128779773
+    - 1.5714633123573505
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.054449729757261
+    ell_half: 2.0272248648786304
+    ell_double: 8.108899459514522
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5996736301175696
+      ell_double: 0.8747708553885064
+      ell_half: 0.1741269645581017
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    c_star: 0.0
+    rotation_key: mixture-d10
+    rotation_seed: 1456378628934395939
+  studentt-d10-nu3:
+    tier: primary
+    family: student_t
+    d: 10
+    params:
+      nu: 3.0
+    event: '||x|| <= r_med, r_med^2 = d F^{-1}_{d,nu}(1/2)'
+    prob_A_abs_error: 3.201168703157646e-17
+    scales:
+    - 1.139894522092204
+    - 1.1348050133565135
+    - 1.1338010367992308
+    - 1.1337395240674268
+    - 1.134566173869434
+    - 1.1318276355689525
+    - 1.12989436818278
+    - 1.1343187323935089
+    - 1.123546229940418
+    - 1.1355939061721556
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.812470032250554
+    ell_half: 2.406235016125277
+    ell_double: 9.624940064501107
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5584039458924107
+      ell_double: 0.8309744985507939
+      ell_half: 0.19915574035468198
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 8.7307540245236485e-16
+        rel_change_norm2_last_doubling: 0.0
+        rule: trapezoid_logW
+      ell_double:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 2.5523353154144665e-16
+        rel_change_norm2_last_doubling: 0.0
+        rule: trapezoid_logW
+      ell_half:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 1.9299005149696584e-15
+        rel_change_norm2_last_doubling: 1.3936618430479703e-16
+        rule: trapezoid_logW
+    r_med: 3.4399405736211506
+  funnel-d10-sy1:
+    tier: stress
+    family: funnel
+    d: 10
+    params:
+      sigma_y: 1.0
+    event: y > 0
+    prob_A_abs_error: 0.0
+    scales:
+    - 0.9987384555987203
+    - 0.9505720563513919
+    - 0.954222938165218
+    - 0.9498724272038064
+    - 0.9436204986611504
+    - 0.9392322960433971
+    - 0.9432637710032756
+    - 0.9520407670638836
+    - 0.9537697362319789
+    - 0.9526968153978084
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.867648478034636
+    ell_half: 2.433824239017318
+    ell_double: 9.735296956069272
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5663610173540767
+      ell_double: 0.8447656281248372
+      ell_half: 0.19997353753960417
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 256
+        rel_change_mu_last_doubling: 9.170120408635033e-15
+        rel_change_norm2_last_doubling: 1.7250415048593302e-14
+        rule: trapezoid_y
+      ell_double:
+        method: quadrature
+        order: 128
+        rel_change_mu_last_doubling: 5.027421253970844e-16
+        rel_change_norm2_last_doubling: 2.6284758462286553e-16
+        rule: trapezoid_y
+      ell_half:
+        method: quadrature
+        order: 256
+        rel_change_mu_last_doubling: 9.861016704268667e-15
+        rel_change_norm2_last_doubling: 1.7488326558590944e-14
+        rule: trapezoid_y
+  funnel-d2-sy3:
+    tier: stress
+    family: funnel
+    d: 2
+    params:
+      sigma_y: 3.0
+    event: y > 0
+    prob_A_abs_error: 0.0
+    scales:
+    - 2.9827113405322425
+    - 0.8569309166792132
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 2.302213933292472
+    ell_half: 1.151106966646236
+    ell_double: 4.604427866584944
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.529040105061741
+      ell_double: 0.720297787137629
+      ell_half: 0.3087424334979409
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 4.8579379213571006e-14
+        rel_change_norm2_last_doubling: 4.784719479537271e-14
+        rule: trapezoid_y
+      ell_double:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 2.680513720260013e-14
+        rel_change_norm2_last_doubling: 4.7781507007189697e-14
+        rule: trapezoid_y
+      ell_half:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 3.817456569346978e-14
+        rel_change_norm2_last_doubling: 4.746656868321213e-14
+        rule: trapezoid_y
+  gauss-d10-c1:
+    tier: stress
+    family: gauss
+    d: 10
+    params:
+      cond: 1.0
+    event: q_min^T x > 0, q_min = rotation[:, -1] (eigvec of smallest eigenvalue)
+    prob_A_abs_error: 0.0
+    scales:
+    - 0.99622745907171
+    - 1.006254198315184
+    - 1.0011213008865445
+    - 0.9962678870318422
+    - 1.002280664292362
+    - 1.0001672270336708
+    - 1.0019277950307837
+    - 0.9936894456997203
+    - 0.9993313583989498
+    - 0.9940729875984321
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.31455478759112
+    ell_half: 2.15727739379556
+    ell_double: 8.62910957518224
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5998310235386504
+      ell_double: 0.8756769558912243
+      ell_half: 0.16693287226986028
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    rotation_key: gauss-d10
+    rotation_seed: 2619761748403303171
+  gauss-d10-c100:
+    tier: stress
+    family: gauss
+    d: 10
+    params:
+      cond: 100.0
+    event: q_min^T x > 0, q_min = rotation[:, -1] (eigvec of smallest eigenvalue)
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.3525294950489906
+    - 1.7000010391069411
+    - 1.9918164854527576
+    - 1.3711444496066
+    - 1.335716957358392
+    - 1.1080504361696222
+    - 1.7675549551720868
+    - 2.1862445117165135
+    - 1.3575312953246284
+    - 1.229190575844492
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.129641587146931
+    ell_half: 2.0648207935734657
+    ell_double: 8.259283174293863
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5920114248011215
+      ell_double: 0.8675501122341044
+      ell_half: 0.18966878031410203
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    rotation_key: gauss-d10
+    rotation_seed: 2619761748403303171
+  gauss-d2-c25:
+    tier: stress
+    family: gauss
+    d: 2
+    params:
+      cond: 25.0
+    event: q_min^T x > 0, q_min = rotation[:, -1] (eigvec of smallest eigenvalue)
+    prob_A_abs_error: 0.0
+    scales:
+    - 0.5261042237563045
+    - 2.2111913930522737
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 1.6200165508559228
+    ell_half: 0.8100082754279614
+    ell_double: 3.2400331017118456
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5820536437422851
+      ell_double: 0.842909487126545
+      ell_half: 0.26767863931398983
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    rotation_key: gauss-d2
+    rotation_seed: 6309371019634467814
+  gauss-d50-c25:
+    tier: stress
+    family: gauss
+    d: 50
+    params:
+      cond: 25.0
+    event: q_min^T x > 0, q_min = rotation[:, -1] (eigvec of smallest eigenvalue)
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.1212971371371316
+    - 1.2486905766495426
+    - 1.1678134067048591
+    - 1.3142476792316555
+    - 1.1651665774014446
+    - 1.3081399625871644
+    - 1.1817089980400852
+    - 1.0381978851509006
+    - 1.0695744452652272
+    - 1.1999724206124358
+    - 1.1884784278198066
+    - 1.0925597361919557
+    - 1.1440982269797686
+    - 1.084038688050604
+    - 1.3259796582852799
+    - 1.2598757161786591
+    - 1.154683539301068
+    - 1.3848334888901528
+    - 1.2452878914235563
+    - 1.3913482527634518
+    - 1.2969866905951664
+    - 1.2164973025309913
+    - 1.195071672418948
+    - 1.1815958503496231
+    - 1.3055364926940047
+    - 1.2196881754826232
+    - 1.3416002033389707
+    - 1.3186409850486445
+    - 1.2066091508778243
+    - 1.3623329113606606
+    - 1.307677451569159
+    - 1.1536678387068942
+    - 1.269167734662895
+    - 1.10631547166403
+    - 1.299567610506595
+    - 1.445750843820036
+    - 1.148100228909277
+    - 1.209018129976317
+    - 1.2741222614477443
+    - 1.2669809603066755
+    - 1.1524719736754474
+    - 1.154502066522241
+    - 1.1028520432355302
+    - 1.2334428921095117
+    - 1.203233425690297
+    - 1.3083289546952686
+    - 1.1940842456501473
+    - 1.2435456116178913
+    - 1.3141794901636545
+    - 1.199937268297662
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 9.864095089199344
+    ell_half: 4.932047544599672
+    ell_double: 19.728190178398687
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.6032447863078583
+      ell_double: 0.8798314695214113
+      ell_half: 0.145787544576246
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    rotation_key: gauss-d50
+    rotation_seed: 3092439411782958680
+  mixture-d10-s10-w0.5:
+    tier: stress
+    family: mixture
+    d: 10
+    params:
+      sep: 10.0
+      w: 0.5
+    event: (Q^T x)_1 > c_star
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.0468950120785918
+    - 1.0509967381342642
+    - 1.084885407919148
+    - 2.6396513832380726
+    - 2.679978903545505
+    - 1.009506486992321
+    - 1.1862815785520953
+    - 1.0272126073941747
+    - 5.720536069803353
+    - 2.4942239546020986
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 3.8910139986001044
+    ell_half: 1.9455069993000522
+    ell_double: 7.782027997200209
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.6024949379479569
+      ell_double: 0.8749553107241304
+      ell_half: 0.18528332349025467
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    c_star: 0.0
+    rotation_key: mixture-d10
+    rotation_seed: 1456378628934395939
+  mixture-d10-s2-w0.5:
+    tier: stress
+    family: mixture
+    d: 10
+    params:
+      sep: 2.0
+      w: 0.5
+    event: (Q^T x)_1 > c_star
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.0006231773922252
+    - 0.9960811382748863
+    - 1.0015322353190093
+    - 1.0631688400011732
+    - 1.0742090337503716
+    - 0.9975558651813075
+    - 1.0054912213932012
+    - 1.0049829315597933
+    - 1.3171373316431423
+    - 1.053142372183643
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.310616938276041
+    ell_half: 2.1553084691380207
+    ell_double: 8.621233876552083
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.6022802088501455
+      ell_double: 0.8765965318175352
+      ell_half: 0.1693713573138294
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    c_star: 0.0
+    rotation_key: mixture-d10
+    rotation_seed: 1456378628934395939
+  mixture-d10-s6-w0.1:
+    tier: stress
+    family: mixture
+    d: 10
+    params:
+      sep: 6.0
+      w: 0.1
+    event: (Q^T x)_1 > c_star
+    prob_A_abs_error: 4.0914635383073536e-17
+    scales:
+    - 1.0089874186806247
+    - 1.0053255812831086
+    - 1.011238613798931
+    - 1.1159353988636473
+    - 1.11466436285467
+    - 0.9975732056483754
+    - 1.0189526184513635
+    - 1.0018145784063774
+    - 1.149164646326167
+    - 1.1163045841774095
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.35705445539314
+    ell_half: 2.17852722769657
+    ell_double: 8.71410891078628
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5769052983146169
+      ell_double: 0.8620030191496209
+      ell_half: 0.16644110118660524
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    c_star: 2.8602897017679005
+    rotation_key: mixture-d10
+    rotation_seed: 1456378628934395939
+  mixture-d2-s6-w0.5:
+    tier: stress
+    family: mixture
+    d: 2
+    params:
+      sep: 6.0
+      w: 0.5
+    event: (Q^T x)_1 > c_star
+    prob_A_abs_error: 0.0
+    scales:
+    - 4.3892576961392695
+    - 1.1125265415067684
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 1.47104061643614
+    ell_half: 0.73552030821807
+    ell_double: 2.94208123287228
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5945156053901696
+      ell_double: 0.8533837781369564
+      ell_half: 0.27665834521621235
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    c_star: 0.0
+    rotation_key: mixture-d2
+    rotation_seed: 3028858502575314479
+  studentt-d10-nu30:
+    tier: stress
+    family: student_t
+    d: 10
+    params:
+      nu: 30.0
+    event: '||x|| <= r_med, r_med^2 = d F^{-1}_{d,nu}(1/2)'
+    prob_A_abs_error: 3.3212421547481595e-17
+    scales:
+    - 1.0137991483226414
+    - 1.0035301508059993
+    - 1.019652310279816
+    - 1.0129826221752072
+    - 1.013055923946108
+    - 1.0117411662059381
+    - 1.0169949664847764
+    - 1.010351512102728
+    - 1.0089628514564555
+    - 1.0137814968015635
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.3404957577541605
+    ell_half: 2.1702478788770803
+    ell_double: 8.680991515508321
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5941908807429688
+      ell_double: 0.872499942564436
+      ell_half: 0.16754887949135452
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 128
+        rel_change_mu_last_doubling: 7.155797348528986e-16
+        rel_change_norm2_last_doubling: 7.473847617701219e-16
+        rule: trapezoid_logW
+      ell_double:
+        method: quadrature
+        order: 128
+        rel_change_mu_last_doubling: 6.286036886572597e-16
+        rel_change_norm2_last_doubling: 3.817386009317121e-16
+        rule: trapezoid_logW
+      ell_half:
+        method: quadrature
+        order: 128
+        rel_change_mu_last_doubling: 1.5093424830674605e-15
+        rel_change_norm2_last_doubling: 4.969697624935968e-16
+        rule: trapezoid_logW
+    r_med: 3.0909490070585495
+  studentt-d10-nu5:
+    tier: stress
+    family: student_t
+    d: 10
+    params:
+      nu: 5.0
+    event: '||x|| <= r_med, r_med^2 = d F^{-1}_{d,nu}(1/2)'
+    prob_A_abs_error: 4.608911788774764e-17
+    scales:
+    - 1.0747540378287792
+    - 1.069046896615769
+    - 1.0837312290835823
+    - 1.0846392132776397
+    - 1.0754105768757618
+    - 1.0781290205058167
+    - 1.0734072729051354
+    - 1.0765487506086726
+    - 1.0754017603567878
+    - 1.0804541362667783
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.593707333243164
+    ell_half: 2.296853666621582
+    ell_double: 9.187414666486328
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5739148083710054
+      ell_double: 0.8537335713400234
+      ell_half: 0.18399493971226114
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 3.4457469947139613e-16
+        rel_change_norm2_last_doubling: 0.0
+        rule: trapezoid_logW
+      ell_double:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 2.689127009097386e-16
+        rel_change_norm2_last_doubling: 1.300432666461208e-16
+        rule: trapezoid_logW
+      ell_half:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 1.3117970609475319e-15
+        rel_change_norm2_last_doubling: 1.5084966825193251e-16
+        rule: trapezoid_logW
+    r_med: 3.2757263732178714
+  studentt-d2-nu3:
+    tier: stress
+    family: student_t
+    d: 2
+    params:
+      nu: 3.0
+    event: '||x|| <= r_med, r_med^2 = d F^{-1}_{d,nu}(1/2)'
+    prob_A_abs_error: 3.461729549734229e-17
+    scales:
+    - 1.1391472043119122
+    - 1.138006700148968
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 1.8693175760466052
+    ell_half: 0.9346587880233026
+    ell_double: 3.7386351520932104
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.56185649660931
+      ell_double: 0.8115366051402283
+      ell_half: 0.27176330649421776
+    rbf_embedding_method:
+      ell:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 6.040377207461964e-16
+        rel_change_norm2_last_doubling: 0.0
+        rule: trapezoid_logW
+      ell_double:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 4.651639697587259e-16
+        rel_change_norm2_last_doubling: 0.0
+        rule: trapezoid_logW
+      ell_half:
+        method: quadrature
+        order: 512
+        rel_change_mu_last_doubling: 5.404924120566871e-16
+        rel_change_norm2_last_doubling: 2.042628636932592e-16
+        rule: trapezoid_logW
+    r_med: 1.3274800020733264
+  gauss-d10-c25-ewide:
+    tier: stress
+    family: gauss
+    d: 10
+    params:
+      cond: 25.0
+      event_dir: wide
+    event: q_max^T x > 0, q_max = rotation[:, 0] (eigvec of largest eigenvalue)
+    prob_A_abs_error: 0.0
+    scales:
+    - 1.1425217655667819
+    - 1.3676067362940485
+    - 1.5436196268499947
+    - 1.168824204469016
+    - 1.1195759250957535
+    - 1.004019874327012
+    - 1.4047710611767736
+    - 1.5979685584218515
+    - 1.2002741102635515
+    - 1.0345324525038715
+    scale_rule: 1.4826 * MAD per coordinate
+    scale_draws: 100000
+    ell: 4.176854142248981
+    ell_half: 2.0884270711244906
+    ell_double: 8.353708284497962
+    ell_rule: median pairwise ||(x_i - x_j)/s|| over i<j
+    bw_draws: 2000
+    rbf_mu_norm2:
+      ell: 0.5926004264083965
+      ell_double: 0.8697831489175997
+      ell_half: 0.17883257146865592
+    rbf_embedding_method:
+      ell:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_double:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+      ell_half:
+        abs_error: roundoff only (closed form)
+        method: closed_form
+    rotation_key: gauss-d10
+    rotation_seed: 2619761748403303171
+configs:
+  funnel-d10-sy3__mala:
+    tier: primary
+    target_id: funnel-d10-sy3
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.25218621843235567
+    accept_target: 0.574
+    accept_tune: 0.5719097900390625
+    accept_verify: 0.5720004272460938
+    accept_verify_se: 0.0014183179218841438
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8192
+    t_max_cap_binds: true
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    - 2048
+    - 4096
+    - 8192
+    pilot_mmd_v:
+      0: 0.2093313635772637
+      1: 0.20887702345592393
+      2: 0.20867341146344554
+      4: 0.20843366292562543
+      8: 0.20808785019621817
+      16: 0.2074884073457602
+      32: 0.20580214468493932
+      64: 0.20217938148963435
+      128: 0.19656601549800765
+      256: 0.18547713966796847
+      512: 0.17017224377795184
+      1024: 0.14706295662227398
+      2048: 0.11769921913784373
+      4096: 0.09139426194653678
+      8192: 0.05939660998678189
+    pilot_mmd2_u:
+      0: 0.043775613721852846
+      1: 0.043585610473394265
+      2: 0.043500601524737004
+      4: 0.043400611593994665
+      8: 0.043256588761876325
+      16: 0.043007501492853095
+      32: 0.04231066902528208
+      64: 0.040832832224936055
+      128: 0.03859481319622354
+      256: 0.03435900424365207
+      512: 0.028916727115618157
+      1024: 0.021587135617387343
+      2048: 0.013814764943423485
+      4096: 0.008316529563369146
+      8192: 0.00349409150661395
+    pilot_p_A:
+      0: 0.90240478515625
+      1: 0.86224365234375
+      2: 0.851806640625
+      4: 0.84405517578125
+      8: 0.839111328125
+      16: 0.8326416015625
+      32: 0.82159423828125
+      64: 0.8040771484375
+      128: 0.77703857421875
+      256: 0.7357177734375
+      512: 0.696533203125
+      1024: 0.65167236328125
+      2048: 0.6087646484375
+      4096: 0.5816650390625
+      8192: 0.5513916015625
+    pilot_vstat_floor: 0.0053739895816612765
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.0246
+          16384: 1.0141
+          65536: 1.0223
+        cpu_12thr:
+          4096: 2.9545
+          16384: 7.8304
+          65536: 27.1216
+        cpu_1thr:
+          4096: 1.9872
+          16384: 8.2106
+          65536: 41.4939
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 62.0
+  funnel-d10-sy3__rwm:
+    tier: primary
+    target_id: funnel-d10-sy3
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.4379225136958972
+    accept_target: 0.234
+    accept_tune: 0.23542083740234376
+    accept_verify: 0.235489501953125
+    accept_verify_se: 0.001113661975902889
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8192
+    t_max_cap_binds: true
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    - 2048
+    - 4096
+    - 8192
+    pilot_mmd_v:
+      0: 0.20697519145013824
+      1: 0.20690404131233084
+      2: 0.206783080946749
+      4: 0.20627179591932676
+      8: 0.20572537764096968
+      16: 0.2047880572962177
+      32: 0.20364378127838254
+      64: 0.20054332384103932
+      128: 0.19481490500348184
+      256: 0.184724544594613
+      512: 0.16721539277616265
+      1024: 0.1406628328473168
+      2048: 0.11105098948888886
+      4096: 0.08242246969826554
+      8192: 0.054493251681459416
+    pilot_mmd2_u:
+      0: 0.04279488036552048
+      1: 0.042765428546464535
+      2: 0.04271538939430969
+      4: 0.04250422318288671
+      8: 0.04227912508736725
+      16: 0.04189439093662889
+      32: 0.041427089781236714
+      64: 0.04017408929891947
+      128: 0.037909626547685094
+      256: 0.03408050386436062
+      512: 0.02791938475830208
+      1024: 0.01974614573410971
+      2048: 0.012294508488654321
+      4096: 0.0067578210252898785
+      8192: 0.0029360900443136106
+    pilot_p_A:
+      0: 0.9012451171875
+      1: 0.8836669921875
+      2: 0.872314453125
+      4: 0.85546875
+      8: 0.84405517578125
+      16: 0.8331298828125
+      32: 0.826416015625
+      64: 0.8115234375
+      128: 0.78631591796875
+      256: 0.75103759765625
+      512: 0.7081298828125
+      1024: 0.65618896484375
+      2048: 0.61212158203125
+      4096: 0.58416748046875
+      8192: 0.5537109375
+    pilot_vstat_floor: 0.0053739895816612765
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.5524
+          16384: 0.5705
+          65536: 0.5735
+        cpu_12thr:
+          4096: 1.6598
+          16384: 7.204
+          65536: 38.7907
+        cpu_1thr:
+          4096: 1.4412
+          16384: 5.1777
+          65536: 20.4858
+      peak_gpu_mem_MB:
+        4096: 10.0
+        16384: 15.9
+        65536: 37.1
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00322
+          16384: 0.04741
+          65536: 0.74521
+        gpu_fp32:
+          4096: 0.00189
+          16384: 0.02611
+          65536: 0.41483
+        gpu_fp32_rel_sum_err:
+          4096: 7.366986635149106e-09
+          16384: 6.738194774168525e-09
+          65536: 6.896468490629505e-09
+        cpu_fp64:
+          4096: 0.21916
+          16384: 3.36136
+          65536: 63.27653
+  gauss-d10-c25__mala:
+    tier: primary
+    target_id: gauss-d10-c25
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.5901378273535138
+    accept_target: 0.574
+    accept_tune: 0.5733663940429687
+    accept_verify: 0.5732382202148437
+    accept_verify_se: 0.0003170059178784441
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 4
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    pilot_mmd_v:
+      0: 0.045326801837077664
+      1: 0.016911662624311243
+      2: 0.011796714586912952
+      4: 0.009086827738858546
+      8: 0.00997333036384415
+      16: 0.008456699352042112
+      32: 0.004216116497106614
+      64: 0.00410490901849184
+      128: 0.004179105930658164
+      256: 0.004688141229881377
+      512: 0.005736691366562971
+      1024: 0.004438906110791318
+      2048: 0.00477563610616226
+      4096: 0.004830096132439866
+      8192: 0.004454743168357587
+    pilot_mmd2_u:
+      0: 0.002029750090070892
+      1: 0.0002611087117413424
+      2: 0.00011430306881377028
+      4: 5.765662787882153e-05
+      8: 7.458825773443145e-05
+      16: 4.641145518680112e-05
+      32: -7.1249390197758444e-06
+      64: -7.954371287421935e-06
+      128: -7.496116582683676e-06
+      256: -3.0281749872074215e-06
+      512: 8.039139217874691e-06
+      1024: -5.098400861269781e-06
+      2048: -2.0568436476242624e-06
+      4096: -1.482368906291498e-06
+      8192: -4.9932889923942625e-06
+    pilot_p_A:
+      0: 0.8988037109375
+      1: 0.64886474609375
+      2: 0.56878662109375
+      4: 0.51434326171875
+      8: 0.50177001953125
+      16: 0.5015869140625
+      32: 0.4979248046875
+      64: 0.4996337890625
+      128: 0.49932861328125
+      256: 0.499755859375
+      512: 0.4979248046875
+      1024: 0.4940185546875
+      2048: 0.49969482421875
+      4096: 0.49676513671875
+      8192: 0.49749755859375
+    pilot_vstat_floor: 0.004986551577026642
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.9012
+          16384: 0.9058
+          65536: 0.9121
+        cpu_12thr:
+          4096: 2.2976
+          16384: 7.1707
+          65536: 24.77
+        cpu_1thr:
+          4096: 2.3055
+          16384: 8.6463
+          65536: 38.4301
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.1
+        65536: 61.4
+  gauss-d10-c25__rwm:
+    tier: primary
+    target_id: gauss-d10-c25
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.5321841786449498
+    accept_target: 0.234
+    accept_tune: 0.236339111328125
+    accept_verify: 0.23645050048828126
+    accept_verify_se: 0.0002660377706885818
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 16
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    pilot_mmd_v:
+      0: 0.04545218968804374
+      1: 0.03984007299565373
+      2: 0.03499870249130175
+      4: 0.027449022726993677
+      8: 0.017354363402857415
+      16: 0.008695883121249073
+      32: 0.0051575373964138456
+      64: 0.00412402541274502
+      128: 0.003925771844699884
+      256: 0.004322672468331011
+      512: 0.004750032473245241
+      1024: 0.006052912878051999
+      2048: 0.0051432572621669835
+      4096: 0.004455789990157355
+      8192: 0.003965615042669503
+    pilot_mmd2_u:
+      0: 0.0020410481535545477
+      1: 0.0015623510782565297
+      2: 0.0011999802617544963
+      4: 0.0007284593958694074
+      8: 0.00027614266015929534
+      16: 5.065039633611601e-05
+      32: 1.5864250013652992e-06
+      64: -7.977707521034105e-06
+      128: -9.470589132476448e-06
+      256: -6.281175083389101e-06
+      512: -2.3667660893345044e-06
+      1024: 1.183058525933145e-05
+      2048: 1.447396555942504e-06
+      4096: -4.9709654454943575e-06
+      8192: -9.09572696572436e-06
+    pilot_p_A:
+      0: 0.896240234375
+      1: 0.8326416015625
+      2: 0.7823486328125
+      4: 0.7060546875
+      8: 0.6082763671875
+      16: 0.5311279296875
+      32: 0.50177001953125
+      64: 0.49896240234375
+      128: 0.504638671875
+      256: 0.49853515625
+      512: 0.4998779296875
+      1024: 0.49468994140625
+      2048: 0.49810791015625
+      4096: 0.506103515625
+      8192: 0.50079345703125
+    pilot_vstat_floor: 0.004986551577026642
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.487
+          16384: 0.4876
+          65536: 0.4885
+        cpu_12thr:
+          4096: 55.7997
+          16384: 56.8516
+          65536: 26.7162
+        cpu_1thr:
+          4096: 1.4505
+          16384: 6.6698
+          65536: 32.7193
+      peak_gpu_mem_MB:
+        4096: 10.4
+        16384: 17.8
+        65536: 44.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00323
+          16384: 0.04715
+          65536: 0.74104
+        gpu_fp32:
+          4096: 0.00189
+          16384: 0.02593
+          65536: 0.41345
+        gpu_fp32_rel_sum_err:
+          4096: 9.48899363222178e-09
+          16384: 9.922171398041186e-09
+          65536: 1.0159584642330319e-08
+        cpu_fp64:
+          4096: 0.19937
+          16384: 3.5601
+          65536: 58.65977
+  mixture-d10-s6-w0.5__mala:
+    tier: primary
+    target_id: mixture-d10-s6-w0.5
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.5267029123968441
+    accept_target: 0.574
+    accept_tune: 0.5756356811523438
+    accept_verify: 0.5754769897460937
+    accept_verify_se: 0.0002894319662151888
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 1024
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    pilot_mmd_v:
+      0: 0.2102009971253906
+      1: 0.21030836473835635
+      2: 0.20971678088640122
+      4: 0.20919359082606614
+      8: 0.20660764250587307
+      16: 0.2027600870937742
+      32: 0.19406587609343576
+      64: 0.1747685607883736
+      128: 0.14357430672582844
+      256: 0.09923749757009047
+      512: 0.04336359054213427
+      1024: 0.009197599013094195
+      2048: 0.004165985147078704
+      4096: 0.003798328470174886
+      8192: 0.004657008455377879
+    pilot_mmd2_u:
+      0: 0.04416273530397308
+      1: 0.04420787429745876
+      2: 0.04395944831918874
+      4: 0.043740256908536224
+      8: 0.04266494507997831
+      16: 0.04108959429672299
+      32: 0.03763940917529929
+      64: 0.03052149064856935
+      128: 0.02059041228553693
+      256: 0.009824250084757513
+      512: 0.0018559587918058895
+      1024: 6.02449447298925e-05
+      2048: -7.126974430060606e-06
+      4096: -1.0028009633789026e-05
+      8192: -2.7733490268744276e-06
+    pilot_p_A:
+      0: 0.89892578125
+      1: 0.8975830078125
+      2: 0.89617919921875
+      4: 0.89453125
+      8: 0.8896484375
+      16: 0.8804931640625
+      32: 0.86273193359375
+      64: 0.83013916015625
+      128: 0.76934814453125
+      256: 0.6861572265625
+      512: 0.5821533203125
+      1024: 0.51776123046875
+      2048: 0.49853515625
+      4096: 0.503173828125
+      8192: 0.50048828125
+    pilot_vstat_floor: 0.004943074198994936
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.362
+          16384: 1.3987
+          65536: 1.6123
+        cpu_12thr:
+          4096: 4.5484
+          16384: 9.1907
+          65536: 70.8119
+        cpu_1thr:
+          4096: 3.2503
+          16384: 12.2293
+          65536: 52.0726
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.1
+        65536: 61.4
+  mixture-d10-s6-w0.5__rwm:
+    tier: primary
+    target_id: mixture-d10-s6-w0.5
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.5379792843984039
+    accept_target: 0.234
+    accept_tune: 0.2335986328125
+    accept_verify: 0.2339849853515625
+    accept_verify_se: 0.0002790931979736828
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 512
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    pilot_mmd_v:
+      0: 0.2092989730675965
+      1: 0.20883476082223285
+      2: 0.20811101840242174
+      4: 0.20640998321774298
+      8: 0.20269634803817835
+      16: 0.19396387591828376
+      32: 0.17855793433113443
+      64: 0.14932125291840104
+      128: 0.10379122285005042
+      256: 0.04814123448802307
+      512: 0.009732699030741306
+      1024: 0.004510792035004365
+      2048: 0.003460853059743997
+      4096: 0.003852547205456521
+      8192: 0.0036552011345269784
+    pilot_mmd2_u:
+      0: 0.043784303224292054
+      1: 0.043590201969064046
+      2: 0.04328845494424727
+      4: 0.04258326734864459
+      8: 0.04106385830692272
+      16: 0.03759989152981347
+      32: 0.03186042110584708
+      64: 0.022273749651112507
+      128: 0.010748792205215518
+      256: 0.0022933533207328827
+      512: 7.035808734234816e-05
+      1024: -4.12333799282294e-06
+      2048: -1.2520817877725854e-05
+      4096: -9.540153615539282e-06
+      8192: -1.1090620579357058e-05
+    pilot_p_A:
+      0: 0.8994140625
+      1: 0.8936767578125
+      2: 0.88983154296875
+      4: 0.88421630859375
+      8: 0.87310791015625
+      16: 0.85394287109375
+      32: 0.82196044921875
+      64: 0.76708984375
+      128: 0.685546875
+      256: 0.58477783203125
+      512: 0.514892578125
+      1024: 0.50567626953125
+      2048: 0.4970703125
+      4096: 0.49969482421875
+      8192: 0.50323486328125
+    pilot_vstat_floor: 0.004943074198994936
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.6952
+          16384: 0.7024
+          65536: 0.6809
+        cpu_12thr:
+          4096: 2.4
+          16384: 6.6927
+          65536: 304.2674
+        cpu_1thr:
+          4096: 1.7694
+          16384: 6.1716
+          65536: 25.3909
+      peak_gpu_mem_MB:
+        4096: 10.1
+        16384: 16.5
+        65536: 39.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00322
+          16384: 0.04714
+          65536: 0.74067
+        gpu_fp32:
+          4096: 0.00188
+          16384: 0.02594
+          65536: 0.41299
+        gpu_fp32_rel_sum_err:
+          4096: 1.0197312917430495e-08
+          16384: 9.76416723527468e-09
+          65536: 9.747267181679086e-09
+        cpu_fp64:
+          4096: 0.21326
+          16384: 3.22243
+          65536: 54.68549
+  studentt-d10-nu3__mala:
+    tier: primary
+    target_id: studentt-d10-nu3
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.0881944247177568
+    accept_target: 0.574
+    accept_tune: 0.5746786499023437
+    accept_verify: 0.576280517578125
+    accept_verify_se: 0.0011648784102595922
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 128
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    pilot_mmd_v:
+      0: 0.1292431146216881
+      1: 0.12060497844315975
+      2: 0.1119424615807042
+      4: 0.09874320273833412
+      8: 0.07965127183085004
+      16: 0.0543577778432506
+      32: 0.032694825521738594
+      64: 0.015397481799575384
+      128: 0.006453000469308668
+      256: 0.004748508232945845
+      512: 0.005654930603348088
+      1024: 0.005268165910244738
+      2048: 0.00522184297759647
+      4096: 0.005308963950286505
+      8192: 0.003855306122417222
+    pilot_mmd2_u:
+      0: 0.016688946365751467
+      1: 0.014529877118296564
+      2: 0.012514584322235067
+      4: 0.009732403763198394
+      8: 0.006324688511013088
+      16: 0.0029327523946163225
+      32: 0.0010449181357279347
+      64: 0.00021143553624036748
+      128: 1.5153583223348477e-05
+      256: -4.4998818952146635e-06
+      512: 4.891940362350411e-06
+      1024: 7.748300443477518e-07
+      2048: 3.104634989092858e-07
+      4096: 1.2282484500580892e-06
+      8192: -1.2164929997560137e-05
+    pilot_p_A:
+      0: 0.8992919921875
+      1: 0.8194580078125
+      2: 0.76483154296875
+      4: 0.7086181640625
+      8: 0.6510009765625
+      16: 0.59136962890625
+      32: 0.5472412109375
+      64: 0.51922607421875
+      128: 0.50653076171875
+      256: 0.49700927734375
+      512: 0.493408203125
+      1024: 0.4998779296875
+      2048: 0.4976806640625
+      4096: 0.49365234375
+      8192: 0.50115966796875
+    pilot_vstat_floor: 0.005191616719466121
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.86
+          16384: 1.1311
+          65536: 0.9652
+        cpu_12thr:
+          4096: 2.5659
+          16384: 7.3994
+          65536: 31.5528
+        cpu_1thr:
+          4096: 2.5212
+          16384: 7.4358
+          65536: 35.3421
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.1
+        65536: 61.4
+  studentt-d10-nu3__rwm:
+    tier: primary
+    target_id: studentt-d10-nu3
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.8950235361545614
+    accept_target: 0.234
+    accept_tune: 0.23121368408203125
+    accept_verify: 0.229862060546875
+    accept_verify_se: 0.0010971343264729381
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 512
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    pilot_mmd_v:
+      0: 0.12792967393968974
+      1: 0.12686494914490698
+      2: 0.12587485519959976
+      4: 0.12374988078139958
+      8: 0.1194064888437345
+      16: 0.1113617757550207
+      32: 0.09573225536875136
+      64: 0.07332625440034653
+      128: 0.04360947593760922
+      256: 0.020696230936227657
+      512: 0.005023841386983908
+      1024: 0.005158200352812502
+      2048: 0.00507485461192207
+      4096: 0.004600855243284949
+      8192: 0.004900385045162007
+    pilot_mmd2_u:
+      0: 0.01635102974090563
+      1: 0.016079637690609716
+      2: 0.015829304383883858
+      4: 0.015298647914859242
+      8: 0.014242096945581095
+      16: 0.012384845751624907
+      32: 0.009146546619022589
+      64: 0.005356487328494586
+      128: 0.0018787585169005583
+      256: 0.0004031991820523384
+      512: -1.492507449407654e-06
+      1024: -2.432713112066054e-07
+      2048: -1.2871636121403185e-06
+      4096: -5.774026194615978e-06
+      8192: -2.9562662088311598e-06
+    pilot_p_A:
+      0: 0.8978271484375
+      1: 0.8831787109375
+      2: 0.87005615234375
+      4: 0.84930419921875
+      8: 0.81524658203125
+      16: 0.7705078125
+      32: 0.71240234375
+      64: 0.64752197265625
+      128: 0.57379150390625
+      256: 0.5301513671875
+      512: 0.50030517578125
+      1024: 0.49969482421875
+      2048: 0.50482177734375
+      4096: 0.50091552734375
+      8192: 0.497314453125
+    pilot_vstat_floor: 0.005191616719466121
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4754
+          16384: 0.4727
+          65536: 0.4678
+        cpu_12thr:
+          4096: 43.25
+          16384: 43.3499
+          65536: 184.9498
+        cpu_1thr:
+          4096: 1.4057
+          16384: 4.9765
+          65536: 18.9577
+      peak_gpu_mem_MB:
+        4096: 9.9
+        16384: 15.8
+        65536: 36.5
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.0032
+          16384: 0.0471
+          65536: 0.74059
+        gpu_fp32:
+          4096: 0.00186
+          16384: 0.02589
+          65536: 0.41255
+        gpu_fp32_rel_sum_err:
+          4096: 1.0044938189797404e-08
+          16384: 1.0203720110676587e-08
+          65536: 1.018214245159799e-08
+        cpu_fp64:
+          4096: 0.21817
+          16384: 3.28739
+          65536: 57.99229
+  funnel-d10-sy1__mala:
+    tier: stress
+    target_id: funnel-d10-sy1
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.6470442761903248
+    accept_target: 0.574
+    accept_tune: 0.5768902587890625
+    accept_verify: 0.577772216796875
+    accept_verify_se: 0.0006843464904059313
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 256
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    pilot_mmd_v:
+      0: 0.14011023970020134
+      1: 0.132733578863732
+      2: 0.12771876726172104
+      4: 0.11929899286435436
+      8: 0.10565415287321381
+      16: 0.08413845042400327
+      32: 0.05583097998499657
+      64: 0.03113716557669508
+      128: 0.013405091323394912
+      256: 0.0038154589220901606
+      512: 0.006975015956220998
+      1024: 0.005124221719544727
+      2048: 0.0047876437983959035
+      4096: 0.0038926079627623475
+      8192: 0.004381717554867441
+    pilot_mmd2_u:
+      0: 0.0195961320504231
+      1: 0.01758335627345331
+      2: 0.01627743111337243
+      4: 0.014197915384597581
+      8: 0.011129187385740313
+      16: 0.0070468764414755025
+      32: 0.0030865095194613223
+      64: 0.0009406836962246867
+      128: 0.00015225057234213857
+      256: -1.1988209647761927e-05
+      512: 2.174532416321373e-05
+      1024: -2.3739856191973274e-07
+      2048: -3.4564414461701887e-06
+      4096: -1.1341694217681386e-05
+      8192: -6.982109754360977e-06
+    pilot_p_A:
+      0: 0.8973388671875
+      1: 0.79547119140625
+      2: 0.76123046875
+      4: 0.72271728515625
+      8: 0.6900634765625
+      16: 0.6431884765625
+      32: 0.5858154296875
+      64: 0.54217529296875
+      128: 0.51934814453125
+      256: 0.5057373046875
+      512: 0.50799560546875
+      1024: 0.502197265625
+      2048: 0.50177001953125
+      4096: 0.50042724609375
+      8192: 0.496337890625
+    pilot_vstat_floor: 0.005144630507809571
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.0549
+          16384: 1.0835
+          65536: 1.0616
+        cpu_12thr:
+          4096: 152.7953
+          16384: 98.6452
+          65536: 233.8985
+        cpu_1thr:
+          4096: 2.7051
+          16384: 9.9
+          65536: 43.0459
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.4
+        65536: 61.4
+  funnel-d10-sy1__rwm:
+    tier: stress
+    target_id: funnel-d10-sy1
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.7207133759219776
+    accept_target: 0.234
+    accept_tune: 0.23192626953125
+    accept_verify: 0.23037506103515626
+    accept_verify_se: 0.0007775628008434562
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 512
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    pilot_mmd_v:
+      0: 0.14108318356000749
+      1: 0.1385272269792681
+      2: 0.13661689753411688
+      4: 0.1331758602529796
+      8: 0.12762723592248096
+      16: 0.11789382501482563
+      32: 0.10246444997195647
+      64: 0.07977947311335945
+      128: 0.05427261300687284
+      256: 0.02630439828966312
+      512: 0.0064245444462945715
+      1024: 0.005661096100637037
+      2048: 0.004746990966932868
+      4096: 0.004768959053342842
+      8192: 0.005630349703164483
+    pilot_mmd2_u:
+      0: 0.019869658799689716
+      1: 0.019154993830897804
+      2: 0.018629390335304974
+      4: 0.01770106282050543
+      8: 0.0162541130483298
+      16: 0.013864752571568717
+      32: 0.010465642277767584
+      64: 0.006332812713546687
+      128: 0.002915179772297938
+      256: 0.0006635856672942975
+      512: 1.4573113150340156e-05
+      1024: 5.510475558412331e-06
+      2048: -3.819882169353583e-06
+      4096: -3.802521325702024e-06
+      8192: 5.3927903078676565e-06
+    pilot_p_A:
+      0: 0.89825439453125
+      1: 0.86236572265625
+      2: 0.84197998046875
+      4: 0.80792236328125
+      8: 0.7664794921875
+      16: 0.72113037109375
+      32: 0.68695068359375
+      64: 0.6363525390625
+      128: 0.59222412109375
+      256: 0.537841796875
+      512: 0.50872802734375
+      1024: 0.50738525390625
+      2048: 0.49383544921875
+      4096: 0.500732421875
+      8192: 0.50030517578125
+    pilot_vstat_floor: 0.005144630507809571
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.576
+          16384: 0.5743
+          65536: 0.5701
+        cpu_12thr:
+          4096: 44.8001
+          16384: 52.7999
+          65536: 294.493
+        cpu_1thr:
+          4096: 1.4839
+          16384: 5.302
+          65536: 21.3408
+      peak_gpu_mem_MB:
+        4096: 9.9
+        16384: 16.2
+        65536: 36.5
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00323
+          16384: 0.04964
+          65536: 0.74239
+        gpu_fp32:
+          4096: 0.00188
+          16384: 0.02926
+          65536: 0.41397
+        gpu_fp32_rel_sum_err:
+          4096: 1.0805259225298238e-08
+          16384: 1.0358515996825478e-08
+          65536: 1.0316995130620712e-08
+        cpu_fp64:
+          4096: 0.46427
+          16384: 5.2703
+          65536: 81.5613
+  funnel-d2-sy3__mala:
+    tier: stress
+    target_id: funnel-d2-sy3
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.6247818106324075
+    accept_target: 0.574
+    accept_tune: 0.5767425537109375
+    accept_verify: 0.5792465209960938
+    accept_verify_se: 0.0010664966787902067
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8192
+    t_max_cap_binds: true
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    - 2048
+    - 4096
+    - 8192
+    pilot_mmd_v:
+      0: 0.23489327590685194
+      1: 0.21417690637714973
+      2: 0.201928290650913
+      4: 0.18397222639532096
+      8: 0.1627289082218098
+      16: 0.13525719749094833
+      32: 0.10550680731618388
+      64: 0.07511113014036919
+      128: 0.058708807440674894
+      256: 0.038920226526247666
+      512: 0.02578015390402522
+      1024: 0.017897790627688464
+      2048: 0.015426282906212228
+      4096: 0.011181677257437125
+      8192: 0.012137959961987865
+    pilot_mmd2_u:
+      0: 0.05513679863996007
+      1: 0.04583355093688107
+      2: 0.04073680075861952
+      4: 0.03380770815448064
+      8: 0.026443048522525547
+      16: 0.018257676555151092
+      32: 0.011096025587069458
+      64: 0.005607649418768235
+      128: 0.0034137667388971504
+      256: 0.0014831931569903034
+      512: 0.0006340780482757546
+      1024: 0.0002904975766231388
+      2048: 0.00020859903038616956
+      4096: 9.618700303115624e-05
+      8192: 0.00011836709487145214
+    pilot_p_A:
+      0: 0.89935302734375
+      1: 0.79266357421875
+      2: 0.74554443359375
+      4: 0.70208740234375
+      8: 0.6702880859375
+      16: 0.6317138671875
+      32: 0.5953369140625
+      64: 0.5648193359375
+      128: 0.5526123046875
+      256: 0.53515625
+      512: 0.5263671875
+      1024: 0.52001953125
+      2048: 0.5126953125
+      4096: 0.50421142578125
+      8192: 0.50225830078125
+    pilot_vstat_floor: 0.005361446705418251
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.0274
+          16384: 1.0575
+          65536: 1.0584
+        cpu_12thr:
+          4096: 18.9001
+          16384: 30.8498
+          65536: 522.0994
+        cpu_1thr:
+          4096: 1.142
+          16384: 3.5651
+          65536: 22.4145
+      peak_gpu_mem_MB:
+        4096: 9.0
+        16384: 11.5
+        65536: 21.4
+  funnel-d2-sy3__rwm:
+    tier: stress
+    target_id: funnel-d2-sy3
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.611564100854902
+    accept_target: 0.234
+    accept_tune: 0.236746826171875
+    accept_verify: 0.2358306884765625
+    accept_verify_se: 0.00033884999085643093
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 1024
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    pilot_mmd_v:
+      0: 0.23853643102587932
+      1: 0.22167472280105519
+      2: 0.20631102162131248
+      4: 0.18271260214994273
+      8: 0.15076597183411078
+      16: 0.11426396938792667
+      32: 0.07575578777276915
+      64: 0.04997824399145948
+      128: 0.027777685685981872
+      256: 0.01948810225833156
+      512: 0.01095578195618519
+      1024: 0.009079617309759768
+      2048: 0.004990077094214884
+      4096: 0.008953215816653117
+      8192: 0.004659033152628548
+    pilot_mmd2_u:
+      0: 0.05686116927066909
+      1: 0.049101224948242816
+      2: 0.04252587684436554
+      4: 0.03334590707322055
+      8: 0.02269309490236937
+      16: 0.013020169710527663
+      32: 0.005704676382362717
+      64: 0.002465179558205577
+      128: 0.000740635620294805
+      256: 0.00034944032093398025
+      512: 9.046407391510858e-05
+      1024: 5.300102954242103e-05
+      2048: -3.804631562243088e-06
+      4096: 5.0761442105695664e-05
+      8192: -7.2475684592676615e-06
+    pilot_p_A:
+      0: 0.898681640625
+      1: 0.8443603515625
+      2: 0.79974365234375
+      4: 0.74371337890625
+      8: 0.6744384765625
+      16: 0.610595703125
+      32: 0.55950927734375
+      64: 0.53271484375
+      128: 0.525634765625
+      256: 0.51348876953125
+      512: 0.505859375
+      1024: 0.5015869140625
+      2048: 0.49737548828125
+      4096: 0.50750732421875
+      8192: 0.50335693359375
+    pilot_vstat_floor: 0.005361446705418251
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.5451
+          16384: 0.55
+          65536: 0.5432
+        cpu_12thr:
+          4096: 15.9
+          16384: 12.799
+          65536: 283.4005
+        cpu_1thr:
+          4096: 0.5594
+          16384: 1.6476
+          65536: 6.1825
+      peak_gpu_mem_MB:
+        4096: 8.7
+        16384: 10.2
+        65536: 16.5
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00317
+          16384: 0.04736
+          65536: 0.74184
+        gpu_fp32:
+          4096: 0.00219
+          16384: 0.02901
+          65536: 0.45806
+        gpu_fp32_rel_sum_err:
+          4096: 8.192075917828076e-09
+          16384: 7.62871391013856e-09
+          65536: 7.76515096265746e-09
+        cpu_fp64:
+          4096: 0.37071
+          16384: 5.2434
+          65536: 91.05842
+  gauss-d10-c100__mala:
+    tier: stress
+    target_id: gauss-d10-c100
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.35858171835798375
+    accept_target: 0.574
+    accept_tune: 0.5758258056640625
+    accept_verify: 0.5758209228515625
+    accept_verify_se: 0.0003065721135341875
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 2
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    pilot_mmd_v:
+      0: 0.027655428183063997
+      1: 0.010889649611329759
+      2: 0.007356457303185652
+      4: 0.006305322225082914
+      8: 0.005042749350724905
+      16: 0.004242764457516699
+      32: 0.0033076573812669124
+      64: 0.004249491459063241
+      128: 0.0035312479445568762
+      256: 0.004869446034526511
+      512: 0.00592863384815952
+      1024: 0.004348006762401984
+      2048: 0.006403475564219457
+      4096: 0.0037001134916872166
+      8192: 0.00530439722363283
+    pilot_mmd2_u:
+      0: 0.0007398570245776837
+      1: 9.35845339219421e-05
+      2: 2.912035418756176e-05
+      4: 1.4735079444605503e-05
+      8: 4.336705152763187e-07
+      16: -6.949716586990284e-06
+      32: -1.3933307110969295e-05
+      64: -6.781311649106669e-06
+      128: -1.2412955884499866e-05
+      256: -1.2303490347642665e-06
+      512: 1.0229234322367553e-05
+      1024: -6.0283071653399745e-06
+      2048: 1.617507612483582e-05
+      4096: -1.1235480590121583e-05
+      8192: 3.178485182164792e-06
+    pilot_p_A:
+      0: 0.89990234375
+      1: 0.65509033203125
+      2: 0.5660400390625
+      4: 0.5186767578125
+      8: 0.50262451171875
+      16: 0.4920654296875
+      32: 0.4959716796875
+      64: 0.49554443359375
+      128: 0.50408935546875
+      256: 0.49969482421875
+      512: 0.5062255859375
+      1024: 0.50115966796875
+      2048: 0.49969482421875
+      4096: 0.495361328125
+      8192: 0.5045166015625
+    pilot_vstat_floor: 0.004990154951048958
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.8785
+          16384: 0.8763
+          65536: 0.8791
+        cpu_12thr:
+          4096: 2.181
+          16384: 7.4207
+          65536: 26.2451
+        cpu_1thr:
+          4096: 2.2048
+          16384: 8.3021
+          65536: 37.3881
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  gauss-d10-c100__rwm:
+    tier: stress
+    target_id: gauss-d10-c100
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.3682474719257757
+    accept_target: 0.234
+    accept_tune: 0.23453948974609376
+    accept_verify: 0.2348272705078125
+    accept_verify_se: 0.0002690058077738605
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    pilot_mmd_v:
+      0: 0.02738589314405205
+      1: 0.023412434801107447
+      2: 0.020127976723320052
+      4: 0.014802839446273426
+      8: 0.00841554727661425
+      16: 0.004152446293582292
+      32: 0.004283902618809666
+      64: 0.0034930849429022216
+      128: 0.005118500822596049
+      256: 0.006823720819918117
+      512: 0.005898758887976537
+      1024: 0.002644940456764641
+      2048: 0.003767107460107952
+      4096: 0.006421221278784737
+      8192: 0.004404743572730073
+    pilot_mmd2_u:
+      0: 0.0007250729475373197
+      1: 0.000523212759325431
+      2: 0.0003801580200921695
+      4: 0.0001941620615039108
+      8: 4.588339224853577e-05
+      16: -7.689815367473152e-06
+      32: -6.563164569817204e-06
+      64: -1.2676797247701543e-05
+      128: 1.263282430996604e-06
+      256: 2.162067657240918e-05
+      512: 9.920892145243165e-06
+      1024: -1.7932803709652667e-05
+      2048: -1.0637538178093209e-05
+      4096: 1.6242497126284228e-05
+      8192: -5.509801648706514e-06
+    pilot_p_A:
+      0: 0.90179443359375
+      1: 0.83251953125
+      2: 0.77532958984375
+      4: 0.68927001953125
+      8: 0.593505859375
+      16: 0.5177001953125
+      32: 0.4996337890625
+      64: 0.50042724609375
+      128: 0.4970703125
+      256: 0.49896240234375
+      512: 0.4967041015625
+      1024: 0.49725341796875
+      2048: 0.4945068359375
+      4096: 0.49951171875
+      8192: 0.4991455078125
+    pilot_vstat_floor: 0.004990154951048958
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4846
+          16384: 0.4835
+          65536: 0.4837
+        cpu_12thr:
+          4096: 1.7902
+          16384: 5.796
+          65536: 41.9234
+        cpu_1thr:
+          4096: 1.4537
+          16384: 5.2906
+          65536: 22.2235
+      peak_gpu_mem_MB:
+        4096: 10.4
+        16384: 18.1
+        65536: 44.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.0032
+          16384: 0.0475
+          65536: 0.74053
+        gpu_fp32:
+          4096: 0.00191
+          16384: 0.02596
+          65536: 0.41251
+        gpu_fp32_rel_sum_err:
+          4096: 9.909765291085764e-09
+          16384: 9.885040634635126e-09
+          65536: 1.0147704530999625e-08
+        cpu_fp64:
+          4096: 0.25583
+          16384: 3.30653
+          65536: 54.3172
+  gauss-d10-c1__mala:
+    tier: stress
+    target_id: gauss-d10-c1
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.1363729079164355
+    accept_target: 0.574
+    accept_tune: 0.5757443237304688
+    accept_verify: 0.5760543823242188
+    accept_verify_se: 0.0003463608044309491
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    pilot_mmd_v:
+      0: 0.1119407299294278
+      1: 0.06320804669338258
+      2: 0.03660917781156283
+      4: 0.014109210053718341
+      8: 0.005433504156382692
+      16: 0.003995656837320301
+      32: 0.004963056813754857
+      64: 0.004265682834194417
+      128: 0.005440252488304824
+      256: 0.0036784212745538257
+      512: 0.004391082426308175
+      1024: 0.0032037956150634214
+      2048: 0.005913896994881588
+      4096: 0.0051901942158874455
+      8192: 0.004060095730757831
+    pilot_mmd2_u:
+      0: 0.012507081026455813
+      1: 0.003971108043106408
+      2: 0.0013158267284709702
+      4: 0.00017467473656240795
+      8: 5.084024174872859e-06
+      16: -8.417515690251065e-06
+      32: 2.0607143214057544e-07
+      64: -6.1913450032369255e-06
+      128: 5.235004591597203e-06
+      256: -1.1000256604720704e-05
+      512: -5.213314262286772e-06
+      1024: -1.4129812472285508e-05
+      2048: 1.0771375709817121e-05
+      4096: 2.5374756847940105e-06
+      8192: -7.934824721944622e-06
+    pilot_p_A:
+      0: 0.9005126953125
+      1: 0.71270751953125
+      2: 0.61724853515625
+      4: 0.5399169921875
+      8: 0.51214599609375
+      16: 0.5006103515625
+      32: 0.5025634765625
+      64: 0.50103759765625
+      128: 0.49652099609375
+      256: 0.5010986328125
+      512: 0.50665283203125
+      1024: 0.5015869140625
+      2048: 0.5006103515625
+      4096: 0.5018310546875
+      8192: 0.493408203125
+    pilot_vstat_floor: 0.004942102387114318
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.9289
+          16384: 0.8862
+          65536: 0.9267
+        cpu_12thr:
+          4096: 2.3417
+          16384: 7.2375
+          65536: 25.0497
+        cpu_1thr:
+          4096: 2.2333
+          16384: 8.2932
+          65536: 38.3573
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  gauss-d10-c1__rwm:
+    tier: stress
+    target_id: gauss-d10-c1
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.8031534313389816
+    accept_target: 0.234
+    accept_tune: 0.23330413818359375
+    accept_verify: 0.23351226806640624
+    accept_verify_se: 0.0002728649098530807
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 64
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    pilot_mmd_v:
+      0: 0.11213499493421228
+      1: 0.10468334985953427
+      2: 0.09787201870407705
+      4: 0.0870588577816417
+      8: 0.06724863248481101
+      16: 0.04030215527141145
+      32: 0.014617513402238854
+      64: 0.005804888712603854
+      128: 0.003952388552199855
+      256: 0.005322237917840561
+      512: 0.00630503761584889
+      1024: 0.005766911856774554
+      2048: 0.0051918329974368375
+      4096: 0.00554959439362076
+      8192: 0.006110974432732863
+    pilot_mmd2_u:
+      0: 0.012550553017168675
+      1: 0.010934806931878982
+      2: 0.009555043314903311
+      4: 0.007555228086069565
+      8: 0.004498211751406189
+      16: 0.001599946046231815
+      32: 0.00018936409292058531
+      64: 9.263674359938356e-06
+      128: -8.691621380951808e-06
+      256: 3.893083871719938e-06
+      512: 1.5491664281386264e-05
+      1024: 8.753764973890021e-06
+      2048: 2.547700603483527e-06
+      4096: 6.3492506057194475e-06
+      8192: 1.3040501506855762e-05
+    pilot_p_A:
+      0: 0.90313720703125
+      1: 0.8565673828125
+      2: 0.82080078125
+      4: 0.76361083984375
+      8: 0.68511962890625
+      16: 0.59832763671875
+      32: 0.53387451171875
+      64: 0.50421142578125
+      128: 0.49822998046875
+      256: 0.49639892578125
+      512: 0.495849609375
+      1024: 0.49755859375
+      2048: 0.5037841796875
+      4096: 0.50103759765625
+      8192: 0.4970703125
+    pilot_vstat_floor: 0.004942102387114318
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4873
+          16384: 0.4841
+          65536: 0.4892
+        cpu_12thr:
+          4096: 1.7872
+          16384: 5.8902
+          65536: 21.2721
+        cpu_1thr:
+          4096: 1.4356
+          16384: 5.2747
+          65536: 21.7693
+      peak_gpu_mem_MB:
+        4096: 10.4
+        16384: 18.1
+        65536: 44.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00321
+          16384: 0.04714
+          65536: 0.74059
+        gpu_fp32:
+          4096: 0.00187
+          16384: 0.02587
+          65536: 0.41329
+        gpu_fp32_rel_sum_err:
+          4096: 9.77436746504189e-09
+          16384: 9.747274169937882e-09
+          65536: 9.509966854280576e-09
+        cpu_fp64:
+          4096: 0.38322
+          16384: 4.01647
+          65536: 52.74631
+  gauss-d2-c25__mala:
+    tier: stress
+    target_id: gauss-d2-c25
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.2700293677551608
+    accept_target: 0.574
+    accept_tune: 0.5721963500976562
+    accept_verify: 0.5730062866210938
+    accept_verify_se: 0.00028753489744631235
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    pilot_mmd_v:
+      0: 0.21770826302248103
+      1: 0.09444124754200407
+      2: 0.053761917150241506
+      4: 0.019730071504136405
+      8: 0.007514994036937841
+      16: 0.004492892133888632
+      32: 0.005959412104837896
+      64: 0.003619983440190953
+      128: 0.0022101384803832717
+      256: 0.004871248711053496
+      512: 0.006421978879711679
+      1024: 0.004192620363521294
+      2048: 0.0034127270376214545
+      4096: 0.0038189826616030803
+      8192: 0.00394935205824946
+    pilot_mmd2_u:
+      0: 0.047374280112386424
+      1: 0.008894060818162686
+      2: 0.0028649488899151754
+      4: 0.0003637917735807017
+      8: 3.087619321107127e-05
+      16: -5.365339629359589e-06
+      32: 1.0163821681286045e-05
+      64: -1.2383975078189557e-05
+      128: -2.0631032112139458e-05
+      256: -1.958341812269282e-06
+      512: 1.5789544664301935e-05
+      1024: -7.873114282297422e-06
+      2048: -1.3837159324681103e-05
+      4096: -1.106195971245505e-05
+      8192: -9.847543909091705e-06
+    pilot_p_A:
+      0: 0.89984130859375
+      1: 0.655517578125
+      2: 0.57354736328125
+      4: 0.51226806640625
+      8: 0.5042724609375
+      16: 0.49755859375
+      32: 0.49542236328125
+      64: 0.49615478515625
+      128: 0.5032958984375
+      256: 0.5028076171875
+      512: 0.50958251953125
+      1024: 0.497314453125
+      2048: 0.494140625
+      4096: 0.498046875
+      8192: 0.49786376953125
+    pilot_vstat_floor: 0.005050685216711471
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.8699
+          16384: 0.8864
+          65536: 0.8796
+        cpu_12thr:
+          4096: 1.2779
+          16384: 2.9276
+          65536: 9.6432
+        cpu_1thr:
+          4096: 1.2505
+          16384: 3.9025
+          65536: 15.1573
+      peak_gpu_mem_MB:
+        4096: 9.0
+        16384: 11.4
+        65536: 21.4
+  gauss-d2-c25__rwm:
+    tier: stress
+    target_id: gauss-d2-c25
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 2.158960088845474
+    accept_target: 0.234
+    accept_tune: 0.2338671875
+    accept_verify: 0.23402618408203124
+    accept_verify_se: 0.00025930381828047713
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 16
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    pilot_mmd_v:
+      0: 0.21606344448045883
+      1: 0.17303201634275533
+      2: 0.14047874758527448
+      4: 0.09288878191676471
+      8: 0.043679693031377614
+      16: 0.007883860818713583
+      32: 0.006959650827141157
+      64: 0.004010172028397103
+      128: 0.0038264141318949106
+      256: 0.006352143853429428
+      512: 0.007154124578283536
+      1024: 0.003391463373522908
+      2048: 0.007623118146077483
+      4096: 0.003012632903945915
+      8192: 0.005538036803529198
+    pilot_mmd2_u:
+      0: 0.04666059149944002
+      1: 0.029916394985220585
+      2: 0.01970997026579535
+      4: 0.008603439542478553
+      8: 0.0018824105819752468
+      16: 3.6711752921303464e-05
+      32: 2.2776800531643104e-05
+      64: -9.535766572255078e-06
+      128: -1.0932088655768446e-05
+      256: 1.4703333033549981e-05
+      512: 2.559454238404424e-05
+      1024: -1.3973875649497813e-05
+      2048: 3.2549685252014626e-05
+      4096: -1.643949698093561e-05
+      8192: 5.16164129604757e-06
+    pilot_p_A:
+      0: 0.8980712890625
+      1: 0.81512451171875
+      2: 0.7518310546875
+      4: 0.6624755859375
+      8: 0.569091796875
+      16: 0.514404296875
+      32: 0.5089111328125
+      64: 0.49560546875
+      128: 0.5018310546875
+      256: 0.49798583984375
+      512: 0.506591796875
+      1024: 0.50341796875
+      2048: 0.4964599609375
+      4096: 0.49615478515625
+      8192: 0.5032958984375
+    pilot_vstat_floor: 0.005050685216711471
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4852
+          16384: 0.4803
+          65536: 0.4821
+        cpu_12thr:
+          4096: 16.6263
+          16384: 1.8628
+          65536: 7.1808
+        cpu_1thr:
+          4096: 0.6518
+          16384: 2.0527
+          65536: 8.5676
+      peak_gpu_mem_MB:
+        4096: 8.7
+        16384: 10.3
+        65536: 16.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00307
+          16384: 0.0458
+          65536: 0.71838
+        gpu_fp32:
+          4096: 0.00212
+          16384: 0.02782
+          65536: 0.43878
+        gpu_fp32_rel_sum_err:
+          4096: 8.88801167966587e-09
+          16384: 8.818454754981065e-09
+          65536: 8.929489448877274e-09
+        cpu_fp64:
+          4096: 0.19776
+          16384: 3.01623
+          65536: 53.95804
+  gauss-d50-c25__mala:
+    tier: stress
+    target_id: gauss-d50-c25
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.45868426625024505
+    accept_target: 0.574
+    accept_tune: 0.5730111694335938
+    accept_verify: 0.5723580932617187
+    accept_verify_se: 0.00034963035983897505
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 1
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    pilot_mmd_v:
+      0: 0.018855291586778813
+      1: 0.009808200135834144
+      2: 0.006491275463362824
+      4: 0.004984983674982808
+      8: 0.004215709737636596
+      16: 0.00423066511020904
+      32: 0.004710364211599009
+      64: 0.005448696823436469
+      128: 0.005456412611265254
+      256: 0.004955581882113959
+      512: 0.003875090503586743
+      1024: 0.004771845096028915
+      2048: 0.004722765808354983
+      4096: 0.004876512299170702
+      8192: 0.004600267047221766
+    pilot_mmd2_u:
+      0: 0.00033131946058784223
+      1: 7.198891666793106e-05
+      2: 1.7921326251557623e-05
+      4: 6.45836680801537e-07
+      8: -6.418076157754804e-06
+      16: -6.347803502837479e-06
+      32: -2.017024297695791e-06
+      64: 5.455180195346188e-06
+      128: 5.582416196081574e-06
+      256: 3.546534486087438e-07
+      512: -9.2355839719227e-06
+      1024: -1.464592498279238e-06
+      2048: -1.972373952829898e-06
+      4096: -4.0503993381513226e-07
+      8192: -3.0802613861791173e-06
+    pilot_p_A:
+      0: 0.89715576171875
+      1: 0.689697265625
+      2: 0.60369873046875
+      4: 0.5419921875
+      8: 0.50750732421875
+      16: 0.501220703125
+      32: 0.50384521484375
+      64: 0.49505615234375
+      128: 0.5020751953125
+      256: 0.493408203125
+      512: 0.49481201171875
+      1024: 0.504150390625
+      2048: 0.50213623046875
+      4096: 0.5010986328125
+      8192: 0.5091552734375
+    pilot_vstat_floor: 0.0049209771855498385
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.8845
+          16384: 0.8866
+          65536: 2.6763
+        cpu_12thr:
+          4096: 8.4323
+          16384: 28.2923
+          65536: 144.5411
+        cpu_1thr:
+          4096: 9.7528
+          16384: 52.2956
+          65536: 307.9824
+      peak_gpu_mem_MB:
+        4096: 24.0
+        16384: 72.2
+        65536: 261.4
+  gauss-d50-c25__rwm:
+    tier: stress
+    target_id: gauss-d50-c25
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.2279095808062605
+    accept_target: 0.234
+    accept_tune: 0.23640533447265624
+    accept_verify: 0.2363934326171875
+    accept_verify_se: 0.0002612415638981566
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 32
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    pilot_mmd_v:
+      0: 0.019089483252340694
+      1: 0.018398574803624848
+      2: 0.017743905537561427
+      4: 0.016556456677438512
+      8: 0.014413062673483504
+      16: 0.010878574422036033
+      32: 0.007138246930505319
+      64: 0.005165688549498426
+      128: 0.0049376844139387265
+      256: 0.0057357649893568065
+      512: 0.004638612488062328
+      1024: 0.00484011669701566
+      2048: 0.004409628735533912
+      4096: 0.005024675763699795
+      8192: 0.005230396623747962
+    pilot_mmd2_u:
+      0: 0.0003401817323419598
+      1: 0.0003142799822115627
+      2: 0.0002906149687521564
+      4: 0.00024988782536450316
+      8: 0.00018351080979805978
+      16: 9.411568189288122e-05
+      32: 2.6725897783075325e-05
+      64: 2.46231134060082e-06
+      128: 2.0203830763954045e-07
+      256: 8.700851997667236e-06
+      512: -2.662828492594471e-06
+      1024: -7.991320204459029e-07
+      2048: -4.72260953132686e-06
+      4096: 9.841478871841502e-07
+      8192: 3.126840461442626e-06
+    pilot_p_A:
+      0: 0.90277099609375
+      1: 0.86865234375
+      2: 0.8392333984375
+      4: 0.791748046875
+      8: 0.7259521484375
+      16: 0.64666748046875
+      32: 0.57177734375
+      64: 0.5235595703125
+      128: 0.50091552734375
+      256: 0.4947509765625
+      512: 0.50372314453125
+      1024: 0.49835205078125
+      2048: 0.497802734375
+      4096: 0.5037841796875
+      8192: 0.50701904296875
+    pilot_vstat_floor: 0.0049209771855498385
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4855
+          16384: 0.4874
+          65536: 1.0815
+        cpu_12thr:
+          4096: 7.2723
+          16384: 36.4938
+          65536: 106.7935
+        cpu_1thr:
+          4096: 6.2971
+          16384: 34.9589
+          65536: 166.4185
+      peak_gpu_mem_MB:
+        4096: 19.2
+        16384: 53.1
+        65536: 184.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00473
+          16384: 0.07156
+          65536: 1.12017
+        gpu_fp32:
+          4096: 0.00193
+          16384: 0.0264
+          65536: 0.42562
+        gpu_fp32_rel_sum_err:
+          4096: 7.4032234745035625e-09
+          16384: 7.721031989730826e-09
+          65536: 7.761051052982955e-09
+        cpu_fp64:
+          4096: 0.21752
+          16384: 3.30073
+          65536: 53.70976
+  mixture-d10-s10-w0.5__mala:
+    tier: stress
+    target_id: mixture-d10-s10-w0.5
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.3165897258068047
+    accept_target: 0.574
+    accept_tune: 0.5756832885742188
+    accept_verify: 0.5758148193359375
+    accept_verify_se: 0.00028964989965567445
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8192
+    t_max_cap_binds: true
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    - 2048
+    - 4096
+    - 8192
+    pilot_mmd_v:
+      0: 0.24639423556674678
+      1: 0.24666006573474802
+      2: 0.24667086915200775
+      4: 0.24616794987453558
+      8: 0.2468370210773062
+      16: 0.2453011903707055
+      32: 0.24388011934398587
+      64: 0.24531964841031498
+      128: 0.24379350889715581
+      256: 0.24405182751416477
+      512: 0.24452689483139348
+      1024: 0.2441897689646647
+      2048: 0.24437851941028388
+      4096: 0.2456794080213898
+      8192: 0.24450375036284477
+    pilot_mmd2_u:
+      0: 0.060689578549992906
+      1: 0.06082065438246087
+      2: 0.06082602964558681
+      4: 0.06057813170479798
+      8: 0.060908067288570344
+      16: 0.06015216342275764
+      32: 0.05945691451572599
+      64: 0.060161149065737995
+      128: 0.05941462070362513
+      256: 0.059540750549254895
+      512: 0.05977276156924105
+      1024: 0.059608011874564104
+      2048: 0.059700201984536405
+      4096: 0.06033781009500461
+      8192: 0.05976155474240219
+    pilot_p_A:
+      0: 0.90057373046875
+      1: 0.90057373046875
+      2: 0.90057373046875
+      4: 0.90057373046875
+      8: 0.90057373046875
+      16: 0.90057373046875
+      32: 0.90057373046875
+      64: 0.90057373046875
+      128: 0.90057373046875
+      256: 0.90057373046875
+      512: 0.90057373046875
+      1024: 0.900634765625
+      2048: 0.900390625
+      4096: 0.90020751953125
+      8192: 0.8997802734375
+    pilot_vstat_floor: 0.00492562519610581
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.3638
+          16384: 1.3831
+          65536: 1.3668
+        cpu_12thr:
+          4096: 2.8962
+          16384: 8.535
+          65536: 59.1117
+        cpu_1thr:
+          4096: 2.9723
+          16384: 11.0101
+          65536: 45.7425
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  mixture-d10-s10-w0.5__rwm:
+    tier: stress
+    target_id: mixture-d10-s10-w0.5
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.36428071501683934
+    accept_target: 0.234
+    accept_tune: 0.23470733642578126
+    accept_verify: 0.23575714111328125
+    accept_verify_se: 0.00026430250399030604
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8192
+    t_max_cap_binds: true
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    - 2048
+    - 4096
+    - 8192
+    pilot_mmd_v:
+      0: 0.24422379814378828
+      1: 0.24405189230384858
+      2: 0.24386903750366676
+      4: 0.2440040809243175
+      8: 0.2440271656163848
+      16: 0.24442242154694746
+      32: 0.24431540241754288
+      64: 0.24443500790442488
+      128: 0.24364717694656962
+      256: 0.24032462370377997
+      512: 0.2359831003847574
+      1024: 0.22630355126669124
+      2048: 0.2119811669057174
+      4096: 0.18146146192891796
+      8192: 0.13451197419365138
+    pilot_mmd2_u:
+      0: 0.05962465824504504
+      1: 0.0595407216496302
+      2: 0.05945150819621248
+      4: 0.059517398456227166
+      8: 0.05952871672399296
+      16: 0.059721743836173125
+      32: 0.059669391715114206
+      64: 0.05972779886025881
+      128: 0.059343257163717245
+      256: 0.05773501782057311
+      512: 0.05566712647400662
+      1024: 0.051192186992061184
+      2048: 0.04491454327072908
+      4096: 0.03290607290956593
+      8192: 0.018070310522897648
+    pilot_p_A:
+      0: 0.8995361328125
+      1: 0.8995361328125
+      2: 0.8995361328125
+      4: 0.8995361328125
+      8: 0.8995361328125
+      16: 0.89935302734375
+      32: 0.8985595703125
+      64: 0.8980712890625
+      128: 0.89605712890625
+      256: 0.89166259765625
+      512: 0.88421630859375
+      1024: 0.8692626953125
+      2048: 0.8458251953125
+      4096: 0.79632568359375
+      8192: 0.7188720703125
+    pilot_vstat_floor: 0.00492562519610581
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.6757
+          16384: 0.6761
+          65536: 0.6784
+        cpu_12thr:
+          4096: 1.9096
+          16384: 6.688
+          65536: 26.3816
+        cpu_1thr:
+          4096: 1.6952
+          16384: 6.0082
+          65536: 24.4969
+      peak_gpu_mem_MB:
+        4096: 10.1
+        16384: 16.9
+        65536: 39.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.0032
+          16384: 0.04713
+          65536: 0.74168
+        gpu_fp32:
+          4096: 0.00186
+          16384: 0.02592
+          65536: 0.41289
+        gpu_fp32_rel_sum_err:
+          4096: 9.705759622891794e-09
+          16384: 9.934540870435093e-09
+          65536: 1.0140592140987587e-08
+        cpu_fp64:
+          4096: 0.1915
+          16384: 3.19359
+          65536: 55.20908
+  mixture-d10-s2-w0.5__mala:
+    tier: stress
+    target_id: mixture-d10-s2-w0.5
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.0941032128354775
+    accept_target: 0.574
+    accept_tune: 0.5722308349609375
+    accept_verify: 0.5727493286132812
+    accept_verify_se: 0.0003427813200127265
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 16
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    pilot_mmd_v:
+      0: 0.1348924139331495
+      1: 0.09921522317535
+      2: 0.07540347345673572
+      4: 0.04407033563251166
+      8: 0.016137043343203848
+      16: 0.005002441398558009
+      32: 0.0036973336260384577
+      64: 0.004833078148994596
+      128: 0.0037394060765770813
+      256: 0.004443068033158926
+      512: 0.005551846863974323
+      1024: 0.003992465036559797
+      2048: 0.005765698899300119
+      4096: 0.005183930738697787
+      8192: 0.005062272940967791
+    pilot_mmd2_u:
+      0: 0.01817288012044671
+      1: 0.009819990309131055
+      2: 0.0056617477285233475
+      4: 0.0019180778422759337
+      8: 0.00023613000017952412
+      16: 6.410809367807246e-07
+      32: -1.0513608167506128e-05
+      64: -1.0263189986758903e-06
+      128: -1.0154655291638726e-05
+      256: -4.570696452876888e-06
+      512: 6.5184063899881295e-06
+      1024: -8.275816871905484e-06
+      2048: 8.926156466415591e-06
+      4096: 2.5734300956870015e-06
+      8192: 1.3276012359453304e-06
+    pilot_p_A:
+      0: 0.89898681640625
+      1: 0.7589111328125
+      2: 0.6800537109375
+      4: 0.59503173828125
+      8: 0.53167724609375
+      16: 0.49652099609375
+      32: 0.4998779296875
+      64: 0.49603271484375
+      128: 0.498046875
+      256: 0.49755859375
+      512: 0.494873046875
+      1024: 0.5010986328125
+      2048: 0.495849609375
+      4096: 0.49224853515625
+      8192: 0.4954833984375
+    pilot_vstat_floor: 0.004926955408418949
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.2849
+          16384: 1.2687
+          65536: 1.441
+        cpu_12thr:
+          4096: 2.9883
+          16384: 9.0914
+          65536: 30.9873
+        cpu_1thr:
+          4096: 2.9938
+          16384: 11.7619
+          65536: 47.7683
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  mixture-d10-s2-w0.5__rwm:
+    tier: stress
+    target_id: mixture-d10-s2-w0.5
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.7859435094781994
+    accept_target: 0.234
+    accept_tune: 0.23404022216796874
+    accept_verify: 0.23349884033203125
+    accept_verify_se: 0.00026746059544585497
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 64
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    pilot_mmd_v:
+      0: 0.13880694562803272
+      1: 0.13256667315114673
+      2: 0.12659590684489322
+      4: 0.11584336248175095
+      8: 0.09651604409581754
+      16: 0.06837984702010569
+      32: 0.03320982731153908
+      64: 0.0075042121146711325
+      128: 0.0036119711759848897
+      256: 0.004035269086605399
+      512: 0.00556573083684603
+      1024: 0.0068734647579852875
+      2048: 0.006339928324236702
+      4096: 0.004061741546314167
+      8192: 0.006263516535941215
+    pilot_mmd2_u:
+      0: 0.019244167860214323
+      1: 0.017550665364924223
+      2: 0.016003180141687112
+      4: 0.013396177871152881
+      8: 0.009291564313049894
+      16: 0.00465179475208799
+      32: 0.0010786311020806183
+      64: 3.2015806384344536e-05
+      128: -1.1292593136591478e-05
+      256: -7.964620593159388e-06
+      512: 6.739882582151857e-06
+      1024: 2.292931555614164e-05
+      2048: 1.591961133218245e-05
+      4096: -7.836767988878002e-06
+      8192: 1.505456418793294e-05
+    pilot_p_A:
+      0: 0.90325927734375
+      1: 0.86700439453125
+      2: 0.83721923828125
+      4: 0.788818359375
+      8: 0.7200927734375
+      16: 0.645263671875
+      32: 0.5648193359375
+      64: 0.513916015625
+      128: 0.50164794921875
+      256: 0.4949951171875
+      512: 0.50152587890625
+      1024: 0.49334716796875
+      2048: 0.5079345703125
+      4096: 0.5028076171875
+      8192: 0.4970703125
+    pilot_vstat_floor: 0.004926955408418949
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.6792
+          16384: 0.683
+          65536: 0.6831
+        cpu_12thr:
+          4096: 2.0566
+          16384: 6.4119
+          65536: 25.6111
+        cpu_1thr:
+          4096: 1.694
+          16384: 6.0026
+          65536: 24.4525
+      peak_gpu_mem_MB:
+        4096: 10.1
+        16384: 16.9
+        65536: 39.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00321
+          16384: 0.04714
+          65536: 0.74067
+        gpu_fp32:
+          4096: 0.00187
+          16384: 0.0259
+          65536: 0.41272
+        gpu_fp32_rel_sum_err:
+          4096: 8.957323940300029e-09
+          16384: 9.561848598863501e-09
+          65536: 9.612153099941764e-09
+        cpu_fp64:
+          4096: 0.21965
+          16384: 3.1864
+          65536: 51.31168
+  mixture-d10-s6-w0.1__mala:
+    tier: stress
+    target_id: mixture-d10-s6-w0.1
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.0706588371211914
+    accept_target: 0.574
+    accept_tune: 0.5740158081054687
+    accept_verify: 0.5745330810546875
+    accept_verify_se: 0.0003441068687506433
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 1024
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    pilot_mmd_v:
+      0: 0.13933235243897654
+      1: 0.10169922015918947
+      2: 0.08317686004168365
+      4: 0.06903623664364446
+      8: 0.06601618194952838
+      16: 0.06201671236246195
+      32: 0.05971456356773841
+      64: 0.054557019324373346
+      128: 0.04804491912398791
+      256: 0.035301643913200856
+      512: 0.015216776608100408
+      1024: 0.004413972572425623
+      2048: 0.004972451050892133
+      4096: 0.004722296585020584
+      8192: 0.005403819286863809
+    pilot_mmd2_u:
+      0: 0.019390960638120736
+      1: 0.010319900363756962
+      2: 0.0068954436356463145
+      4: 0.004742989933966935
+      8: 0.004335164262460833
+      16: 0.003822907295318423
+      32: 0.0035425008653572343
+      64: 0.002952996770610561
+      128: 0.002284436900046538
+      256: 0.0012217774928775516
+      512: 0.00020627528813832452
+      1024: -6.249051476281409e-06
+      2048: -1.111748778481747e-06
+      4096: -3.4374825998995107e-06
+      8192: 3.5263115008010715e-06
+    pilot_p_A:
+      0: 0.90472412109375
+      1: 0.7252197265625
+      2: 0.63934326171875
+      4: 0.57244873046875
+      8: 0.546875
+      16: 0.5364990234375
+      32: 0.54296875
+      64: 0.53900146484375
+      128: 0.5411376953125
+      256: 0.5250244140625
+      512: 0.50811767578125
+      1024: 0.4989013671875
+      2048: 0.50244140625
+      4096: 0.5067138671875
+      8192: 0.50482177734375
+    pilot_vstat_floor: 0.005081697671636369
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.2656
+          16384: 1.2889
+          65536: 1.3858
+        cpu_12thr:
+          4096: 3.2788
+          16384: 8.2858
+          65536: 30.4809
+        cpu_1thr:
+          4096: 3.7206
+          16384: 10.9956
+          65536: 48.111
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  mixture-d10-s6-w0.1__rwm:
+    tier: stress
+    target_id: mixture-d10-s6-w0.1
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.7608176002719954
+    accept_target: 0.234
+    accept_tune: 0.23416351318359374
+    accept_verify: 0.23409454345703126
+    accept_verify_se: 0.00027348087471436105
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 1024
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    pilot_mmd_v:
+      0: 0.13766771180255688
+      1: 0.13199316643476117
+      2: 0.1259721999864982
+      4: 0.11638469870770637
+      8: 0.10175311317120693
+      16: 0.0823356054760363
+      32: 0.06624364165938108
+      64: 0.055868190866681974
+      128: 0.04643442260365942
+      256: 0.030002888911478072
+      512: 0.016234703314769387
+      1024: 0.003611019169212844
+      2048: 0.0036510855879318526
+      4096: 0.004396585605228789
+      8192: 0.0056188323652626385
+    pilot_mmd2_u:
+      0: 0.01892981034584096
+      1: 0.01739953762615276
+      2: 0.01584625936902384
+      4: 0.01352257032016746
+      8: 0.01033078770017648
+      16: 0.0067560829221345875
+      32: 0.0043650105172019504
+      64: 0.0030977187110785565
+      128: 0.0021322997022135137
+      256: 0.0008755455936013679
+      512: 0.00023839482150778135
+      1024: -1.2775672283527051e-05
+      2048: -1.2434622010060181e-05
+      4096: -6.564035014977598e-06
+      8192: 5.926663960376111e-06
+    pilot_p_A:
+      0: 0.8995361328125
+      1: 0.86163330078125
+      2: 0.8231201171875
+      4: 0.76837158203125
+      8: 0.69659423828125
+      16: 0.62054443359375
+      32: 0.5673828125
+      64: 0.5389404296875
+      128: 0.53289794921875
+      256: 0.525146484375
+      512: 0.51214599609375
+      1024: 0.50537109375
+      2048: 0.50164794921875
+      4096: 0.50079345703125
+      8192: 0.49749755859375
+    pilot_vstat_floor: 0.005081697671636369
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.6783
+          16384: 0.6803
+          65536: 0.6956
+        cpu_12thr:
+          4096: 26.4549
+          16384: 7.447
+          65536: 25.8768
+        cpu_1thr:
+          4096: 1.7002
+          16384: 6.037
+          65536: 24.6547
+      peak_gpu_mem_MB:
+        4096: 10.1
+        16384: 16.9
+        65536: 39.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00321
+          16384: 0.04712
+          65536: 0.74087
+        gpu_fp32:
+          4096: 0.00187
+          16384: 0.02592
+          65536: 0.4125
+        gpu_fp32_rel_sum_err:
+          4096: 9.720995421191196e-09
+          16384: 1.0204560860063996e-08
+          65536: 9.657949204318247e-09
+        cpu_fp64:
+          4096: 0.2337
+          16384: 3.4293
+          65536: 53.81851
+  mixture-d2-s6-w0.5__mala:
+    tier: stress
+    target_id: mixture-d2-s6-w0.5
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.42305711633710646
+    accept_target: 0.574
+    accept_tune: 0.5731723022460937
+    accept_verify: 0.5729644775390625
+    accept_verify_se: 0.0002798130635092697
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 1024
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    pilot_mmd_v:
+      0: 0.30458167121454127
+      1: 0.30341642183201584
+      2: 0.3029925917767675
+      4: 0.30233736644185655
+      8: 0.2968520427845245
+      16: 0.28638598972521206
+      32: 0.27208458554138254
+      64: 0.24150697513910901
+      128: 0.18834043782745438
+      256: 0.12223182093286807
+      512: 0.04880332619790503
+      1024: 0.006313617352279362
+      2048: 0.0077897394344174364
+      4096: 0.0012679924433882926
+      8192: 0.004724568460422204
+    pilot_mmd2_u:
+      0: 0.09275100715562845
+      1: 0.0920425318173238
+      2: 0.09178551818907765
+      4: 0.09138894475157933
+      8: 0.08810189519480205
+      16: 0.0819974449209927
+      32: 0.07400987339916854
+      64: 0.05830451716251417
+      128: 0.035449659399566236
+      256: 0.014916822357196602
+      512: 0.002357208743190231
+      1024: 1.4946144463734434e-05
+      2048: 3.589087079503006e-05
+      4096: -2.3099961296568772e-05
+      8192: -2.4004060088511636e-06
+    pilot_p_A:
+      0: 0.9019775390625
+      1: 0.89971923828125
+      2: 0.89776611328125
+      4: 0.895751953125
+      8: 0.88861083984375
+      16: 0.877685546875
+      32: 0.85595703125
+      64: 0.8138427734375
+      128: 0.74725341796875
+      256: 0.6583251953125
+      512: 0.5628662109375
+      1024: 0.5081787109375
+      2048: 0.5079345703125
+      4096: 0.50238037109375
+      8192: 0.498046875
+    pilot_vstat_floor: 0.004974816919440117
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.306
+          16384: 1.3024
+          65536: 1.3027
+        cpu_12thr:
+          4096: 62.8007
+          16384: 87.3496
+          65536: 18.3143
+        cpu_1thr:
+          4096: 1.8645
+          16384: 6.0262
+          65536: 23.7357
+      peak_gpu_mem_MB:
+        4096: 9.0
+        16384: 11.4
+        65536: 21.4
+  mixture-d2-s6-w0.5__rwm:
+    tier: stress
+    target_id: mixture-d2-s6-w0.5
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.2977042018716562
+    accept_target: 0.234
+    accept_tune: 0.23567596435546875
+    accept_verify: 0.23563720703125
+    accept_verify_se: 0.0002669129198568866
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 32
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    pilot_mmd_v:
+      0: 0.30176190387551133
+      1: 0.2598386669089629
+      2: 0.2230785470946428
+      4: 0.16912905502701428
+      8: 0.09819081284511019
+      16: 0.03198253304748005
+      32: 0.008968949289053046
+      64: 0.004627911069518959
+      128: 0.006671860545801683
+      256: 0.002255232034241884
+      512: 0.0038713606563890064
+      1024: 0.003595608004684421
+      2048: 0.0033407302088429612
+      4096: 0.005536366756083744
+      8192: 0.005325525838629165
+    pilot_mmd2_u:
+      0: 0.0910409769709013
+      1: 0.06749550712178676
+      2: 0.049742292962682844
+      4: 0.028581688136748773
+      8: 0.009617400816624655
+      16: 0.0009982208507628432
+      32: 5.5625908388701184e-05
+      64: -3.360100149008005e-06
+      128: 1.9974687797241764e-05
+      256: -1.9648850982934007e-05
+      512: -9.818052697618818e-06
+      1024: -1.1792555222100987e-05
+      2048: -1.361944313482688e-05
+      4096: 6.147391057753637e-06
+      8192: 3.6233941638208478e-06
+    pilot_p_A:
+      0: 0.8978271484375
+      1: 0.82965087890625
+      2: 0.7747802734375
+      4: 0.69696044921875
+      8: 0.60614013671875
+      16: 0.53143310546875
+      32: 0.5087890625
+      64: 0.5050048828125
+      128: 0.50457763671875
+      256: 0.50238037109375
+      512: 0.50494384765625
+      1024: 0.5040283203125
+      2048: 0.5003662109375
+      4096: 0.50067138671875
+      8192: 0.498291015625
+    pilot_vstat_floor: 0.004974816919440117
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.674
+          16384: 0.9593
+          65536: 0.9495
+        cpu_12thr:
+          4096: 1.1361
+          16384: 2.9268
+          65536: 9.805
+        cpu_1thr:
+          4096: 1.1411
+          16384: 3.0152
+          65536: 11.1804
+      peak_gpu_mem_MB:
+        4096: 8.8
+        16384: 10.7
+        65536: 18.3
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00358
+          16384: 0.04904
+          65536: 0.75309
+        gpu_fp32:
+          4096: 0.0023
+          16384: 0.02996
+          65536: 0.47156
+        gpu_fp32_rel_sum_err:
+          4096: 8.425087459484706e-09
+          16384: 8.044888749956661e-09
+          65536: 8.02590780041214e-09
+        cpu_fp64:
+          4096: 0.21851
+          16384: 3.84226
+          65536: 59.74476
+  studentt-d10-nu30__mala:
+    tier: stress
+    target_id: studentt-d10-nu30
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.1363729079164355
+    accept_target: 0.574
+    accept_tune: 0.5762771606445313
+    accept_verify: 0.575975341796875
+    accept_verify_se: 0.0004194034479937863
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 8
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    pilot_mmd_v:
+      0: 0.06887912125533947
+      1: 0.04843302817302555
+      2: 0.034992954517771485
+      4: 0.018810277076277162
+      8: 0.007764247400363428
+      16: 0.006533931713376645
+      32: 0.005068913215879137
+      64: 0.005487242109208823
+      128: 0.005425947683386333
+      256: 0.005847746643149576
+      512: 0.004768668197485852
+      1024: 0.004972556284707726
+      2048: 0.006344626180258743
+      4096: 0.005828631540051137
+      8192: 0.003655694211311025
+    pilot_mmd2_u:
+      0: 0.00472574003816284
+      1: 0.002325270856365247
+      2: 0.0012027866610584415
+      4: 0.00033063511824360514
+      8: 3.60134798909062e-05
+      16: 1.8081464964403438e-05
+      32: 9.43606561443211e-07
+      64: 5.35654079825143e-06
+      128: 4.741316890877201e-06
+      256: 9.52240908691504e-06
+      512: -1.9705079229437317e-06
+      1024: 7.603107821108068e-08
+      2048: 1.53617745871637e-05
+      4096: 9.365068633915286e-06
+      8192: -1.1426961041172135e-05
+    pilot_p_A:
+      0: 0.90252685546875
+      1: 0.7506103515625
+      2: 0.6650390625
+      4: 0.57366943359375
+      8: 0.52301025390625
+      16: 0.50762939453125
+      32: 0.502197265625
+      64: 0.49847412109375
+      128: 0.50335693359375
+      256: 0.5047607421875
+      512: 0.5032958984375
+      1024: 0.49932861328125
+      2048: 0.49615478515625
+      4096: 0.50665283203125
+      8192: 0.49896240234375
+    pilot_vstat_floor: 0.004976808515658181
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.884
+          16384: 0.8991
+          65536: 0.9038
+        cpu_12thr:
+          4096: 147.548
+          16384: 149.6531
+          65536: 352.924
+        cpu_1thr:
+          4096: 2.07
+          16384: 7.5599
+          65536: 34.2232
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  studentt-d10-nu30__rwm:
+    tier: stress
+    target_id: studentt-d10-nu30
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.8031534313389816
+    accept_target: 0.234
+    accept_tune: 0.23642303466796874
+    accept_verify: 0.237547607421875
+    accept_verify_se: 0.0003297567691091567
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 64
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    pilot_mmd_v:
+      0: 0.06783804379499128
+      1: 0.06539553161074706
+      2: 0.0628345546849767
+      4: 0.05795713740773857
+      8: 0.04988774888626347
+      16: 0.03600817364591799
+      32: 0.020309662204528282
+      64: 0.007687212061916786
+      128: 0.00463905885723049
+      256: 0.0046600064658503864
+      512: 0.0035641400616661994
+      1024: 0.005977002173313901
+      2048: 0.004956532833144027
+      4096: 0.005377990326303473
+      8192: 0.004017541281952047
+    pilot_mmd2_u:
+      0: 0.004583300366010845
+      1: 0.004257644407339112
+      2: 0.003929012584480751
+      4: 0.003339407985443521
+      8: 0.002468429277922901
+      16: 0.001274964527541611
+      32: 0.0003894153123031874
+      64: 3.4830233843541336e-05
+      128: -3.2060754607821096e-06
+      256: -2.9662640517180705e-06
+      512: -1.1977924658901351e-05
+      1024: 1.0984231355037899e-05
+      2048: -1.9527746852876504e-07
+      4096: 4.1933244422365235e-06
+      8192: -8.7200338346749e-06
+    pilot_p_A:
+      0: 0.89642333984375
+      1: 0.8648681640625
+      2: 0.83636474609375
+      4: 0.79119873046875
+      8: 0.7264404296875
+      16: 0.64471435546875
+      32: 0.5731201171875
+      64: 0.5194091796875
+      128: 0.50555419921875
+      256: 0.5029296875
+      512: 0.50860595703125
+      1024: 0.5020751953125
+      2048: 0.502685546875
+      4096: 0.503662109375
+      8192: 0.49713134765625
+    pilot_vstat_floor: 0.004976808515658181
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.8799
+          16384: 0.6473
+          65536: 0.7299
+        cpu_12thr:
+          4096: 2.0882
+          16384: 9.0591
+          65536: 35.6634
+        cpu_1thr:
+          4096: 1.9527
+          16384: 8.7615
+          65536: 35.0529
+      peak_gpu_mem_MB:
+        4096: 9.9
+        16384: 16.1
+        65536: 36.5
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00342
+          16384: 0.04798
+          65536: 0.74258
+        gpu_fp32:
+          4096: 0.00209
+          16384: 0.02692
+          65536: 0.41576
+        gpu_fp32_rel_sum_err:
+          4096: 9.361307205392487e-09
+          16384: 9.955668648372143e-09
+          65536: 9.705956729754068e-09
+        cpu_fp64:
+          4096: 0.33954
+          16384: 4.8312
+          65536: 86.8258
+  studentt-d10-nu5__mala:
+    tier: stress
+    target_id: studentt-d10-nu5
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.1120227798003826
+    accept_target: 0.574
+    accept_tune: 0.5747122192382812
+    accept_verify: 0.5755557250976563
+    accept_verify_se: 0.0008399579048526449
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 64
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    pilot_mmd_v:
+      0: 0.10636470398224604
+      1: 0.09461523204118219
+      2: 0.08507202112334203
+      4: 0.07025797308594255
+      8: 0.0482691092290005
+      16: 0.02452652837961748
+      32: 0.011276168215261654
+      64: 0.00548680652886422
+      128: 0.004603855787823698
+      256: 0.0066031661627951686
+      512: 0.00475016555146778
+      1024: 0.005648901177110218
+      2048: 0.004029381853522799
+      4096: 0.006020189675816888
+      8192: 0.005341293359961837
+    pilot_mmd2_u:
+      0: 0.01129725113110247
+      1: 0.008934716794755104
+      2: 0.0072190144386784505
+      4: 0.0049165379834361644
+      8: 0.0023082281808817218
+      16: 0.0005776923229032782
+      32: 0.0001020652013461465
+      64: 4.22664697297126e-06
+      128: -4.713613640960901e-06
+      256: 1.7460539255109708e-05
+      512: -3.3983278390214977e-06
+      1024: 5.769852400527853e-06
+      2048: -9.633164398503702e-06
+      4096: 1.0524025586433616e-05
+      8192: 2.678693856505987e-06
+    pilot_p_A:
+      0: 0.9012451171875
+      1: 0.80126953125
+      2: 0.7413330078125
+      4: 0.67730712890625
+      8: 0.6099853515625
+      16: 0.545166015625
+      32: 0.52020263671875
+      64: 0.5
+      128: 0.50390625
+      256: 0.49725341796875
+      512: 0.497314453125
+      1024: 0.4940185546875
+      2048: 0.50286865234375
+      4096: 0.50726318359375
+      8192: 0.50244140625
+    pilot_vstat_floor: 0.005099625108465021
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 1.6291
+          16384: 0.9265
+          65536: 1.2079
+        cpu_12thr:
+          4096: 145.0964
+          16384: 8.1868
+          65536: 32.9412
+        cpu_1thr:
+          4096: 2.1594
+          16384: 10.0493
+          65536: 69.2998
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.3
+        65536: 61.4
+  studentt-d10-nu5__rwm:
+    tier: stress
+    target_id: studentt-d10-nu5
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.8570774745240465
+    accept_target: 0.234
+    accept_tune: 0.23142547607421876
+    accept_verify: 0.23143524169921875
+    accept_verify_se: 0.0007769050519264276
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 256
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    pilot_mmd_v:
+      0: 0.1055419683897824
+      1: 0.10395359168333418
+      2: 0.10237149604387222
+      4: 0.09949932914953095
+      8: 0.09392072314469058
+      16: 0.08314082552765131
+      32: 0.06463364156959495
+      64: 0.042069164962744564
+      128: 0.02023818462249624
+      256: 0.005580764227133288
+      512: 0.005740545458477352
+      1024: 0.005348732990644879
+      2048: 0.004748777741564136
+      4096: 0.005507856262287454
+      8192: 0.00521870779877784
+    pilot_mmd2_u:
+      0: 0.011122837065927094
+      1: 0.010789922327070878
+      2: 0.010463345299891125
+      4: 0.009883260907528668
+      8: 0.008803709981112129
+      16: 0.00689397645474954
+      32: 0.004157347798565358
+      64: 0.0017475468013601336
+      128: 0.00038530552642701554
+      256: 5.415627124971678e-06
+      512: 7.210183952333082e-06
+      1024: 2.426666944943534e-06
+      2048: -3.604919542099516e-06
+      4096: 4.219866006294204e-06
+      8192: 1.059682340542878e-06
+    pilot_p_A:
+      0: 0.8980712890625
+      1: 0.8778076171875
+      2: 0.86004638671875
+      4: 0.83074951171875
+      8: 0.78399658203125
+      16: 0.729248046875
+      32: 0.6595458984375
+      64: 0.59576416015625
+      128: 0.53936767578125
+      256: 0.50567626953125
+      512: 0.5008544921875
+      1024: 0.49462890625
+      2048: 0.49542236328125
+      4096: 0.50067138671875
+      8192: 0.49444580078125
+    pilot_vstat_floor: 0.005099625108465021
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4522
+          16384: 0.4451
+          65536: 0.4499
+        cpu_12thr:
+          4096: 44.6009
+          16384: 44.6471
+          65536: 21.5772
+        cpu_1thr:
+          4096: 1.3068
+          16384: 4.9697
+          65536: 20.1373
+      peak_gpu_mem_MB:
+        4096: 9.9
+        16384: 16.1
+        65536: 36.5
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00321
+          16384: 0.04715
+          65536: 0.90544
+        gpu_fp32:
+          4096: 0.00189
+          16384: 0.02591
+          65536: 0.59499
+        gpu_fp32_rel_sum_err:
+          4096: 9.517476994284422e-09
+          16384: 9.803460873947839e-09
+          65536: 9.843104835190572e-09
+        cpu_fp64:
+          4096: 0.32023
+          16384: 5.05687
+          65536: 83.04131
+  studentt-d2-nu3__mala:
+    tier: stress
+    target_id: studentt-d2-nu3
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 1.5857599096380817
+    accept_target: 0.574
+    accept_tune: 0.5751010131835937
+    accept_verify: 0.5749050903320313
+    accept_verify_se: 0.000437505064185954
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 16
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    pilot_mmd_v:
+      0: 0.1796096794483916
+      1: 0.12093020767182439
+      2: 0.08448735364273689
+      4: 0.042278951039106845
+      8: 0.016574417609143893
+      16: 0.007831429507873388
+      32: 0.005574509323576862
+      64: 0.0063627034746195354
+      128: 0.006043182309718145
+      256: 0.003237734522379376
+      512: 0.006282902783938285
+      1024: 0.008678623974336587
+      2048: 0.004729155729883948
+      4096: 0.004179888087017832
+      8192: 0.005280623284152444
+    pilot_mmd2_u:
+      0: 0.032246929622093745
+      1: 0.01460667868109966
+      2: 0.00711784959360906
+      4: 0.0017640798744628094
+      8: 0.00024922300771601513
+      16: 3.495472053616222e-05
+      32: 4.0341366357443675e-06
+      64: 1.375239348655466e-05
+      128: 9.568275853300001e-06
+      256: -1.6398919069682272e-05
+      512: 1.2950576066095287e-05
+      1024: 4.851437280817272e-05
+      2048: -4.4818600101192985e-06
+      4096: -9.387981470654339e-06
+      8192: 8.959295592081418e-07
+    pilot_p_A:
+      0: 0.90234375
+      1: 0.7471923828125
+      2: 0.658935546875
+      4: 0.564697265625
+      8: 0.522216796875
+      16: 0.50543212890625
+      32: 0.492919921875
+      64: 0.49749755859375
+      128: 0.49365234375
+      256: 0.4998779296875
+      512: 0.5054931640625
+      1024: 0.49151611328125
+      2048: 0.4991455078125
+      4096: 0.49481201171875
+      8192: 0.4940185546875
+    pilot_vstat_floor: 0.0051712819676916835
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.8908
+          16384: 0.878
+          65536: 0.9038
+        cpu_12thr:
+          4096: 6.6138
+          16384: 2.961
+          65536: 8.4198
+        cpu_1thr:
+          4096: 1.363
+          16384: 4.4861
+          65536: 20.8232
+      peak_gpu_mem_MB:
+        4096: 9.0
+        16384: 11.5
+        65536: 21.4
+  studentt-d2-nu3__rwm:
+    tier: stress
+    target_id: studentt-d2-nu3
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 2.7103169507209253
+    accept_target: 0.234
+    accept_tune: 0.23151702880859376
+    accept_verify: 0.23210113525390624
+    accept_verify_se: 0.000407348111794276
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 32
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    pilot_mmd_v:
+      0: 0.17950618490965412
+      1: 0.16079442073612665
+      2: 0.1446553073763927
+      4: 0.1155261014422419
+      8: 0.0785213784517005
+      16: 0.03494415732243594
+      32: 0.008444476669502949
+      64: 0.004135352238781788
+      128: 0.004202744418774718
+      256: 0.004999543411452101
+      512: 0.005649657775222745
+      1024: 0.007493167788675605
+      2048: 0.005896726328317636
+      4096: 0.005029790599751277
+      8192: 0.004825212180964618
+    pilot_mmd2_u:
+      0: 0.03220981357501829
+      1: 0.025840606962004076
+      2: 0.020909569232490988
+      4: 0.01332833344902773
+      8: 0.006144785573018674
+      16: 0.001196928468340075
+      32: 4.514405781441688e-05
+      64: -9.381039813516345e-06
+      128: -8.958736731123906e-06
+      256: -1.6519004126802628e-06
+      512: 4.822358022349427e-06
+      1024: 2.948676907121861e-05
+      2048: 8.14720633646182e-06
+      4096: -1.4779084569482848e-06
+      8192: -3.3916501092079443e-06
+    pilot_p_A:
+      0: 0.89898681640625
+      1: 0.84906005859375
+      2: 0.80694580078125
+      4: 0.73516845703125
+      8: 0.64739990234375
+      16: 0.55865478515625
+      32: 0.511962890625
+      64: 0.502197265625
+      128: 0.50396728515625
+      256: 0.50506591796875
+      512: 0.4942626953125
+      1024: 0.50360107421875
+      2048: 0.501220703125
+      4096: 0.4986572265625
+      8192: 0.49676513671875
+    pilot_vstat_floor: 0.0051712819676916835
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.4853
+          16384: 0.4806
+          65536: 0.4777
+        cpu_12thr:
+          4096: 0.7124
+          16384: 1.7738
+          65536: 6.7175
+        cpu_1thr:
+          4096: 0.6854
+          16384: 2.1798
+          65536: 8.1159
+      peak_gpu_mem_MB:
+        4096: 8.7
+        16384: 10.2
+        65536: 16.5
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.003
+          16384: 0.04515
+          65536: 0.70838
+        gpu_fp32:
+          4096: 0.00209
+          16384: 0.02716
+          65536: 0.42823
+        gpu_fp32_rel_sum_err:
+          4096: 8.63117080932844e-09
+          16384: 8.618934519381985e-09
+          65536: 8.696120814517732e-09
+        cpu_fp64:
+          4096: 0.22429
+          16384: 5.04159
+          65536: 88.21001
+  gauss-d10-c25-ewide__mala:
+    tier: stress
+    target_id: gauss-d10-c25-ewide
+    sampler: mala
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.5901378273535138
+    accept_target: 0.574
+    accept_tune: 0.5733663940429687
+    accept_verify: 0.5732382202148437
+    accept_verify_se: 0.0003170059178784441
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 128
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    pilot_mmd_v:
+      0: 0.1732754535042494
+      1: 0.16549789909267323
+      2: 0.15806132657083044
+      4: 0.1463789306839362
+      8: 0.12398246565009931
+      16: 0.08901080371638638
+      32: 0.04585559266853428
+      64: 0.012026745058521025
+      128: 0.003698894163375331
+      256: 0.00577351120970095
+      512: 0.003653118626562619
+      1024: 0.005629139258831392
+      2048: 0.0057904836381180505
+      4096: 0.005181477097841488
+      8192: 0.005169838026230605
+    pilot_mmd2_u:
+      0: 0.030001409688803715
+      1: 0.027366493496137956
+      2: 0.02496012320774832
+      4: 0.021403280401019464
+      8: 0.015347793187165282
+      16: 0.007898593222797956
+      32: 0.002077815384615267
+      64: 0.00011980131443056763
+      128: -1.1319033449752602e-05
+      256: 8.342427929131091e-06
+      512: -1.1606664430119373e-05
+      1024: 6.851645410588247e-06
+      2048: 8.710281509838325e-06
+      4096: 1.9843373914030238e-06
+      8192: 1.7434116249548381e-06
+    pilot_p_A:
+      0: 0.89642333984375
+      1: 0.83953857421875
+      2: 0.80352783203125
+      4: 0.7608642578125
+      8: 0.70745849609375
+      16: 0.63641357421875
+      32: 0.57208251953125
+      64: 0.52008056640625
+      128: 0.4990234375
+      256: 0.49810791015625
+      512: 0.4989013671875
+      1024: 0.5032958984375
+      2048: 0.50091552734375
+      4096: 0.50152587890625
+      8192: 0.49932861328125
+    pilot_vstat_floor: 0.004986551577026642
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.9012
+          16384: 0.9058
+          65536: 0.9121
+        cpu_12thr:
+          4096: 2.2976
+          16384: 7.1707
+          65536: 24.77
+        cpu_1thr:
+          4096: 2.3055
+          16384: 8.6463
+          65536: 38.4301
+      peak_gpu_mem_MB:
+        4096: 11.5
+        16384: 22.1
+        65536: 61.4
+    t_max_rng_stage: pilot-tmax-ewide
+  gauss-d10-c25-ewide__rwm:
+    tier: stress
+    target_id: gauss-d10-c25-ewide
+    sampler: rwm
+    preconditioner: S = diag(scales) of the target entry (frozen, non-adaptive)
+    h: 0.5321841786449498
+    accept_target: 0.234
+    accept_tune: 0.236339111328125
+    accept_verify: 0.23645050048828126
+    accept_verify_se: 0.0002660377706885818
+    tune_J: 16384
+    tune_n_steps: 200
+    t_max: 256
+    t_max_cap_binds: false
+    t_grid:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    pilot_mmd_v:
+      0: 0.17731220400065492
+      1: 0.17526485888419294
+      2: 0.17331140112345222
+      4: 0.16893956508861388
+      8: 0.16002284561568872
+      16: 0.14363111897407918
+      32: 0.11631876080147752
+      64: 0.07710305225727641
+      128: 0.034098934554758834
+      256: 0.008847883834150342
+      512: 0.005061203278627097
+      1024: 0.0035765607584011165
+      2048: 0.005614633971954493
+      4096: 0.004038420772770224
+      8192: 0.0064669222970330535
+    pilot_mmd2_u:
+      0: 0.031416530469120074
+      1: 0.03069462393058542
+      2: 0.030013633313304533
+      4: 0.02851732348871794
+      8: 0.0255839439145078
+      16: 0.020606280766222618
+      32: 0.013506020095057303
+      64: 0.005920352269140006
+      128: 0.0011379437016906246
+      256: 5.344801377960007e-05
+      512: 7.197788897128632e-07
+      1024: -1.2148610067819199e-05
+      2048: 6.461674513458249e-06
+      4096: -8.677996718997605e-06
+      8192: 1.7038557113990827e-05
+    pilot_p_A:
+      0: 0.9033203125
+      1: 0.8828125
+      2: 0.86492919921875
+      4: 0.83953857421875
+      8: 0.800048828125
+      16: 0.74951171875
+      32: 0.68695068359375
+      64: 0.6170654296875
+      128: 0.54718017578125
+      256: 0.5128173828125
+      512: 0.5008544921875
+      1024: 0.4969482421875
+      2048: 0.49896240234375
+      4096: 0.4981689453125
+      8192: 0.49005126953125
+    pilot_vstat_floor: 0.004986551577026642
+    pilot_J: 16384
+    pilot_eps: 0.8
+    throughput:
+      sampler_ms_per_step:
+        gpu:
+          4096: 0.487
+          16384: 0.4876
+          65536: 0.4885
+        cpu_12thr:
+          4096: 55.7997
+          16384: 56.8516
+          65536: 26.7162
+        cpu_1thr:
+          4096: 1.4505
+          16384: 6.6698
+          65536: 32.7193
+      peak_gpu_mem_MB:
+        4096: 10.4
+        16384: 17.8
+        65536: 44.8
+      kernel_sum_vstat_s:
+        gpu_fp64:
+          4096: 0.00323
+          16384: 0.04715
+          65536: 0.74104
+        gpu_fp32:
+          4096: 0.00189
+          16384: 0.02593
+          65536: 0.41345
+        gpu_fp32_rel_sum_err:
+          4096: 9.48899363222178e-09
+          16384: 9.922171398041186e-09
+          65536: 1.0159584642330319e-08
+        cpu_fp64:
+          4096: 0.19937
+          16384: 3.5601
+          65536: 58.65977
+    t_max_rng_stage: pilot-tmax-ewide
